@@ -1,0 +1,132 @@
+package co.edu.uniquindio.gestionPrestamos.model;
+
+import java.util.ArrayList;
+
+
+/**
+ * Representa a la clase prestamo
+ * @author Mauricio y Johan
+ *
+ */
+public class Loan {
+
+    //Declaración de variables
+    private String codigo;
+    private String valor;
+    private String fechaPrestamo;
+    private String fechaEntrega;
+    private ConditionLoan estadoPrestamo;
+    private ArrayList<Customer> cliente = new ArrayList<>();
+    private ArrayList<Employee> empleado = new ArrayList<>();
+    private ArrayList<LoanDetail> detallePrestamo = new ArrayList<>();
+    /**
+     * Constructor
+     * @param codigo
+     * @param estado
+     * @param valor
+     * @param fechaPrestamo
+     * @param fechaEntrega
+     * @param estadoPrestamo
+     * @param cliente
+     * @param empleado
+     * @param objeto
+     */
+    public Loan(String codigo, String estado, String valor, String fechaPrestamo, String fechaEntrega,
+            ConditionLoan estadoPrestamo, ArrayList<Customer> cliente, ArrayList<Employee> empleado,
+            ArrayList<Product> objeto) {
+        super();
+        this.codigo = codigo;
+        this.estado = estado;
+        this.valor = valor;
+        this.fechaPrestamo = fechaPrestamo;
+        this.fechaEntrega = fechaEntrega;
+        this.estadoPrestamo = estadoPrestamo;
+        this.cliente = cliente;
+        this.empleado = empleado;
+        this.objeto = objeto;
+    }
+    /**
+     * Constructor2
+     * @param codigo
+     * @param estado
+     * @param valor
+     * @param fechaPrestamo
+     * @param fechaEntrega
+     * @param estadoPrestamo
+     */
+    public Loan(String codigo, String estado, String valor, String fechaPrestamo, String fechaEntrega,
+            ConditionLoan estadoPrestamo) {
+        super();
+        this.codigo = codigo;
+        this.estado = estado;
+        this.valor = valor;
+        this.fechaPrestamo = fechaPrestamo;
+        this.fechaEntrega = fechaEntrega;
+        this.estadoPrestamo = estadoPrestamo;
+    }
+
+    //Getters y setters-----------------------------------------------------------
+    public String getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    public String getValor() {
+        return valor;
+    }
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+    public String getFechaPrestamo() {
+        return fechaPrestamo;
+    }
+    public void setFechaPrestamo(String fechaPrestamo) {
+        this.fechaPrestamo = fechaPrestamo;
+    }
+    public String getFechaEntrega() {
+        return fechaEntrega;
+    }
+    public void setFechaEntrega(String fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
+    }
+    public ArrayList<Customer> getCliente() {
+        return cliente;
+    }
+    public void setCliente(ArrayList<Customer> cliente) {
+        this.cliente = cliente;
+    }
+    public ArrayList<Employee> getEmpleado() {
+        return empleado;
+    }
+    public void setEmpleado(ArrayList<Employee> empleado) {
+        this.empleado = empleado;
+    }
+    public ArrayList<Product> getObjeto() {
+        return objeto;
+    }
+    public void setObjeto(ArrayList<Product> objeto) {
+        this.objeto = objeto;
+    }
+
+    public ConditionLoan getEstadoPrestamo() {
+        return estadoPrestamo;
+    }
+    public void setEstadoPrestamo(ConditionLoan estadoPrestamo) {
+        this.estadoPrestamo = estadoPrestamo;
+    }
+    @Override
+    public String toString() {
+        return "Prestamo [codigo=" + codigo + ", estado=" + estado + ", valor=" + valor + ", fechaPrestamo="
+                + fechaPrestamo + ", fechaEntrega=" + fechaEntrega + ", estadoPrestamo=" + estadoPrestamo + ", cliente="
+                + cliente + ", empleado=" + empleado + ", objeto=" + objeto + "]";
+    }
+
+
+}

@@ -1,0 +1,8 @@
+package co.uniquindio.prog2.prestamo.exception;
+
+public class LoanExistException extends Exception {
+
+	public LoanExistException(String message){
+		super(message);
+	}
+}

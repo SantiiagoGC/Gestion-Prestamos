@@ -1,0 +1,59 @@
+package co.edu.uniquindio.gestionPrestamos.controller;
+
+
+import co.edu.uniquindio.gestionPrestamos.Aplicacion;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
+public class LoginController {
+
+    @FXML
+    private TextField txtUser;
+
+    @FXML
+    private Button bttinLogin;
+
+    @FXML
+    private PasswordField txtPassword;
+    //Aplicacion
+	private Aplicacion aplicacion;
+
+    @FXML
+    void loginAction(ActionEvent event) {
+    	login();
+    }
+
+	public void setAplicacion(Aplicacion aplicacion) {
+		this.aplicacion = aplicacion;
+	}
+
+	private void login() {
+		String user = txtUser.getText();
+		String password = txtPassword.getText();
+		if (user.isEmpty() || password.isEmpty()) {
+			showMessage("Notificacion.", "Ta vacia la wea", "Alguno de los espacios esta vacios.", AlertType.INFORMATION);
+		} else {
+			if (user.equals("Admin") && password.equals("12345")) {
+				showMessage("Notificaón", "Bienvenido Admin.", "Sea bienvenido Administrador.", AlertType.INFORMATION);
+			} else {
+				showMessage("Notificaón", "Datos incorrectos", "No se ha encontrado un usuario con esa información.", AlertType.ERROR);
+			}
+		}
+	}
+	//Nos muestra un tipo de alerta
+    private void showMessage(String titulo, String header, String contenido, AlertType tipoAlerta) {
+
+        Alert alert = new Alert(tipoAlerta);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+
+    }
+
+}

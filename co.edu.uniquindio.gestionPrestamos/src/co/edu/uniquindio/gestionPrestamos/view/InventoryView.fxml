@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="500.0" prefWidth="565.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.gestionPrestamos.controller.InventoryController">
+   <left>
+      <AnchorPane prefHeight="500.0" prefWidth="302.0" style="-fx-background-color: #5a4141;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="282.0" fitWidth="276.0" layoutX="16.0" layoutY="-31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../pngwing.com%20(4).png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="txtestadoObjetoInventario" layoutX="113.0" layoutY="311.0" promptText="Estado del objeto." style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <TextField fx:id="txtnombreObjetoInventario" layoutX="113.0" layoutY="195.0" promptText="Nombre del objeto." style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <TextField fx:id="txtcodigoObjetoInventario" layoutX="113.0" layoutY="236.0" promptText="Codigo del objeto." style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <TextField fx:id="txtpesoObjetoInventario" layoutX="113.0" layoutY="274.0" promptText="Peso del objeto." style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <Label layoutX="57.0" layoutY="199.0" text="Nombre" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="56.0" layoutY="240.0" text="Codigo" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="67.0" layoutY="278.0" text="Peso" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="62.0" layoutY="315.0" text="Estado" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="62.0" layoutY="353.0" text="Valor" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtvalorObjetoInventario" layoutX="113.0" layoutY="349.0" promptText="Valor del objeto." style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <TextField fx:id="txtdescripcionObjetoInventario" layoutX="113.0" layoutY="388.0" promptText="Desscripcion del objeto." style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <Label layoutX="37.0" layoutY="392.0" text="Descripcion" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtcolorObjetoInventario" layoutX="113.0" layoutY="423.0" promptText="Color del objeto." style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <Label layoutX="62.0" layoutY="427.0" text="Color" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="506.0" prefWidth="249.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tblListInventory" layoutX="14.0" layoutY="51.0" prefHeight="401.0" prefWidth="220.0">
+              <columns>
+                <TableColumn fx:id="columnNombreInventario" prefWidth="110.0" text="C1">
+                     <graphic>
+                        <Pane prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #5a4141; -fx-background-radius: 5 0 0 5;">
+                           <children>
+                              <Label layoutX="32.0" layoutY="4.0" text="Nombre" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </graphic>
+                  </TableColumn>
+                <TableColumn fx:id="columnCodigoInventory" prefWidth="110.0" text="C2">
+                     <graphic>
+                        <Pane prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #5a4141; -fx-background-radius: 0 5 5 0;">
+                           <children>
+                              <Label layoutX="32.0" layoutY="4.0" text="Codigo" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </graphic>
+                  </TableColumn>
+              </columns>
+            </TableView>
+            <TextField fx:id="txtBuscarInventario" layoutX="64.0" layoutY="19.0" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
+            <Button fx:id="btnBuscarInventario" layoutX="181.0" layoutY="20.0" mnemonicParsing="false" onAction="#buscarInventario" style="-fx-background-color: transparent;" text="Buscar" textFill="GREY">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <ComboBox fx:id="comboBoxInventario" layoutX="14.0" layoutY="22.0" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
+            <HBox layoutX="17.0" layoutY="461.0" prefHeight="25.0" prefWidth="216.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="461.0">
+               <children>
+                  <Button fx:id="btnActualizarInventario" mnemonicParsing="false" onAction="#actualizarInventario" style="-fx-background-color: #5a4141;" text="Actualizar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnRegistarInventario" mnemonicParsing="false" onAction="#registarInventario" style="-fx-background-color: #5a4141;" text="Registrar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnNuevoInventario" mnemonicParsing="false" onAction="#nuevoInventario" style="-fx-background-color: #5a4141;" text="Nuevo" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

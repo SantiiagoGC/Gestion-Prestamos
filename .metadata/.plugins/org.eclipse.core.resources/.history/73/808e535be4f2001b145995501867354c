@@ -1,0 +1,36 @@
+package co.edu.uniquindio.gestionPrestamos.model;
+
+public enum ConditionProduct {
+
+    ENTREGADO(1), FALTA_POR_ENTREGAR(2);
+    int productCondition;
+
+    private ConditionProduct(int productCondition){
+        this.productCondition = productCondition;
+    }
+
+    public int getProductCondition() {
+        return productCondition;
+    }
+
+    public void setProductCondition(int productCondition) {
+        this.productCondition = productCondition;
+    }
+
+    public String toString(){
+
+        String condition = "";
+
+        switch(productCondition){
+            case 1:
+                condition = "ENTREGADO";
+                break;
+            case 2:
+                condition = "FALTA_POR_ENTREGAR";
+                break;
+            default:
+                break;
+        }
+        return condition;
+    }
+}

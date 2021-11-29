@@ -1,0 +1,88 @@
+package co.edu.uniquindio.gestionPrestamos.controller;
+
+
+import java.io.IOException;
+
+import co.edu.uniquindio.gestionPrestamos.Aplicacion;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
+public class LoginController {
+
+    @FXML
+    private TextField txtUser;
+
+    @FXML
+    private Button bttinLogin;
+
+    @FXML
+    private PasswordField txtPassword;
+    //Aplicacion
+	private Aplicacion aplicacion;
+	private Stage primaryStage;
+
+    @FXML
+    void loginAction(ActionEvent event) {
+    	login();
+    }
+
+	public void setAplicacion(Aplicacion aplicacion) {
+		this.aplicacion = aplicacion;
+	}
+
+	private void login() {
+		String user = txtUser.getText();
+		String password = txtPassword.getText();
+		if (user.isEmpty() || password.isEmpty()) {
+			showMessage("Notificacion.", "Algun espacio esta vacio.", "Por favor ingrese algo en los capos.", AlertType.ERROR);
+		} else {
+			if (user.equals("Admin") && password.equals("12345")) {
+				showMessage("Notificaón", "Bienvenido Admin.", "Sea bienvenido Administrador.", AlertType.INFORMATION);
+				showAdminLogin();
+			} else {
+				showMessage("Notificaón", "Datos incorrectos", "No se ha encontrado un usuario con esa información.", AlertType.ERROR);
+			}
+		}
+	}
+	private void showAdminLogin() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/gestionPrestamos/view/AdminView.fxml"));
+
+			AnchorPane rootLayout = loader.load();
+
+			AdminViewController adminViewController = loader.getController();
+
+			Scene scene = new Scene(rootLayout);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	//Nos muestra un tipo de alerta
+    private void showMessage(String titulo, String header, String contenido, AlertType tipoAlerta) {
+
+        Alert alert = new Alert(tipoAlerta);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+
+    }
+
+}

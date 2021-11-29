@@ -1,0 +1,1150 @@
+package co.edu.uniquindio.gestionPrestamos.controller;
+import java.net.URL;
+import java.util.Observable;
+import java.util.ResourceBundle;
+
+import co.edu.uniquindio.gestionPrestamos.Aplicacion;
+import co.edu.uniquindio.gestionPrestamos.exception.CustomerExistException;
+import co.edu.uniquindio.gestionPrestamos.exception.EmployeeExistException;
+import co.edu.uniquindio.gestionPrestamos.exception.ProductExistException;
+import co.edu.uniquindio.gestionPrestamos.model.Customer;
+import co.edu.uniquindio.gestionPrestamos.model.Employee;
+import co.edu.uniquindio.gestionPrestamos.model.Loan;
+import co.edu.uniquindio.gestionPrestamos.model.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+public class AdminViewController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+	private TextField txtValorPrestamo;
+
+	@FXML
+	private TextField txtNombreObjeto;
+
+	@FXML
+    private TextField txtObjetos;
+
+    @FXML
+    private TextField txtValorUnitarioObjeto;
+
+    @FXML
+    private TextField txtBuscarObjeto;
+
+    @FXML
+    private Button btnRegistrarObjeto;
+
+    @FXML
+    private TextField txtCliente;
+
+    @FXML
+    private TextField txtPaisEmpleado;
+
+    @FXML
+    private TextField txtBuscarEmpleado;
+
+    @FXML
+    private TextField txtProfesion;
+
+    @FXML
+    private TextField txtDocumentoCliente;
+
+    @FXML
+    private TextField txtEstadoObjeto;
+
+    @FXML
+    private TextField txtApellidoCliente;
+
+    @FXML
+    private Button btnNuevoCliente;
+
+    @FXML
+    private Button btnBuscarPrestamo;
+
+    @FXML
+    private TextField txtEmailCliente;
+
+    @FXML
+    private TextField txtEstadoPrestamo;
+
+    @FXML
+    private Button btnRegistrarCliente;
+
+    @FXML
+    private TextField txtDepartamentoEmpleado;
+
+    @FXML
+    private TextField txtApellidoEmpleado;
+
+    @FXML
+    private TextField txtBuscarPrestamo;
+
+    @FXML
+    private TextField txtCódigoPrestamo;
+
+    @FXML
+    private TextField txtCodigoObjeto;
+
+    @FXML
+    private TextField txtDepartamentoCliente;
+
+    @FXML
+    private TextField txtTipoEmpleado;
+
+    @FXML
+    private TextField txtBuscarCliente;
+
+    @FXML
+    private TextField txtValorTotalObjeto;
+
+    @FXML
+    private Button btnActuliazarCliente;
+
+    @FXML
+    private Button btnNuevoObjeto;
+
+    @FXML
+    private ComboBox<?> choiceBoxCliente;
+
+    @FXML
+    private TextField txtNombreEmpleado;
+
+    @FXML
+    private Button btnActuliazarPrestamo;
+
+    @FXML
+    private Button btnBuscarEmpleado;
+
+    @FXML
+    private Button btnNuevoEmpleado;
+
+    @FXML
+    private TextField txtCiudadCliente;
+
+    @FXML
+    private Button btnRegistrarPrestamo;
+
+    @FXML
+    private TextField txtDescripcionObjeto;
+
+    @FXML
+    private TextField txtDireccionCliente;
+
+    @FXML
+    private TextField txtCiudadEmpleado;
+
+    @FXML
+    private TextField txtDireccionEmpleado;
+
+    @FXML
+    private TextField txtEmpleado;
+
+    @FXML
+    private TextField txtPesoObjeto;
+
+    @FXML
+    private TextField txtFechaPrestamo;
+
+    @FXML
+    private TextField txtCelularEmpleado;
+
+    @FXML
+    private TextField txtNombreCliente;
+
+    @FXML
+    private Button btnRegistrarEmpleado;
+
+    @FXML
+    private Button btnActuliazarEmpleado;
+
+    @FXML
+    private Button btnBuscarCliente;
+
+    @FXML
+    private Button btnActuliazarObjeto;
+
+    @FXML
+    private Button btnNuevoPrestamo;
+
+    @FXML
+    private ComboBox<?> choiceBoxObjeto;
+
+    @FXML
+    private ComboBox<?> choiceBoxPrestamo;
+
+    @FXML
+	private ComboBox<?> choiceBoxEmpleado;
+
+	@FXML
+    private TextField txtEmailEmpleado;
+
+    @FXML
+    private TextField txtCelularCliente;
+
+    @FXML
+    private TextField txtColorObjeto;
+
+    @FXML
+    private Button btnBuscarObjeto;
+
+    @FXML
+    private TextField txtFechaEntrega;
+
+    @FXML
+    private TextField txtDocumentoEmpleado;
+
+    @FXML
+    private TextField txtPaisCliente;
+
+    @FXML
+	private TableView<Customer> tblListCostumer;
+
+	@FXML
+	private TableView<Employee> tblListEmployee;
+
+	@FXML
+	private TableView<Product> tblListProduct;
+
+	@FXML
+	private TableView<Loan> tblListLoan;
+
+	@FXML
+	private TableColumn<Customer, String> columnNombreCliente;
+
+	@FXML
+	private TableColumn<Customer, String> columnApellidoCliente;
+
+	@FXML
+	private TableColumn<Product, String> columnNombreObjeto;
+
+	@FXML
+	private TableColumn<Product, String> columnCodigoObjeto;
+
+	@FXML
+	private TableColumn<Employee, String> columnNombreEmpleado;
+
+	@FXML
+	private TableColumn<Employee, String> columnApellidoEmpleado;
+
+	@FXML
+	private TableColumn<Loan, String> columnValorPrestamo;
+
+	@FXML
+	private TableColumn<Loan, String> columnCodigoPrestamo;
+
+	private Aplicacion aplicacion;
+	//Observables
+	ObservableList<Customer> listCustomers = FXCollections.observableArrayList();
+	ObservableList<Product> listProducts = FXCollections.observableArrayList();
+	ObservableList<Employee> listEmployee = FXCollections.observableArrayList();
+	ObservableList<Loan> listLoan = FXCollections.observableArrayList();
+	//Variables de seleccion
+	private Customer selectedClient;
+	private Product selectedProduct;
+	private Employee selectedEmployee;
+	private Loan selectedLoan;
+
+    @FXML
+	void initialize() {
+    //Datos de la tabla Cliente
+    	this.columnNombreCliente.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+    	this.columnApellidoCliente.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+
+    	tblListCostumer.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+    		selectedClient = newSelection;
+    		showCustomerInformation(selectedClient);
+    	});
+
+    	this.columnNombreObjeto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+    	this.columnCodigoObjeto.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+
+    	tblListProduct.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+    		selectedProduct = newSelection;
+    		showProductInformation(selectedProduct);
+    	});
+
+    	this.columnNombreEmpleado.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+    	this.columnApellidoEmpleado.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+
+    	tblListEmployee.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+    		selectedEmployee = newSelection;
+    		showEmployeeInformation(selectedEmployee);
+    	});
+
+    	this.columnValorPrestamo.setCellValueFactory(new PropertyValueFactory<>("valor"));
+    	this.columnCodigoPrestamo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+
+    	tblListLoan.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+    		selectedLoan = newSelection;
+    		showLoanInformation(selectedLoan);
+    	});
+
+
+
+
+	}
+	//Nos muestra un tipo de alerta
+    private void showMessage(String titulo, String header, String contenido, AlertType tipoAlerta) {
+
+        Alert alert = new Alert(tipoAlerta);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+
+    }
+
+	public void setAplicacion(Aplicacion aplicacion) {
+		this.aplicacion = aplicacion;
+		loadCustomerList();
+		loadProductList();
+		loadEmployeeList();
+		loadLoanList();
+	}
+
+	private void loadCustomerList() {
+		tblListCostumer.getItems().clear();
+		tblListCostumer.setItems(obtenerClientes());
+
+	}
+
+	private void loadProductList() {
+		tblListProduct.getItems().clear();
+		tblListProduct.setItems(obtenerProductos());
+	}
+
+	private void loadEmployeeList() {
+		tblListEmployee.getItems().clear();
+		tblListEmployee.setItems(obtenerEmpleados());
+	}
+
+	private void loadLoanList() {
+		tblListLoan.getItems().clear();
+		tblListLoan.setItems(obtenerPrestamos());
+	}
+
+	private ObservableList<Product> obtenerProductos() {
+		listProducts.addAll(aplicacion.obtenerProductos());
+		return listProducts;
+	}
+
+	private ObservableList<Employee> obtenerEmpleados() {
+		listEmployee.addAll(aplicacion.obtenerEmpleados());
+		return listEmployee;
+	}
+
+	private ObservableList<Loan> obtenerPrestamos() {
+		listLoan.addAll(aplicacion.obtenerPrestamos());
+		return listLoan;
+	}
+
+	private ObservableList<Customer> obtenerClientes() {
+		listCustomers.addAll(aplicacion.obtenerClientes());
+		return listCustomers;
+	}
+
+	private void showCustomerInformation(Customer client) {
+		if (client != null) {
+			txtNombreCliente.setText(client.getNombre());
+			txtApellidoCliente.setText(client.getApellidos());
+			txtDocumentoCliente.setText(client.getDocumento());
+			txtDireccionCliente.setText(client.getDireccion());
+			txtCelularCliente.setText(client.getCelular());
+			txtCiudadCliente.setText(client.getCiudadResidencia());
+			txtDepartamentoCliente.setText(client.getDepartamento());
+			txtPaisCliente.setText(client.getPais());
+			txtEmailCliente.setText(client.getMail());
+			txtProfesion.setText(client.getProfesion());
+
+		}
+	}
+
+	private void showProductInformation(Product product) {
+		if (product != null) {
+			txtNombreObjeto.setText(product.getNombre());
+			txtCodigoObjeto.setText(product.getCodigo());
+			txtPesoObjeto.setText(product.getPeso());
+			txtEstadoObjeto.setText(product.getEstadoObjeto().toString());
+			txtValorUnitarioObjeto.setText(product.getValorUnitario());
+			txtDescripcionObjeto.setText(product.getDescripcion());
+			txtColorObjeto.setText(product.getColor());
+			txtValorTotalObjeto.setText(product.getValorTotal());
+		}
+
+	}
+
+	private void showEmployeeInformation(Employee employee) {
+		if (employee != null) {
+			txtNombreEmpleado.setText(employee.getNombre());
+			txtApellidoEmpleado.setText(employee.getApellidos());
+			txtDocumentoEmpleado.setText(employee.getDocumento());
+			txtDireccionEmpleado.setText(employee.getDireccion());
+			txtCelularEmpleado.setText(employee.getCelular());
+			txtCiudadEmpleado.setText(employee.getCiudadResidencia());
+			txtDepartamentoEmpleado.setText(employee.getDepartamento());
+			txtPaisEmpleado.setText(employee.getPais());
+			txtEmailEmpleado.setText(employee.getMail());
+			txtTipoEmpleado.setText(employee.getTipoEmpleado().toString());
+		}
+
+	}
+
+	private void showLoanInformation(Loan loan) {
+		if (loan != null) {
+			txtCódigoPrestamo.setText(loan.getCodigo());
+			txtEstadoPrestamo.setText(loan.getEstadoPrestamo().toString());
+			txtValorPrestamo.setText(loan.getValor());
+			txtFechaPrestamo.setText(loan.getFechaPrestamo());
+			txtFechaEntrega.setText(loan.getFechaEntrega());
+		}
+
+	}
+
+	@FXML
+	void nuevoCliente(ActionEvent event) {
+		nuevoCliente();
+	}
+
+	@FXML
+	void nuevoObjeto(ActionEvent event) {
+		nuevoObjeto();
+	}
+
+	@FXML
+	void nuevoEmpleado(ActionEvent event) {
+		nuevoEmpleado();
+	}
+
+	@FXML
+	void nuevoPrestamo(ActionEvent event) {
+		nuevoPrestamo();
+	}
+
+	@FXML
+	void registrarCliente(ActionEvent event) {
+		registrarACliente();
+	}
+
+	@FXML
+	void registrarObjeto(ActionEvent event) {
+		registrarProducto();
+	}
+
+	@FXML
+	void registrarEmpleado(ActionEvent event) {
+		registrarEmployee();
+	}
+
+	@FXML
+	void registrarPrestamo(ActionEvent event) {
+		registrarLoan();
+	}
+
+	@FXML
+	void actulizarCliente(ActionEvent event) throws CustomerExistException {
+		updateCustomer();
+	}
+
+	@FXML
+	void actualizarObjeto(ActionEvent event) throws ProductExistException {
+		updateProduct();
+	}
+
+	@FXML
+	void actualizarEmpleado(ActionEvent event) throws EmployeeExistException {
+		updateEmployee();
+	}
+
+	@FXML
+	void actualizarPrestamo(ActionEvent event) {
+
+	}
+
+	@FXML
+	void buscarCliente(ActionEvent event) {
+
+	}
+
+	@FXML
+	void buscarObejto(ActionEvent event) {
+
+	}
+
+	@FXML
+	void buscarEmpleado(ActionEvent event) {
+
+	}
+
+	@FXML
+	void buscarPrestamo(ActionEvent event) {
+
+	}
+
+	//Metodos
+	//limpia la pestaña de cliente
+	private void nuevoCliente() {
+		txtNombreCliente.setText("");
+		txtApellidoCliente.setText("");
+		txtDocumentoCliente.setText("");
+		txtDireccionCliente.setText("");
+		txtCelularCliente.setText("");
+		txtCiudadCliente.setText("");
+		txtDepartamentoCliente.setText("");
+		txtPaisCliente.setText("");
+		txtEmailCliente.setText("");
+		txtProfesion.setText("");
+
+	}
+	//Limpia la ventana de objeto
+	private void nuevoObjeto() {
+		txtNombreObjeto.setText("");
+		txtCodigoObjeto.setText("");
+		txtPesoObjeto.setText("");
+		txtEstadoObjeto.setText("");
+		txtValorUnitarioObjeto.setText("");
+		txtDescripcionObjeto.setText("");
+		txtColorObjeto.setText("");
+		txtValorTotalObjeto.setText("");
+	}
+	//Limpia la ventana de objeto
+	private void nuevoEmpleado() {
+		txtNombreEmpleado.setText("");
+		txtApellidoEmpleado.setText("");
+		txtDocumentoEmpleado.setText("");
+		txtDireccionEmpleado.setText("");
+		txtCelularEmpleado.setText("");
+		txtCiudadEmpleado.setText("");
+		txtDepartamentoEmpleado.setText("");
+		txtPaisEmpleado.setText("");
+		txtEmailEmpleado.setText("");
+		txtTipoEmpleado.setText("");
+
+	}
+	//Limpia la ventana de objeto
+	private void nuevoPrestamo() {
+		txtCódigoPrestamo.setText("");
+		txtEstadoPrestamo.setText("");
+		txtValorPrestamo.setText("");
+		txtFechaPrestamo.setText("");
+		txtFechaEntrega.setText("");
+		txtCliente.setText("");
+		txtEmpleado.setText("");
+		txtObjetos.setText("");
+
+	}
+	/**
+	 * Registra la información del cliente
+	 */
+	private void registrarACliente() {
+		String nameCustomer = txtNombreCliente.getText();
+    	String lastNameCustomer = txtApellidoCliente.getText();
+    	String customerIdentification = txtDocumentoCliente.getText();
+    	String customerAddress = txtDireccionCliente.getText();
+    	String cellPhoneClient = txtCelularCliente.getText();
+    	String clientCity = txtCiudadCliente.getText();
+    	String customerDepartment = txtDepartamentoCliente.getText();
+    	String clientCountry = txtPaisCliente.getText();
+    	String emailCustomer = txtEmailCliente.getText();
+    	String profesioCustomer = txtProfesion.getText();
+
+    	if(validData(nameCustomer,lastNameCustomer,customerIdentification,
+    			customerAddress,cellPhoneClient,clientCity,customerDepartment,clientCountry,emailCustomer,profesioCustomer)){
+
+    		Customer cliente = null;
+    		cliente  = aplicacion.registerClient(nameCustomer,lastNameCustomer,customerIdentification,
+        			customerAddress,cellPhoneClient,clientCity,customerDepartment,clientCountry,emailCustomer,profesioCustomer);
+
+    		if(cliente != null){
+    			listCustomers.add(cliente);
+    			showMessage("Notificación.", "Registro completado.", "cliente registrado con exito.", AlertType.INFORMATION);
+    		} else{
+    			showMessage("Notificación.", "¡Algo ocurrio! El registro no se pudó completar.", "El cliente no se pudo registrado con exito.", AlertType.INFORMATION);
+    		}
+
+    	}
+	}
+	private boolean validData(String nombreCustomer, String apellidoCustomer, String documentoCustomer,
+			String direccionCustomer, String celularCustomer, String ciudadCustomer, String departamentoCustomer,
+			String paisCustomer, String emailCustomer, String profesioCustomer) {
+		String mensaje = "";
+
+
+        if(nombreCustomer == null || nombreCustomer.equals("") || nombreCustomer.matches("[0-9]+")){
+            mensaje  += "NOMBRE NO VALIDO.\n";
+        }
+        if(apellidoCustomer == null || apellidoCustomer.equals("") || apellidoCustomer.matches("[0-9]+")){
+            mensaje += "APELLIDO NO VALIDO.\n";
+        }
+        if(direccionCustomer == null || direccionCustomer.equals("")){
+            mensaje += "DIRECCION NO VALIDA.\n";
+        }
+        if(documentoCustomer == null || documentoCustomer.equals("") || documentoCustomer.matches("[a-zA-Z]+")){
+            mensaje += "CEDULA NO VALIDA.\n";
+        } else{
+        	if (selectedClient != null ) {
+				if (documentoCustomer.equals(selectedClient.getDocumento())) {
+					if (aplicacion.verifyIdentificationClient(documentoCustomer)) {
+						mensaje += "¡ESE DOCUMENTO YA EXISTE!";
+					}
+				}
+			}else{
+				if(aplicacion.verifyIdentificationClient(documentoCustomer)){
+					mensaje += "¡ESA DOCUMENTO YA EXISTE!";
+				}
+			}
+        }
+        if(celularCustomer == null || celularCustomer.equals("") || celularCustomer.matches("[a-zA-Z]+")){
+        	mensaje += "CELULAR NO VALIDO\n";
+        }
+        if(ciudadCustomer == null || ciudadCustomer.equals("") || ciudadCustomer.matches("[0-9]+")){
+        	mensaje += "CIUDAD NO VALIDA\n";
+        }
+        if(departamentoCustomer == null || departamentoCustomer.equals("")){
+        	mensaje += "DEPARTAMENTO NO VALIDO\n";
+        }
+        if(paisCustomer == null || paisCustomer.equals("") || paisCustomer.matches("[0-9]+")){
+        	mensaje += "PAIS NO VALIDO\n";
+        }
+        if(emailCustomer == null || emailCustomer.equals("") || !emailCustomer.contains("@")){
+        	mensaje += "EMAIL NO VALIDO\n";
+        }
+        if(profesioCustomer == null || profesioCustomer.equals("") || profesioCustomer.matches("[0-9]+")){
+        	mensaje += "PROFESIÓN NO VALIDA\n";
+        }
+
+        if(mensaje.equals("")){
+            return true;
+        } else{
+
+        	showMessage("Notificación.", "DATOS INCORRECTOS.", mensaje, AlertType.WARNING);
+            return false;
+        }
+	}
+	//Registra la información del objeto
+	private void registrarProducto() {
+		String nameProduct = txtNombreObjeto.getText();
+    	String productCode = txtCodigoObjeto.getText();
+    	String productWeight = txtPesoObjeto.getText();
+    	String conditionProduct = txtEstadoObjeto.getText();
+    	String productValue = txtValorUnitarioObjeto.getText();
+    	String productDescription = txtDescripcionObjeto.getText();
+    	String productColor = txtColorObjeto.getText();
+    	String totalValue = txtValorTotalObjeto.getText();
+
+    	if(validDataProduct(nameProduct,productCode,productWeight,conditionProduct,productValue,
+    			productDescription,productColor,totalValue)){
+
+    		Product objeto = null;
+    		objeto = aplicacion.registerProduct(nameProduct,productCode,productWeight,conditionProduct,productValue,
+    			productDescription,productColor,totalValue);
+
+    		if(objeto != null){
+    			listProducts.add(objeto);
+    			showMessage("Notificación.", "Registro completado.", "producto registrado con exito.", AlertType.INFORMATION);
+    		} else{
+    			showMessage("Notificación.", "¡Algo ocurrio! El registro no se pudó completar.", "El producto no se pudo registrado con exito.", AlertType.INFORMATION);
+    		}
+    	}
+
+	}
+	/**
+	 * Valida los datos del producto
+	 * @param nameProduct
+	 * @param productCode
+	 * @param productWeight
+	 * @param conditionProduct
+	 * @param productValue
+	 * @param productDescription
+	 * @param productColor
+	 * @param totalValue
+	 * @return
+	 */
+	private boolean validDataProduct(String nameProduct, String productCode, String productWeight,
+			String conditionProduct, String productValue, String productDescription, String productColor,
+			String totalValue) {
+		String mensaje = "";
+
+		if(nameProduct == null || nameProduct.equals("") || nameProduct.matches("[0-9]+")){
+			mensaje  += "NOMBRE NO VALIDO.\n";
+		}
+        if(productCode == null || productCode.equals("") || productCode.matches("[a-zA-Z]+")){
+            mensaje += "CÓDIGO NO VALIDO.\n";
+        } else{
+        	if (selectedProduct != null ) {
+				if (productCode.equals(selectedProduct.getCodigo())){
+					if (aplicacion.verifyCodeProduct(productCode)) {
+						mensaje += "¡ESE CÓDIGO YA EXISTE!";
+					}
+				}
+			}else{
+				if(aplicacion.verifyCodeProduct(productCode)){
+					mensaje += "¡ESA CÓDIGO YA EXISTE!";
+				}
+			}
+        }
+        if(productWeight == null || productWeight.equals("")){
+        	mensaje += "¡PESO NO VALIDO!";
+        }
+        if(conditionProduct == null || conditionProduct.equals("") || conditionProduct.matches("[0-9]+")){
+        	mensaje += "¡CONDICIÓN NO VALIDA!";
+        }
+        if(productValue == null || productValue.equals("") || productValue.matches("[a-zA-z]")){
+        	mensaje += "¡VALOR NO VALIDO!";
+        }
+        if(productDescription == null || productDescription.equals("")){
+        	mensaje += "¡INGRESE LA CONDICIÓN DEL PRODUCTO!";
+        }
+        if(totalValue == null || totalValue.equals("") || totalValue.matches("[a-zA-z]")){
+        	mensaje += "¡VALOR TOTAL NO VALIDO!";
+        }
+
+        if(mensaje.equals("")){
+            return true;
+        } else{
+
+        	showMessage("Notificación.", "DATOS INCORRECTOS.", mensaje, AlertType.WARNING);
+            return false;
+        }
+	}
+	//Registra al empleado
+	private void registrarEmployee() {
+		String nameEmployee = txtNombreEmpleado.getText();
+    	String lastNameEmployee = txtApellidoEmpleado.getText();
+    	String employeeIdentification = txtDocumentoEmpleado.getText();
+    	String employeeAddress = txtDireccionEmpleado.getText();
+    	String cellPhoneEmployee = txtCelularEmpleado.getText();
+    	String employeeCity = txtCiudadEmpleado.getText();
+    	String employeeDepartment = txtDepartamentoEmpleado.getText();
+    	String employeeCountry = txtPaisEmpleado.getText();
+    	String emailEmployee = txtEmailEmpleado.getText();
+    	String employeeType = txtTipoEmpleado.getText();
+
+    	if(validDataEmployee(nameEmployee,lastNameEmployee,employeeIdentification,
+    			employeeAddress,cellPhoneEmployee,employeeCity,employeeDepartment,employeeCountry,emailEmployee,employeeType)){
+
+    		Employee employee = null;
+    		employee  = aplicacion.registerEmployee(nameEmployee,lastNameEmployee,employeeIdentification,
+        			employeeAddress,cellPhoneEmployee,employeeCity,employeeDepartment,employeeCountry,emailEmployee,employeeType);
+
+    		if(employee != null){
+    			listEmployee.add(employee);
+    			showMessage("Notificación.", "Registro completado.", "empleado registrado con exito.", AlertType.INFORMATION);
+    		} else{
+    			showMessage("Notificación.", "¡Algo ocurrio! El registro no se pudó completar.", "El empleado no se pudo registrado con exito.", AlertType.INFORMATION);
+    		}
+
+    	}
+
+	}
+	/**
+	 * Verifica los datos del empleado
+	 * @param nameEmployee
+	 * @param lastNameEmployee
+	 * @param employeeIdentification
+	 * @param employeeAddress
+	 * @param cellPhoneEmployee
+	 * @param employeeCity
+	 * @param employeeDepartment
+	 * @param employeeCountry
+	 * @param emailEmployee
+	 * @param employeeType
+	 * @return
+	 */
+	private boolean validDataEmployee(String nameEmployee, String lastNameEmployee, String employeeIdentification,
+			String employeeAddress, String cellPhoneEmployee, String employeeCity, String employeeDepartment,
+			String employeeCountry, String emailEmployee, String employeeType) {
+
+		String mensaje = "";
+
+
+        if(nameEmployee == null || nameEmployee.equals("") || nameEmployee.matches("[0-9]+")){
+            mensaje  += "NOMBRE NO VALIDO.\n";
+        }
+        if(lastNameEmployee == null || lastNameEmployee.equals("") || lastNameEmployee.matches("[0-9]+")){
+            mensaje += "APELLIDO NO VALIDO.\n";
+        }
+        if(employeeAddress == null || employeeAddress.equals("")){
+            mensaje += "DIRECCION NO VALIDA.\n";
+        }
+        if(employeeIdentification == null || employeeIdentification.equals("") || employeeIdentification.matches("[a-zA-Z]+")){
+            mensaje += "CEDULA NO VALIDA.\n";
+        } else{
+        	if (selectedEmployee != null ) {
+				if (employeeIdentification.equals(selectedEmployee.getDocumento())) {
+					if (aplicacion.verifyIdentificationEmployee(employeeIdentification)) {
+						mensaje += "¡ESE DOCUMENTO YA EXISTE!";
+					}
+				}
+			}else{
+				if(aplicacion.verifyIdentificationEmployee(employeeIdentification)){
+					mensaje += "¡ESA DOCUMENTO YA EXISTE!";
+				}
+			}
+        }
+        if(cellPhoneEmployee == null || cellPhoneEmployee.equals("") || cellPhoneEmployee.matches("[a-zA-Z]+")){
+        	mensaje += "CELULAR NO VALIDO\n";
+        }
+        if(employeeCity == null || employeeCity.equals("") || employeeCity.matches("[0-9]+")){
+        	mensaje += "CIUDAD NO VALIDA\n";
+        }
+        if(employeeDepartment == null || employeeDepartment.equals("")){
+        	mensaje += "DEPARTAMENTO NO VALIDO\n";
+        }
+        if(employeeCountry == null || employeeCountry.equals("") || employeeCountry.matches("[0-9]+")){
+        	mensaje += "PAIS NO VALIDO\n";
+        }
+        if(emailEmployee == null || emailEmployee.equals("") || !emailEmployee.contains("@")){
+        	mensaje += "EMAIL NO VALIDO\n";
+        }
+        if(employeeType == null || employeeType.equals("") || employeeType.matches("[0-9]+")){
+        	mensaje += "PROFESIÓN NO VALIDA\n";
+        }
+
+        if(mensaje.equals("")){
+            return true;
+        } else{
+
+        	showMessage("Notificación.", "DATOS INCORRECTOS.", mensaje, AlertType.WARNING);
+            return false;
+        }
+	}
+	//Registar los prestamos
+	private void registrarLoan() {
+		String loanCode = txtCódigoPrestamo.getText();
+		String loanCondition = txtEstadoPrestamo.getText();
+		String loanValue = txtValorPrestamo.getText();
+		String loanDate = txtFechaPrestamo.getText();
+		String expirationDate = txtFechaEntrega.getText();
+		String customer = txtCliente.getText();
+		String employee = txtEmpleado.getText();
+		String product = txtObjetos.getText();
+
+		if(validateLoan(loanCode,loanCondition,loanValue,loanDate,expirationDate,
+				customer,employee,product)){
+
+			Loan loan = null;
+			loan = aplicacion.registerLoan(loanCode,loanCondition,loanValue,loanDate,expirationDate,
+				customer,employee,product);
+
+			if(loan != null){
+				listLoan.add(loan);
+				showMessage("Notificación.", "Registro completado.", "prestamo registrado con exito.", AlertType.INFORMATION);
+			} else{
+				showMessage("Notificación.", "¡Algo ocurrio! El registro no se pudó completar.", "El prestamo no se pudo registrado con exito.", AlertType.INFORMATION);
+			}
+		}
+
+	}
+	//Valida los datos del prestamo
+	private boolean validateLoan(String loanCode, String loanCondition, String loanValue, String loanDate,
+			String expirationDate, String customer, String employee, String product) {
+
+		String mensaje = "";
+
+		if(loanCode == null || loanCode.equals("") || loanCode.matches("[a-zA-Z]")){
+			mensaje += "¡CÓDIGO NO VALIDO!";
+		} else{
+			if(selectedLoan != null){
+				if(loanCode.equals(selectedLoan.getCodigo())){
+					if(aplicacion.verifyCodeLoan(loanCode)){
+						mensaje += "¡ESTE CÓDIGO YA ESTÁ REGISTRADO!";
+					}
+				}
+			} else{
+				if(aplicacion.verifyCodeLoan(loanCode)){
+					mensaje += "¡ESTE CÓDIGO YA ESTÁ REGISTRADO!";
+				}
+			}
+		}
+		if(loanCondition == null || loanCode.equals("") || loanCode.matches("[0-9]+")){
+			mensaje += "¡CONDICIÓN IVALIDA!";
+		}
+		if(loanValue == null || loanValue.equals("") || loanValue.matches("[a-zA-Z]")){
+			mensaje += "¡VALOR INVALIDO!";
+		}
+		if(loanDate == null || loanDate.equals("") || loanDate.matches("[a-zA-Z]+")){
+			mensaje += "¡FECHA INVALIDA!";
+		}
+		if(expirationDate == null || expirationDate.equals("") || expirationDate.matches("[a-zA-Z]")){
+			mensaje += "¡FECHA DE ENTREGA INVALIDA!";
+		}
+		if(customer == null || customer.equals("")){
+			mensaje += "¡CLIENTE INVALIDO!";
+		}
+		if(employee == null || employee.equals("")){
+			mensaje += "¡EMPLEADO INVALIDO!";
+		}
+		if(product == null || product.equals("")){
+			mensaje += "¡PRODUCTO INVALIDO!";
+		}
+
+		if(mensaje.equals("")){
+			return true;
+		} else{
+
+			showMessage("Notificación.", "DATOS INCORRECTOS.", mensaje, AlertType.WARNING);
+			return false;
+		}
+	}
+	//Actuliza al cliente
+	private void updateCustomer() throws CustomerExistException {
+		String nameCustomer = txtNombreCliente.getText();
+    	String lastNameCustomer = txtApellidoCliente.getText();
+    	String customerIdentification = txtDocumentoCliente.getText();
+    	String customerAddress = txtDireccionCliente.getText();
+    	String cellPhoneClient = txtCelularCliente.getText();
+    	String clientCity = txtCiudadCliente.getText();
+    	String customerDepartment = txtDepartamentoCliente.getText();
+    	String clientCountry = txtPaisCliente.getText();
+    	String emailCustomer = txtEmailCliente.getText();
+    	String profesioCustomer = txtProfesion.getText();
+    	if(selectedClient != null){
+    		if(validDat2(nameCustomer,lastNameCustomer,customerIdentification,
+        			customerAddress,cellPhoneClient,clientCity,customerDepartment,clientCountry,emailCustomer,profesioCustomer)){
+
+    			aplicacion.updateCustomer(nameCustomer,lastNameCustomer,customerIdentification,
+        			customerAddress,cellPhoneClient,clientCity,customerDepartment,clientCountry,emailCustomer,profesioCustomer);
+    			showMessage("Notificación.", "Actualizacion Completada", "Se ha actualizado con exito.", AlertType.INFORMATION);
+    			tblListCostumer.refresh();
+    		}
+    	} else{
+			showMessage("Notificación.", "Actualizacion incompleta", "No se ha podido actualizar la información.", AlertType.INFORMATION);
+
+    	}
+
+	}
+	//Valida los para la actulización del cliente
+	private boolean validDat2(String nameCustomer, String lastNameCustomer, String customerIdentification,
+			String customerAddress, String cellPhoneClient, String clientCity, String customerDepartment,
+			String clientCountry, String emailCustomer, String profesioCustomer) {
+		String mensaje = "";
+
+
+        if(nameCustomer == null || nameCustomer.equals("") || nameCustomer.matches("[0-9]+")){
+            mensaje  += "NOMBRE NO VALIDO.\n";
+        }
+        if(lastNameCustomer == null || lastNameCustomer.equals("") || lastNameCustomer.matches("[0-9]+")){
+            mensaje += "APELLIDO NO VALIDO.\n";
+        }
+        if(customerAddress == null || customerAddress.equals("")){
+            mensaje += "DIRECCION NO VALIDA.\n";
+        }
+        if(customerIdentification == null || customerIdentification.equals("") || customerIdentification.matches("[a-zA-Z]+")){
+            mensaje += "CEDULA NO VALIDA.\n";
+        } else{
+        	if (selectedClient != null ) {
+				if (!customerIdentification.equals(selectedClient.getDocumento())) {
+					if (aplicacion.verifyIdentificationClient(customerIdentification)) {
+						mensaje += "¡ESE DOCUMENTO YA EXISTE!";
+					}
+				}
+			}else{
+				if(aplicacion.verifyIdentificationClient(customerIdentification)){
+					mensaje += "¡ESA DOCUMENTO YA EXISTE!";
+				}
+			}
+        }
+        if(cellPhoneClient == null || cellPhoneClient.equals("") || cellPhoneClient.matches("[a-zA-Z]+")){
+        	mensaje += "CELULAR NO VALIDO\n";
+        }
+        if(clientCity == null || clientCity.equals("") || clientCity.matches("[0-9]+")){
+        	mensaje += "CIUDAD NO VALIDA\n";
+        }
+        if(customerDepartment == null || customerDepartment.equals("")){
+        	mensaje += "DEPARTAMENTO NO VALIDO\n";
+        }
+        if(clientCountry == null || clientCountry.equals("") || clientCountry.matches("[0-9]+")){
+        	mensaje += "PAIS NO VALIDO\n";
+        }
+        if(emailCustomer == null || emailCustomer.equals("") || !emailCustomer.contains("@")){
+        	mensaje += "EMAIL NO VALIDO\n";
+        }
+        if(profesioCustomer == null || profesioCustomer.equals("") || profesioCustomer.matches("[0-9]+")){
+        	mensaje += "PROFESIÓN NO VALIDA\n";
+        }
+
+        if(mensaje.equals("")){
+            return true;
+        } else{
+
+        	showMessage("Notificación.", "DATOS INCORRECTOS.", mensaje, AlertType.WARNING);
+            return false;
+        }
+	}
+	//Actuliza el producto
+	private void updateProduct() throws ProductExistException {
+		String nameProduct = txtNombreObjeto.getText();
+    	String productCode = txtCodigoObjeto.getText();
+    	String productWeight = txtPesoObjeto.getText();
+    	String conditionProduct = txtEstadoObjeto.getText();
+    	String productValue = txtValorUnitarioObjeto.getText();
+    	String productDescription = txtDescripcionObjeto.getText();
+    	String productColor = txtColorObjeto.getText();
+    	String totalValue = txtValorTotalObjeto.getText();
+    	if(selectedProduct != null){
+    		if(validDataProduct2(nameProduct,productCode,productWeight,conditionProduct,productValue,
+    			productDescription,productColor,totalValue)){
+
+    			aplicacion.updateProduct(nameProduct,productCode,productWeight,conditionProduct,productValue,
+    			productDescription,productColor,totalValue);
+    			showMessage("Notificación.", "Actualizacion Completada", "Se ha actualizado con exito.", AlertType.INFORMATION);
+    			tblListProduct.refresh();
+    		}
+    	} else{
+    		showMessage("Notificación.", "Actualizacion incompleta", "No se ha podido actualizar la información.", AlertType.INFORMATION);
+    	}
+
+	}
+	//Vaiida los datos para la actualización
+	private boolean validDataProduct2(String nameProduct, String productCode, String productWeight,
+			String conditionProduct, String productValue, String productDescription, String productColor,
+			String totalValue) {
+		String mensaje = "";
+
+		if(nameProduct == null || nameProduct.equals("") || nameProduct.matches("[0-9]+")){
+			mensaje  += "NOMBRE NO VALIDO.\n";
+		}
+        if(productCode == null || productCode.equals("") || productCode.matches("[a-zA-Z]+")){
+            mensaje += "CÓDIGO NO VALIDO.\n";
+        } else{
+        	if (selectedProduct != null ) {
+				if (!productCode.equals(selectedProduct.getCodigo())){
+					if (aplicacion.verifyCodeProduct(productCode)) {
+						mensaje += "¡ESE CÓDIGO YA EXISTE!";
+					}
+				}
+			}else{
+				if(aplicacion.verifyCodeProduct(productCode)){
+					mensaje += "¡ESA CÓDIGO YA EXISTE!";
+				}
+			}
+        }
+        if(productWeight == null || productWeight.equals("")){
+        	mensaje += "¡PESO NO VALIDO!";
+        }
+        if(conditionProduct == null || conditionProduct.equals("") || conditionProduct.matches("[0-9]+")){
+        	mensaje += "¡CONDICIÓN NO VALIDA!";
+        }
+        if(productValue == null || productValue.equals("") || productValue.matches("[a-zA-z]")){
+        	mensaje += "¡VALOR NO VALIDO!";
+        }
+        if(productDescription == null || productDescription.equals("")){
+        	mensaje += "¡INGRESE LA CONDICIÓN DEL PRODUCTO!";
+        }
+        if(totalValue == null || totalValue.equals("") || totalValue.matches("[a-zA-z]")){
+        	mensaje += "¡VALOR TOTAL NO VALIDO!";
+        }
+
+        if(mensaje.equals("")){
+            return true;
+        } else{
+
+        	showMessage("Notificación.", "DATOS INCORRECTOS.", mensaje, AlertType.WARNING);
+            return false;
+        }
+	}
+	//Actualizar al empleado
+	private void updateEmployee() throws EmployeeExistException {
+		String nameEmployee = txtNombreEmpleado.getText();
+    	String lastNameEmployee = txtApellidoEmpleado.getText();
+    	String employeeIdentification = txtDocumentoEmpleado.getText();
+    	String employeeAddress = txtDireccionEmpleado.getText();
+    	String cellPhoneEmployee = txtCelularEmpleado.getText();
+    	String employeeCity = txtCiudadEmpleado.getText();
+    	String employeeDepartment = txtDepartamentoEmpleado.getText();
+    	String employeeCountry = txtPaisEmpleado.getText();
+    	String emailEmployee = txtEmailEmpleado.getText();
+    	String employeeType = txtTipoEmpleado.getText();
+    	if(selectedEmployee != null){
+        	if(validDataEmployee2(nameEmployee,lastNameEmployee,employeeIdentification,
+        			employeeAddress,cellPhoneEmployee,employeeCity,employeeDepartment,employeeCountry,emailEmployee,employeeType)){
+
+        		aplicacion.updateEmployee(nameEmployee,lastNameEmployee,employeeIdentification,
+        			employeeAddress,cellPhoneEmployee,employeeCity,employeeDepartment,employeeCountry,emailEmployee,employeeType);
+    			showMessage("Notificación.", "Actualizacion Completada", "Se ha actualizado con exito.", AlertType.INFORMATION);
+    			tblListEmployee.refresh();
+        	}
+    	} else{
+    		showMessage("Notificación.", "Actualizacion incompleta", "No se ha podido actualizar la información.", AlertType.INFORMATION);
+    	}
+
+	}
+	//Validación de datos para acutlizar al empleado
+	private boolean validDataEmployee2(String nameEmployee, String lastNameEmployee, String employeeIdentification,
+			String employeeAddress, String cellPhoneEmployee, String employeeCity, String employeeDepartment,
+			String employeeCountry, String emailEmployee, String employeeType) {
+
+
+		String mensaje = "";
+
+
+        if(nameEmployee == null || nameEmployee.equals("") || nameEmployee.matches("[0-9]+")){
+            mensaje  += "NOMBRE NO VALIDO.\n";
+        }
+        if(lastNameEmployee == null || lastNameEmployee.equals("") || lastNameEmployee.matches("[0-9]+")){
+            mensaje += "APELLIDO NO VALIDO.\n";
+        }
+        if(employeeAddress == null || employeeAddress.equals("")){
+            mensaje += "DIRECCION NO VALIDA.\n";
+        }
+        if(employeeIdentification == null || employeeIdentification.equals("") || employeeIdentification.matches("[a-zA-Z]+")){
+            mensaje += "CEDULA NO VALIDA.\n";
+        } else{
+        	if (selectedEmployee != null ) {
+				if (!employeeIdentification.equals(selectedEmployee.getDocumento())) {
+					if (aplicacion.verifyIdentificationEmployee(employeeIdentification)) {
+						mensaje += "¡ESE DOCUMENTO YA EXISTE!";
+					}
+				}
+			}else{
+				if(aplicacion.verifyIdentificationEmployee(employeeIdentification)){
+					mensaje += "¡ESA DOCUMENTO YA EXISTE!";
+				}
+			}
+        }
+        if(cellPhoneEmployee == null || cellPhoneEmployee.equals("") || cellPhoneEmployee.matches("[a-zA-Z]+")){
+        	mensaje += "CELULAR NO VALIDO\n";
+        }
+        if(employeeCity == null || employeeCity.equals("") || employeeCity.matches("[0-9]+")){
+        	mensaje += "CIUDAD NO VALIDA\n";
+        }
+        if(employeeDepartment == null || employeeDepartment.equals("")){
+        	mensaje += "DEPARTAMENTO NO VALIDO\n";
+        }
+        if(employeeCountry == null || employeeCountry.equals("") || employeeCountry.matches("[0-9]+")){
+        	mensaje += "PAIS NO VALIDO\n";
+        }
+        if(emailEmployee == null || emailEmployee.equals("") || !emailEmployee.contains("@")){
+        	mensaje += "EMAIL NO VALIDO\n";
+        }
+        if(employeeType == null || employeeType.equals("") || employeeType.matches("[0-9]+")){
+        	mensaje += "PROFESIÓN NO VALIDA\n";
+        }
+
+        if(mensaje.equals("")){
+            return true;
+        } else{
+
+        	showMessage("Notificación.", "DATOS INCORRECTOS.", mensaje, AlertType.WARNING);
+            return false;
+        }
+	}
+
+}
+

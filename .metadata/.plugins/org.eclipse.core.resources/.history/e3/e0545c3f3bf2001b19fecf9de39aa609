@@ -1,0 +1,38 @@
+package co.edu.uniquindio.gestionPrestamos.model;
+
+package co.edu.uniquindio.prog2.proyectoFinal.model;
+
+public enum ConditionLoan {
+
+    DISPONIBLE(1), NO_DISPONIBLE(2);
+    int productCondition;
+
+    private ConditionLoan(int productCondition){
+        this.productCondition = productCondition;
+    }
+
+    public int getProductCondition() {
+        return productCondition;
+    }
+
+    public void setProductCondition(int productCondition) {
+        this.productCondition = productCondition;
+    }
+
+    public String toString(){
+
+        String condition = "";
+
+        switch(productCondition){
+            case 1:
+                condition = "A TIEMPO";
+                break;
+            case 2:
+                condition = "ATRASADO";
+                break;
+            default:
+                break;
+        }
+        return condition;
+    }
+}

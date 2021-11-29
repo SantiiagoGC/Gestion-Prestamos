@@ -1,0 +1,74 @@
+package co.edu.uniquindio.gestionPrestamos.model;
+/*
+ * Clase empresa
+ * @author Mauricio y Johan
+ */
+import java.util.ArrayList;
+
+import co.edu.uniquindio.gestionPrestamos.Aplicacion;
+
+public class Company {
+
+    private String nombre;
+    private ArrayList<Employee> empleado = new ArrayList<>();
+    private ArrayList<Customer> cliente = new ArrayList<>();
+    private ArrayList<Product> objeto = new ArrayList<>();
+    private ArrayList<Loan> prestamo = new ArrayList<>();
+    /*
+     * Constructor
+     * @param nombre
+     */
+    public Company(String nombre) {
+        super();
+        this.nombre = nombre;
+        startData();
+    }
+	//Setters y Getters-------------------------------------------------------------------------------------
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public ArrayList<Employee> getEmpleado() {
+        return empleado;
+    }
+    public void setEmpleado(ArrayList<Employee> empleado) {
+        this.empleado = empleado;
+    }
+    public ArrayList<Customer> getCliente() {
+        return cliente;
+    }
+    public void setCliente(ArrayList<Customer> cliente) {
+        this.cliente = cliente;
+    }
+    public ArrayList<Product> getObjeto() {
+        return objeto;
+    }
+    public void setObjeto(ArrayList<Product> objeto) {
+        this.objeto = objeto;
+    }
+    public ArrayList<Loan> getPrestamo() {
+        return prestamo;
+    }
+    public void setPrestamo(ArrayList<Loan> prestamo) {
+        this.prestamo = prestamo;
+    }
+    @Override
+    public String toString() {
+        return "Empresa [nombre=" + nombre + ", empleado=" + empleado + ", cliente=" + cliente + ", objeto=" + objeto
+                + ", prestamo=" + prestamo + "]";
+    }
+    private void startData() {
+		Customer customer = new Customer("102598", "Irelia", "Xan", "3135874578", "Cll 13", "Jonia", "No aplica", "Jonia", "irelia@gmail.com", DocumentType.ID_CITIZEN, "No aplica");
+		getCliente().add(customer);
+
+		customer = new Customer("1874", "Anna", "Lopez Gomez", "3215478524", "Cll 167", "Armenia", "Quindio", "Colombia", "Anna@gmail.com", DocumentType.ID_CITIZEN, "No aplica");
+		getCliente().add(customer);
+		Product product = new Product("2548", "100 Años de soledad.", "Negro", "2.5 Kilogramos", "20000", "20000", ConditionProduct.DISPONIBLE, "Libro");
+		getObjeto().add(product);
+		Employee employee = new Employee("1684", "Luis", "Salazar Gomez", "3254589875", "Crr 21", "Armenia", "numero 21", "Colombia", "Luis@gmail.com", DocumentType.ID_CITIZEN, "Corriente");
+		getEmpleado().add(employee);
+	}
+
+}

@@ -1,0 +1,63 @@
+package co.edu.uniquindio.gestionPrestamos.model;
+
+import java.util.ArrayList;
+
+/*
+ * Representa la clase detalle de prestamo
+ * @author Mauricio
+ *
+ */
+public class LoanDetail {
+
+    private int borrowedUnits;
+    private double subTotal;
+    private ArrayList<Product> loanedProduct = new ArrayList<>();
+    /*
+     * Constructor
+     * @param borrowedUnits
+     * @param subTotal
+     * @param loanedProduct
+     */
+    public LoanDetail(int borrowedUnits, double subTotal, ArrayList<Product> loanedProduct) {
+        super();
+        this.borrowedUnits = borrowedUnits;
+        this.subTotal = subTotal;
+        this.loanedProduct = loanedProduct;
+    }
+    /**
+     * Constructor2
+     * @param borrowedUnits
+     * @param subTotal
+     */
+    public LoanDetail(int borrowedUnits, double subTotal) {
+        super();
+        this.borrowedUnits = borrowedUnits;
+        this.subTotal = subTotal;
+    }
+    //Getters y setters
+    public int getBorrowedUnits() {
+        return borrowedUnits;
+    }
+    public void setBorrowedUnits(int borrowedUnits) {
+        this.borrowedUnits = borrowedUnits;
+    }
+    public double getSubTotal() {
+        return subTotal;
+    }
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
+    }
+    public ArrayList<Product> getLoanedProduct() {
+        return loanedProduct;
+    }
+    public void setLoanedProduct(ArrayList<Product> loanedProduct) {
+        this.loanedProduct = loanedProduct;
+    }
+    @Override
+    public String toString() {
+        return "LoanDetail [borrowedUnits=" + borrowedUnits + ", subTotal=" + subTotal + ", loanedProduct="
+                + loanedProduct + "]";
+    }
+
+}
+

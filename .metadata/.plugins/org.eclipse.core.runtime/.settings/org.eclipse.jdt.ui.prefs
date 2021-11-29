@@ -1,0 +1,19 @@
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="co.edu.uniquindio.prestamoobjetos.model.Cliente"><rhs name\="co.edu.uniquindio.prestamoobjetos.model.Cliente"/></lhs><lhs name\="java.lang.Enum"><rhs name\="javafx.stage.StageStyle"/><rhs name\="javafx.stage.Modality"/><rhs name\="co.edu.uniquindio.gestionPrestamos.model.DocumentType"/><rhs name\="co.edu.uniquindio.gestionPrestamos.model.TypeEmployee"/><rhs name\="co.edu.uniquindio.gestionPrestamos.model.ConditionProduct"/><rhs name\="javafx.scene.control.Alert$AlertType"/><rhs name\="co.edu.uniquindio.gestionPrestamos.model.ConditionLoan"/></lhs><lhs name\="javafx.event.EventTarget"><rhs name\="javafx.scene.Scene"/></lhs><lhs name\="javafx.scene.Scene"><rhs name\="javafx.scene.Scene"/></lhs><lhs name\="javafx.util.Callback"><rhs name\="javafx.scene.control.cell.PropertyValueFactory"/></lhs><lhs name\="co.edu.uniquindio.gestionPrestamos.model.DocumentType"><rhs name\="co.edu.uniquindio.gestionPrestamos.model.DocumentType"/></lhs><lhs name\="co.edu.uniquindio.gestionPrestamos.model.Product"><rhs name\="co.edu.uniquindio.gestionPrestamos.model.Product"/></lhs><lhs name\="co.edu.uniquindio.gestionPrestamos.model.ConditionProduct"><rhs name\="co.edu.uniquindio.gestionPrestamos.model.ConditionProduct"/></lhs><lhs name\="co.edu.uniquindio.gestionPrestamos.model.Person"><rhs name\="co.edu.uniquindio.gestionPrestamos.model.Customer"/><rhs name\="co.edu.uniquindio.gestionPrestamos.model.Employee"/></lhs><lhs name\="co.edu.uniquindio.gestionPrestamos.model.Employee"><rhs name\="co.edu.uniquindio.gestionPrestamos.model.Employee"/></lhs><lhs name\="java.lang.CharSequence"><rhs name\="java.lang.String"/></lhs><lhs name\="co.edu.uniquindio.gestionPrestamos.model.Loan"><rhs name\="co.edu.uniquindio.gestionPrestamos.model.Loan"/></lhs><lhs name\="co.edu.uniquindio.gestionPrestamos.model.ConditionLoan"><rhs name\="co.edu.uniquindio.gestionPrestamos.model.ConditionLoan"/></lhs><lhs name\="co.edu.uniquindio.gestionPrestamos.model.Customer"><rhs name\="co.edu.uniquindio.gestionPrestamos.model.Customer"/></lhs><lhs name\="co.edu.uniquindio.gestionPrestamos.model.TypeEmployee"><rhs name\="co.edu.uniquindio.gestionPrestamos.model.TypeEmployee"/></lhs></history>
+content_assist_number_of_computers=15
+content_assist_proposals_background=255,255,255
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+fontPropagated=true
+org.eclipse.jdt.ui.editor.tab.width=
+org.eclipse.jdt.ui.formatterprofiles.version=12
+org.eclipse.jdt.ui.javadoclocations.migrated=true
+org.eclipse.jdt.ui.text.code_templates_migrated=true
+org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.templates_migrated=true
+org.eclipse.jface.textfont=1|Consolas|10.0|0|WINDOWS|1|0|0|0|0|0|0|0|0|1|0|0|0|0|Consolas;
+proposalOrderMigrated=true
+spelling_locale_initialized=true
+tabWidthPropagated=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

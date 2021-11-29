@@ -1,0 +1,92 @@
+package co.edu.uniquindio.gestionPrestamos.model;
+
+import java.util.ArrayList;
+
+
+/**
+ * Representa a la clase prestamo
+ * @author Mauricio y Johan
+ *
+ */
+public class Loan {
+
+    //Declaración de variables
+    private String codigo;
+    private String valor;
+    private String fechaPrestamo;
+    private String fechaEntrega;
+    private ConditionLoan estadoPrestamo;
+    //private ArrayList<Customer> cliente = new ArrayList<>();
+    //private ArrayList<Employee> empleado = new ArrayList<>();
+    //private ArrayList<LoanDetail> detallePrestamo = new ArrayList<>();
+    private Customer customer;
+    private Employee employee;
+    private LoanDetail loanDetail;
+	//Constructor
+    public Loan(String codigo, String valor, String fechaPrestamo, String fechaEntrega, ConditionLoan estadoPrestamo,
+			Customer customer, Employee employee, LoanDetail loanDetail) {
+		super();
+		this.codigo = codigo;
+		this.valor = valor;
+		this.fechaPrestamo = fechaPrestamo;
+		this.fechaEntrega = fechaEntrega;
+		this.estadoPrestamo = estadoPrestamo;
+		this.customer = customer;
+		this.employee = employee;
+		this.loanDetail = loanDetail;
+	}
+	/**
+	 * Getters and setters
+	 * @return
+	 */
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	public String getValor() {
+		return valor;
+	}
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+	public String getFechaPrestamo() {
+		return fechaPrestamo;
+	}
+	public void setFechaPrestamo(String fechaPrestamo) {
+		this.fechaPrestamo = fechaPrestamo;
+	}
+	public String getFechaEntrega() {
+		return fechaEntrega;
+	}
+	public void setFechaEntrega(String fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
+	}
+	public ConditionLoan getEstadoPrestamo() {
+		return estadoPrestamo;
+	}
+	public void setEstadoPrestamo(ConditionLoan estadoPrestamo) {
+		this.estadoPrestamo = estadoPrestamo;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+	public LoanDetail getLoanDetail() {
+		return loanDetail;
+	}
+	public void setLoanDetail(LoanDetail loanDetail) {
+		this.loanDetail = loanDetail;
+	}
+
+
+}

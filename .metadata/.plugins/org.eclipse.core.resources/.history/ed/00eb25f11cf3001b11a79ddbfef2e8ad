@@ -1,0 +1,8 @@
+package co.uniquindio.prog2.prestamo.exception;
+
+public class CustomerFull extends Exception {
+
+	public CustomerFull(String message){
+		super(message);
+	}
+}

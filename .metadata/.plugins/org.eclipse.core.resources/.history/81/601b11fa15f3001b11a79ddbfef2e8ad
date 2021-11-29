@@ -1,0 +1,239 @@
+package co.edu.uniquindio.gestionPrestamos.model;
+/*
+ * Clase empresa
+ * @author Mauricio y Johan
+ */
+import java.util.ArrayList;
+
+import co.edu.uniquindio.gestionPrestamos.Aplicacion;
+
+public class Company {
+
+    private String nombre;
+    private ArrayList<Employee> empleado = new ArrayList<>();
+    private ArrayList<Customer> cliente = new ArrayList<>();
+    private ArrayList<Product> objeto = new ArrayList<>();
+    private ArrayList<Loan> prestamo = new ArrayList<>();
+    /*
+     * Constructor
+     * @param nombre
+     */
+    public Company(String nombre) {
+        super();
+        this.nombre = nombre;
+        startData();
+    }
+	//Setters y Getters-------------------------------------------------------------------------------------
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public ArrayList<Employee> getEmpleado() {
+        return empleado;
+    }
+    public void setEmpleado(ArrayList<Employee> empleado) {
+        this.empleado = empleado;
+    }
+    public ArrayList<Customer> getCliente() {
+        return cliente;
+    }
+    public void setCliente(ArrayList<Customer> cliente) {
+        this.cliente = cliente;
+    }
+    public ArrayList<Product> getObjeto() {
+        return objeto;
+    }
+    public void setObjeto(ArrayList<Product> objeto) {
+        this.objeto = objeto;
+    }
+    public ArrayList<Loan> getPrestamo() {
+        return prestamo;
+    }
+    public void setPrestamo(ArrayList<Loan> prestamo) {
+        this.prestamo = prestamo;
+    }
+    @Override
+    public String toString() {
+        return "Empresa [nombre=" + nombre + ", empleado=" + empleado + ", cliente=" + cliente + ", objeto=" + objeto
+                + ", prestamo=" + prestamo + "]";
+    }
+    private void startData() {
+		Customer customer = new Customer("102598", "Irelia", "Xan", "3135874578", "Cll 13", "Jonia", "No aplica", "Jonia", "irelia@gmail.com", DocumentType.ID_CITIZEN, "No aplica");
+		getCliente().add(customer);
+
+		customer = new Customer("1874", "Anna", "Lopez Gomez", "3215478524", "Cll 167", "Armenia", "Quindio", "Colombia", "Anna@gmail.com", DocumentType.ID_CITIZEN, "Estudiante");
+		getCliente().add(customer);
+		Product product = new Product("258749", "100 años de soleda", "Negro", "2.5 kilogramos", "20000", "20000", ConditionProduct.DISPONIBLE, "Libro", "Libro negro escrito por Gabriel");
+		getObjeto().add(product);
+		Employee employee = new Employee("1684", "Luis", "Salazar Gomez", "3254589875", "Crr 21", "Armenia", "numero 21", "Colombia", "Luis@gmail.com", DocumentType.ID_CITIZEN, TypeEmployee.PRESTADOR);
+		getEmpleado().add(employee);
+	}
+    //Verifica el documento no este repetido.
+	public boolean verfyIdentificationCustomer(String documentoCustomer) {
+		Customer clientAux = null;
+		for(int  i = 0; i < cliente.size(); i++) {
+			clientAux = cliente.get(i);
+			if (clientAux.getDocumento().equals(documentoCustomer)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	//Verifica el códig del cliente
+	public boolean verifyCodeProduct(String productCode) {
+		Product objetoAux = null;
+		for(int  i = 0; i < objeto.size(); i++) {
+			objetoAux = objeto.get(i);
+			if (objetoAux.getCodigo().equals(productCode)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	//Verifica el código del empleado
+	public boolean verifyCodeEmployee(String employeeIdentification) {
+		Employee empleadoAux = null;
+		for(int  i = 0; i < empleado.size(); i++) {
+			empleadoAux = empleado.get(i);
+			if (empleadoAux.getDocumento().equals(employeeIdentification)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	//Verfica el códgo del prestamo
+	public boolean verifyCodeLoan(String loanCode) {
+		Loan loanAux = null;
+		for (int i = 0; i < prestamo.size(); i++) {
+			loanAux = prestamo.get(i);
+			if(loanAux.getCodigo().equals(loanCode)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Registra el producto
+	 * @param nameCustomer
+	 * @param lastNameCustomer
+	 * @param customerIdentification
+	 * @param customerAddress
+	 * @param cellPhoneClient
+	 * @param clientCity
+	 * @param customerDepartment
+	 * @param clientCountry
+	 * @param emailCustomer
+	 * @param profesioCustomer
+	 * @return
+	 */
+	public Customer registerClient(String nameCustomer, String lastNameCustomer, String customerIdentification,
+		String customerAddress, String cellPhoneClient, String clientCity, String customerDepartment,
+		String clientCountry, String emailCustomer, String profesioCustomer) {
+		Customer client = new Customer(customerIdentification, nameCustomer, lastNameCustomer, cellPhoneClient, customerAddress, clientCity, customerDepartment, clientCountry, emailCustomer, DocumentType.ID_CITIZEN, profesioCustomer);
+		client.setNombre(nameCustomer);
+		client.setApellidos(lastNameCustomer);
+		client.setDocumento(customerIdentification);
+		client.setDireccion(customerAddress);
+		client.setCelular(cellPhoneClient);
+		client.setCiudadResidencia(clientCity);
+		client.setDepartamento(customerDepartment);
+		client.setCiudadResidencia(clientCountry);
+		client.setMail(emailCustomer);
+		client.setProfesion(profesioCustomer);
+		return client;
+	}
+	/**
+	 * Regristra el producto
+	 * @param nameProduct
+	 * @param productCode
+	 * @param productWeight
+	 * @param conditionProduct
+	 * @param productValue
+	 * @param productDescription
+	 * @param productColor
+	 * @param totalValue
+	 * @return
+	 */
+	public Product registerProduct(String nameProduct, String productCode, String productWeight,
+			String conditionProduct, String productValue, String productDescription, String productColor,
+			String totalValue) {
+
+		Product product = new Product(productCode, nameProduct, productColor, productWeight, productValue, totalValue, null, "", productDescription);
+		product.setNombre(nameProduct);
+		product.setCodigo(productCode);
+		product.setPeso(productWeight);
+		if(conditionProduct.equalsIgnoreCase("DISPONIBLE")){
+			product.setEstadoObjeto(ConditionProduct.DISPONIBLE);
+		} else{
+			product.setEstadoObjeto(ConditionProduct.NO_DISPONIBLE);
+		}
+		product.setValorUnitario(productValue);
+		product.setDescripcion(productDescription);
+		product.setColor(productColor);
+		product.setValorTotal(totalValue);
+		return product;
+	}
+	/**
+	 * Registra al empleado
+	 * @param nameEmployee
+	 * @param lastNameEmployee
+	 * @param employeeIdentification
+	 * @param employeeAddress
+	 * @param cellPhoneEmployee
+	 * @param employeeCity
+	 * @param employeeDepartment
+	 * @param employeeCountry
+	 * @param emailEmployee
+	 * @param employeeType
+	 * @return
+	 */
+	public Employee registerEmployee(String nameEmployee, String lastNameEmployee, String employeeIdentification,
+			String employeeAddress, String cellPhoneEmployee, String employeeCity, String employeeDepartment,
+			String employeeCountry, String emailEmployee, String employeeType) {
+
+		Employee employee = new Employee(employeeIdentification,nameEmployee,
+				lastNameEmployee,cellPhoneEmployee,employeeAddress,employeeCity,
+				employeeDepartment, employeeCountry, emailEmployee, null, null);
+		employee.setNombre(nameEmployee);
+		employee.setApellidos(lastNameEmployee);
+		employee.setDocumento(employeeIdentification);
+		employee.setDireccion(employeeAddress);
+		employee.setCelular(cellPhoneEmployee);
+		employee.setCiudadResidencia(employeeCity);
+		employee.setDepartamento(employeeDepartment);
+		employee.setPais(employeeCountry);
+		employee.setMail(emailEmployee);
+		employee.setTipoEmpleado(TypeEmployee.PRESTADOR);
+		if(employeeType.equalsIgnoreCase("Administrador")){
+			employee.setTipoEmpleado(TypeEmployee.AMINISTRADOR);
+		} else{
+			employee.setTipoEmpleado(TypeEmployee.JEFE_DE_INVENTARIO);
+		}
+		return employee;
+	}
+	//Registra el prestamo
+	public Loan registerLoan(String loanCode, String loanCondition, String loanValue, String loanDate,
+			String expirationDate, String customer, String employee, String product) {
+
+		Customer clienteAux = null;
+		Loan loan = new Loan(loanCode, loanValue, loanDate, expirationDate, null, null, null, null);
+		loan.setCodigo(loanCode);
+		loan.setEstadoPrestamo(ConditionLoan.ENTREGADO);
+		loan.setFechaPrestamo(loanDate);
+		loan.setFechaEntrega(expirationDate);
+		for (int i = 0; i < cliente.size(); i++) {
+			clienteAux = cliente.get(i);
+			if(customer.equals(clienteAux.getDocumento())){
+				loan.setCliente(cliente.get(i));
+			} else{
+
+			}
+		}
+		return null;
+	}
+
+
+}

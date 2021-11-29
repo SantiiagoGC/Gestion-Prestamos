@@ -1,0 +1,49 @@
+package co.edu.uniquindio.gestionPrestamos.model;
+
+/*
+* Representa la clase cliente
+* @author Mauricio y Johan
+*
+*/
+public class Customer extends Person {
+
+   private String profesion;
+   /*
+    * Consttructor
+    * @param documento
+    * @param nombre
+    * @param apellidos
+    * @param celular
+    * @param direccion
+    * @param ciudadResidencia
+    * @param departamento
+    * @param pais
+    * @param mail
+    * @param tipoDcoumento
+    * @param profesion
+    */
+   public Customer(int documento, String nombre, String apellidos, int celular, String direccion,
+           String ciudadResidencia, String departamento, String pais, String mail, DocumentType tipoDcoumento,
+           String profesion) {
+       super(documento, nombre, apellidos, celular, direccion, ciudadResidencia, departamento, pais, mail,
+               tipoDcoumento);
+       this.profesion = profesion;
+   }
+   //Setters y Getters------------------------------------------------
+   public String getProfesion() {
+       return profesion;
+   }
+   public void setProfesion(String profesion) {
+       this.profesion = profesion;
+   }
+   @Override
+   public String toString() {
+       return "Cliente [profesion=" + profesion + ", getDocumento()=" + getDocumento() + ", getNombre()=" + getNombre()
+               + ", getApellidos()=" + getApellidos() + ", getCelular()=" + getCelular() + ", getDireccion()="
+               + getDireccion() + ", getCiudadResidencia()=" + getCiudadResidencia() + ", getDepartamento()="
+               + getDepartamento() + ", getPais()=" + getPais() + ", getMail()=" + getMail() + ", getTipoDcoumento()="
+               + getTipoDcoumento() + "]";
+   }
+
+
+}

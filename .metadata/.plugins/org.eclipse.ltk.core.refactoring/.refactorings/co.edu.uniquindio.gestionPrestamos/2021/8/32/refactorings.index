@@ -1,0 +1,95 @@
+1627777192400	Rename type 'ControlladorPrestamo'
+1627777320867	Rename compilation unit 'AdminView.java'
+1627778301888	Rename method 'mostrarMensaje'
+1627778663370	Rename method 'showLoginWindow'
+1627783011710	Move method
+1627783017933	Move method
+1627783023350	Move method
+1627783028658	Move method
+1627783033275	Move method
+1627783035394	Move method
+1627783039352	Move method
+1627783043453	Move method
+1627783056160	Move method
+1627783071868	Move method
+1627783077179	Move method
+1627783291345	Move methods
+1627783298262	Move method
+1627783301769	Move method
+1627783306622	Move method
+1627783310722	Move method
+1627783312560	Move method
+1627783369744	Move method
+1627783378239	Move method
+1627783380882	Move method
+1627783384885	Move method
+1627783388190	Move method
+1627783392094	Move method
+1627783491176	Move method
+1627783497901	Move method
+1627784121228	Rename method 'nuevoCliente'
+1627785866030	Rename method 'unNuevoCliente'
+1627786237616	Move method
+1627786751625	Move methods
+1627786758454	Move methods
+1627787934697	Move field
+1627787937915	Move field
+1627787946649	Move field
+1627787977702	Move field
+1627787998665	Move field
+1627788016628	Move field
+1627788094267	Move field
+1627788120099	Move field
+1627788150263	Move field
+1627788181597	Move field
+1627788196485	Move field
+1627788214464	Move field
+1627788217428	Move field
+1627788226129	Move field
+1627788239998	Move field
+1627788243748	Move field
+1627788263374	Move field
+1627788266313	Move field
+1627788274288	Move field
+1627788282558	Move field
+1627788285926	Move field
+1627788319693	Move fields
+1627794832398	Move method
+1627794845398	Move method
+1627794849071	Move method
+1627795351644	Move method
+1627795354983	Move method
+1627799205864	Move method
+1627799503890	Move method
+1627799506727	Move method
+1627799525225	Move method
+1627799533912	Move methods
+1627832334245	Copy compilation unit
+1627832442918	Rename local variable 'documentType'
+1627832470931	Rename field 'documentType'
+1627832545985	Rename type 'typeEmployee'
+1627838865986	Rename local variable 'nombreCustomer'
+1627838896125	Rename local variable 'apellidoCustomer'
+1627838998471	Rename local variable 'documentoCustomer'
+1627839024604	Rename local variable 'direccionCustomer'
+1627839048207	Rename local variable 'celularCustomer'
+1627839069665	Rename local variable 'ciudadCustomer'
+1627839092133	Rename local variable 'departamentoCustomer'
+1627839109060	Rename local variable 'paisCustomer'
+1627863326412	Move method
+1627863334005	Move method
+1627863336351	Move method
+1627863338850	Move method
+1627863342298	Move method
+1627863345991	Move method
+1627863349303	Move method
+1627863352506	Move method
+1627863367017	Move method
+1627864165718	Move method
+1627864172802	Move method
+1627864176612	Move method
+1627913714186	Move methods
+1627913725906	Copy method
+1627915063591	Rename field 'productCondition'
+1627915581374	Move method
+1627915585217	Move method

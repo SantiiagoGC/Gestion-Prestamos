@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutY="-36.0" prefHeight="506.0" prefWidth="780.0" style="-fx-background-color: ffff;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab style="-fx-background-color: FFFF; -fx-background-radius: 100 100 10 10; -fx-text-fill: A56463;" text="Gestión de clientes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="824.0" style="-fx-background-color: E2CFC1;">
+                     <children>
+                        <AnchorPane layoutY="-4.0" prefHeight="482.0" prefWidth="230.0" style="-fx-background-color: A56463;">
+                           <children>
+                              <VBox layoutY="94.0" prefHeight="383.0" prefWidth="233.0">
+                                 <children>
+                                    <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="233.0" style="-fx-background-color: B88F88; -fx-background-radius: 30 0 0 30;" text="Name1" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                                       </graphic>
+                                    </Button>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <Pane layoutX="2.0" layoutY="42.0" prefHeight="41.0" prefWidth="230.0" style="-fx-background-color: #5a4141; -fx-background-radius: 100 100 30 30;">
+                                 <children>
+                                    <Label layoutX="58.0" layoutY="11.0" text="Listado de clientes" textAlignment="CENTER" textFill="#d7bfbf">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <Pane layoutX="246.0" layoutY="14.0" prefHeight="400.0" prefWidth="525.0" style="-fx-background-color: #5a4141; -fx-background-radius: 20 20 20 20;">
+                           <children>
+                              <Pane layoutY="14.0" prefHeight="390.0" prefWidth="525.0" style="-fx-background-color: ffffff; -fx-background-radius: 10 10 10 10;">
+                                 <children>
+                                    <Separator layoutX="260.0" orientation="VERTICAL" prefHeight="390.0" prefWidth="0.0" />
+                                    <TextField layoutX="63.0" layoutY="27.0" prefHeight="25.0" prefWidth="188.0" />
+                                    <TextField layoutX="63.0" layoutY="65.0" prefHeight="25.0" prefWidth="188.0" />
+                                    <TextField layoutX="63.0" layoutY="110.0" prefHeight="25.0" prefWidth="188.0" />
+                                    <TextField layoutX="63.0" layoutY="155.0" prefHeight="25.0" prefWidth="188.0" />
+                                    <TextField layoutX="63.0" layoutY="195.0" prefHeight="25.0" prefWidth="188.0" />
+                                    <TextField layoutX="323.0" layoutY="194.0" prefHeight="25.0" prefWidth="188.0" />
+                                    <TextField layoutX="323.0" layoutY="154.0" prefHeight="25.0" prefWidth="188.0" />
+                                    <TextField layoutX="323.0" layoutY="109.0" prefHeight="25.0" prefWidth="188.0" />
+                                    <TextField layoutX="323.0" layoutY="64.0" prefHeight="25.0" prefWidth="188.0" />
+                                    <TextField layoutX="323.0" layoutY="26.0" prefHeight="25.0" prefWidth="188.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+            </content>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

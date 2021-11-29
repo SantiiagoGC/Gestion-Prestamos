@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.gestionPrestamos.controller.AdminViewController">
+   <children>
+      <TabPane prefHeight="506.0" prefWidth="811.0" style="-fx-background-color: ffff;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab style="-fx-background-color: FFFF; -fx-background-radius: 100 100 10 10; -fx-text-fill: A56463; -fx-border-radius: 100 100 10 10;" text="Gestión de Prestamo">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="824.0" style="-fx-background-color: #5a4141;">
+                     <children>
+                        <AnchorPane layoutY="-4.0" prefHeight="482.0" prefWidth="230.0" style="-fx-background-color: E2CFC1;">
+                           <children>
+                              <VBox layoutY="56.0" prefHeight="294.0" prefWidth="233.0">
+                                 <children>
+                                    <TableView fx:id="tblListLoan" prefHeight="287.0" prefWidth="233.0" style="-fx-background-color: Transparent;">
+                                       <columns>
+                                          <TableColumn fx:id="columnValorPrestamo" prefWidth="112.0">
+                                             <graphic>
+                                                <Pane prefHeight="0.0" prefWidth="108.0" style="-fx-background-color: #5a4141; -fx-background-radius: 5 0 0 5;">
+                                                   <children>
+                                                      <Label layoutX="39.0" layoutY="4.0" text="Valor" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font></Label>
+                                                   </children>
+                                                </Pane>
+                                             </graphic>
+                                          </TableColumn>
+                                          <TableColumn fx:id="columnCodigoPrestamo" prefWidth="119.0" text="C2">
+                                             <graphic>
+                                                <Pane prefHeight="24.0" prefWidth="115.0" style="-fx-background-color: #5a4141; -fx-background-radius: 0 5 5 0;">
+                                                   <children>
+                                                      <Label layoutX="30.0" layoutY="4.0" prefHeight="17.0" prefWidth="56.0" text="Código" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font></Label>
+                                                   </children>
+                                                </Pane>
+                                             </graphic>
+                                          </TableColumn>
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <Pane layoutX="4.0" layoutY="18.0" prefHeight="38.0" prefWidth="225.0" style="-fx-background-color: #5a4141; -fx-background-radius: 10 10 0 0;">
+                                 <children>
+                                    <Label layoutX="53.0" layoutY="9.0" text="Listado Prestamos" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../pngwing.com%20(4).png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Pane layoutX="272.0" layoutY="37.0" prefHeight="400.0" prefWidth="525.0" style="-fx-background-color: #5a4141; -fx-background-radius: 20 20 20 20;">
+                           <children>
+                              <Pane layoutX="-14.0" prefHeight="390.0" prefWidth="525.0" style="-fx-background-color: ffffff; -fx-background-radius: 10 10 10 10;">
+                                 <children>
+                                    <TextField fx:id="txtCódigoPrestamo" layoutX="63.0" layoutY="27.0" prefHeight="25.0" prefWidth="188.0" promptText="Codigo del prestamo." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
+                                    <TextField fx:id="txtEstadoPrestamo" layoutX="63.0" layoutY="65.0" prefHeight="25.0" prefWidth="188.0" promptText="Estado del prestamos." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtValorPrestamo" layoutX="63.0" layoutY="110.0" prefHeight="25.0" prefWidth="188.0" promptText="Valor del prestamo." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtFechaPrestamo" layoutX="63.0" layoutY="155.0" prefHeight="29.0" prefWidth="188.0" promptText="Fecha del prestamo." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtFechaEntrega" layoutX="128.0" layoutY="194.0" prefHeight="25.0" prefWidth="121.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <Label layoutX="14.0" layoutY="30.0" text="Codigo">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Label>
+                                    <Label layoutX="14.0" layoutY="68.0" text="Estado">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Label>
+                                    <Label layoutX="14.0" layoutY="113.0" text="Valor">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Label>
+                                    <Label layoutX="13.0" layoutY="158.0" text="Fecha">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Label>
+                                    <Label layoutX="17.0" layoutY="198.0" text="Fecha de entrega">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Label>
+                                    <HBox layoutX="305.0" layoutY="343.0" spacing="8.0">
+                                       <children>
+                                          <Button fx:id="btnActuliazarPrestamo" layoutX="305.0" layoutY="343.0" mnemonicParsing="false" onAction="#actualizarPrestamo" style="-fx-background-color: #5a4141;" text="Actualizar" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Button>
+                                          <Button fx:id="btnRegistrarPrestamo" layoutX="385.0" layoutY="343.0" mnemonicParsing="false" onAction="#registrarPrestamo" style="-fx-background-color: #5a4141;" text="Registrar" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Button>
+                                          <Button fx:id="btnNuevoPrestamo" layoutX="459.0" layoutY="343.0" mnemonicParsing="false" onAction="#nuevoPrestamo" style="-fx-background-color: #5a4141;" text="Nuevo" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font></Button>
+                                       </children>
+                                    </HBox>
+                                    <ComboBox fx:id="choiceBoxPrestamo" layoutX="14.0" layoutY="274.0" prefHeight="23.0" prefWidth="80.0" style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 5 5 5 5;" />
+                                    <TextField fx:id="txtBuscarPrestamo" layoutX="14.0" layoutY="311.0" prefHeight="25.0" prefWidth="258.0" />
+                                    <Button fx:id="btnBuscarPrestamo" layoutX="214.0" layoutY="311.0" mnemonicParsing="false" onAction="#buscarPrestamo" style="-fx-background-color: transparent;" text="Buscar" textFill="#808080">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Button>
+                                    <Label layoutX="265.0" layoutY="69.0" text="Cliente">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Label>
+                                    <TextField fx:id="txtCliente" layoutX="331.0" layoutY="64.0" prefHeight="15.0" prefWidth="180.0" promptText="Ingrese el codigo del cliente." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <Label layoutX="265.0" layoutY="113.0" text="Empleado">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Label>
+                                    <TextField fx:id="txtEmpleado" layoutX="331.0" layoutY="109.0" prefHeight="15.0" prefWidth="180.0" promptText="Ingrese el codigo del empleado." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <Label layoutX="270.0" layoutY="159.0" text="Objetos">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Label>
+                                    <TextField fx:id="txtObjetos" layoutX="331.0" layoutY="154.0" prefHeight="15.0" prefWidth="180.0" promptText="Ingrese el codigo del objeto." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: FFFF; -fx-background-radius: 100 100 10 10; -fx-text-fill: A56463;" text="Gestión de clientes">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="824.0" style="-fx-background-color: #5a4141;">
+                     <children>
+                        <AnchorPane layoutY="-4.0" prefHeight="482.0" prefWidth="230.0" style="-fx-background-color: E2CFC1;">
+                           <children>
+                              <VBox layoutY="56.0" prefHeight="278.0" prefWidth="233.0">
+                                 <children>
+                                    <TableView fx:id="tblListCostumer" prefHeight="287.0" prefWidth="233.0" style="-fx-background-color: Transparent;">
+                                       <columns>
+                                          <TableColumn fx:id="columnNombreCliente" prefWidth="112.0">
+                                             <graphic>
+                                                <Pane prefHeight="0.0" prefWidth="108.0" style="-fx-background-color: #5a4141; -fx-background-radius: 5 0 0 5;">
+                                                   <children>
+                                                      <Label layoutX="31.0" layoutY="4.0" text="Nombre" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </graphic>
+                                          </TableColumn>
+                                          <TableColumn fx:id="columnDocumentoCliente" prefWidth="119.0" text="C2">
+                                             <graphic>
+                                                <Pane prefHeight="24.0" prefWidth="115.0" style="-fx-background-color: #5a4141; -fx-background-radius: 0 5 5 0;">
+                                                   <children>
+                                                      <Label layoutX="23.0" layoutY="4.0" prefHeight="17.0" prefWidth="69.0" text="Documento" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </graphic>
+                                          </TableColumn>
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <Pane layoutX="4.0" layoutY="18.0" prefHeight="38.0" prefWidth="225.0" style="-fx-background-color: #5a4141; -fx-background-radius: 10 10 0 0;">
+                                 <children>
+                                    <Label layoutX="53.0" layoutY="9.0" text="Listado Clientes" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../pngwing.com%20(4).png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Pane layoutX="272.0" layoutY="37.0" prefHeight="400.0" prefWidth="525.0" style="-fx-background-color: #5a4141; -fx-background-radius: 20 20 20 20;">
+                           <children>
+                              <Pane layoutX="-14.0" prefHeight="390.0" prefWidth="525.0" style="-fx-background-color: ffffff; -fx-background-radius: 10 10 10 10;">
+                                 <children>
+                                    <TextField fx:id="txtNombreCliente" layoutX="82.0" layoutY="24.0" prefHeight="25.0" prefWidth="188.0" promptText="Ingrese el nombre." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
+                                    <TextField fx:id="txtTelefonoCliente" layoutX="82.0" layoutY="64.0" prefHeight="25.0" prefWidth="188.0" promptText="Ingrese el telefono." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtDocumentoCliente" layoutX="82.0" layoutY="110.0" prefHeight="25.0" prefWidth="188.0" promptText="Ingrese el documento." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtDireccionCliente" layoutX="82.0" layoutY="154.0" prefHeight="29.0" prefWidth="188.0" promptText="Ingrese la direccion." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtCelularCliente" layoutX="83.0" layoutY="194.0" prefHeight="29.0" prefWidth="154.0" promptText="Numero de celular." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <Label layoutX="14.0" layoutY="30.0" text="Nombre">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="68.0" text="Telefono">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="113.0" text="Documento">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="13.0" layoutY="158.0" text="Dirección">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="13.0" layoutY="200.0" text="Celular">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox layoutX="305.0" layoutY="343.0" spacing="8.0">
+                                       <children>
+                                          <Button fx:id="btnActuliazarCliente" layoutX="305.0" layoutY="343.0" mnemonicParsing="false" onAction="#actulizarCliente" style="-fx-background-color: #5a4141;" text="Actualizar" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="btnRegistrarCliente" layoutX="385.0" layoutY="343.0" mnemonicParsing="false" onAction="#registrarCliente" style="-fx-background-color: #5a4141;" text="Registrar" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="btnNuevoCliente" layoutX="459.0" layoutY="343.0" mnemonicParsing="false" onAction="#nuevoCliente" style="-fx-background-color: #5a4141;" text="Nuevo" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <ComboBox fx:id="choiceBoxCliente" layoutX="14.0" layoutY="274.0" prefHeight="23.0" prefWidth="80.0" style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 5 5 5 5;" />
+                                    <TextField fx:id="txtBuscarCliente" layoutX="14.0" layoutY="311.0" prefHeight="25.0" prefWidth="258.0" />
+                                    <Button fx:id="btnBuscarCliente" layoutX="214.0" layoutY="311.0" mnemonicParsing="false" onAction="#buscarCliente" style="-fx-background-color: transparent;" text="Buscar" textFill="#808080">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <Label layoutX="279.0" layoutY="198.0" text="Profesión">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="279.0" layoutY="156.0" text="E-mail">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="280.0" layoutY="111.0" text="País">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="280.0" layoutY="66.0" text="Departamento">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="280.0" layoutY="28.0" text="Ciudad">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtProfesion" layoutX="342.0" layoutY="192.0" prefHeight="29.0" prefWidth="165.0" promptText="Ingrese la profesion." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtEmailCliente" layoutX="328.0" layoutY="152.0" prefHeight="29.0" prefWidth="165.0" promptText="Ingrese el E-mail" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtPaisCliente" layoutX="307.0" layoutY="108.0" prefHeight="29.0" prefWidth="125.0" promptText="Ingrese el pais." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtDepartamentoCliente" layoutX="366.0" layoutY="62.0" prefHeight="29.0" prefWidth="140.0" promptText="Ingrese el departamento" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtCiudadCliente" layoutX="330.0" layoutY="22.0" prefHeight="29.0" prefWidth="165.0" promptText="Ingrese la direccion" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
+                                    <TextField fx:id="txtGenero" layoutX="342.0" layoutY="232.0" prefHeight="29.0" prefWidth="165.0" promptText="Ingrese el genero." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <Label layoutX="279.0" layoutY="238.0" text="Genero">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: FFFF; -fx-background-radius: 100 100 10 10; -fx-text-fill: A56463;" text="Gestión de empleados">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="824.0" style="-fx-background-color: #5a4141;">
+                     <children>
+                        <AnchorPane layoutY="-4.0" prefHeight="482.0" prefWidth="230.0" style="-fx-background-color: E2CFC1;">
+                           <children>
+                              <VBox layoutY="49.0" prefHeight="286.0" prefWidth="233.0">
+                                 <children>
+                                    <TableView fx:id="tblListEmployee" prefHeight="287.0" prefWidth="233.0" style="-fx-background-color: E2CFC1;">
+                                       <columns>
+                                          <TableColumn fx:id="columnNombreEmpleado" prefWidth="112.0">
+                                             <graphic>
+                                                <Pane prefHeight="0.0" prefWidth="108.0" style="-fx-background-color: #5a4141; -fx-background-radius: 5 0 0 5;">
+                                                   <children>
+                                                      <Label layoutX="31.0" layoutY="4.0" text="Nombre" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </graphic>
+                                          </TableColumn>
+                                          <TableColumn fx:id="columnDocumentoEmpleado" prefWidth="119.0" text="C2">
+                                             <graphic>
+                                                <Pane prefHeight="24.0" prefWidth="115.0" style="-fx-background-color: #5a4141; -fx-background-radius: 0 5 5 0;">
+                                                   <children>
+                                                      <Label layoutX="23.0" layoutY="4.0" prefHeight="17.0" prefWidth="70.0" text="Documento" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </graphic>
+                                          </TableColumn>
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <Pane layoutX="4.0" layoutY="18.0" prefHeight="38.0" prefWidth="225.0" style="-fx-background-color: #5a4141; -fx-background-radius: 10 10 0 0;">
+                                 <children>
+                                    <Label layoutX="51.0" layoutY="9.0" text="Listado Empleados" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../pngwing.com%20(4).png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Pane layoutX="272.0" layoutY="37.0" prefHeight="400.0" prefWidth="525.0" style="-fx-background-color: #5a4141; -fx-background-radius: 20 20 20 20;">
+                           <children>
+                              <Pane layoutX="-14.0" prefHeight="390.0" prefWidth="525.0" style="-fx-background-color: ffffff; -fx-background-radius: 10 10 10 10;">
+                                 <children>
+                                    <TextField fx:id="txtNombreEmpleado" layoutX="82.0" layoutY="24.0" prefHeight="25.0" prefWidth="188.0" promptText="Ingrese el nombre." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
+                                    <TextField fx:id="txtTelefonoEmpleado" layoutX="82.0" layoutY="64.0" prefHeight="25.0" prefWidth="188.0" promptText="Ingrese el telefono." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtDocumentoEmpleado" layoutX="82.0" layoutY="110.0" prefHeight="25.0" prefWidth="188.0" promptText="Ingrese el documento." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtDireccionEmpleado" layoutX="82.0" layoutY="154.0" prefHeight="29.0" prefWidth="188.0" promptText="Ingrese la direccion." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtCelularEmpleado" layoutX="83.0" layoutY="194.0" prefHeight="29.0" prefWidth="154.0" promptText="Numero de celular." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <Label layoutX="14.0" layoutY="30.0" text="Nombre">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="68.0" text="Telefono">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="113.0" text="Documento">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="13.0" layoutY="158.0" text="Dirección">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="13.0" layoutY="200.0" text="Celular">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox layoutX="305.0" layoutY="343.0" spacing="8.0">
+                                       <children>
+                                          <Button fx:id="btnActuliazarEmpleado" layoutX="305.0" layoutY="343.0" mnemonicParsing="false" onAction="#actualizarEmpleado" style="-fx-background-color: #5a4141;" text="Actualizar" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="btnRegistrarEmpleado" layoutX="385.0" layoutY="343.0" mnemonicParsing="false" onAction="#registrarEmpleado" style="-fx-background-color: #5a4141;" text="Registrar" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="btnNuevoEmpleado" layoutX="459.0" layoutY="343.0" mnemonicParsing="false" onAction="#nuevoEmpleado" style="-fx-background-color: #5a4141;" text="Nuevo" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <ComboBox fx:id="choiceBoxEmpleado" layoutX="14.0" layoutY="274.0" prefHeight="23.0" prefWidth="80.0" style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 5 5 5 5;" />
+                                    <TextField fx:id="txtBuscarEmpleado" layoutX="14.0" layoutY="311.0" prefHeight="25.0" prefWidth="258.0" />
+                                    <Button fx:id="btnBuscarEmpleado" layoutX="214.0" layoutY="311.0" mnemonicParsing="false" onAction="#buscarEmpleado" style="-fx-background-color: transparent;" text="Buscar" textFill="#808080">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <Label layoutX="279.0" layoutY="198.0" text="Tipo">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="279.0" layoutY="156.0" text="E-mail">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="280.0" layoutY="111.0" text="País">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="280.0" layoutY="66.0" text="Departamento">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="280.0" layoutY="28.0" text="Ciudad">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtTipoEmpleado" layoutX="321.0" layoutY="192.0" prefHeight="29.0" prefWidth="165.0" promptText="Ingrese la profesion." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtEmailEmpleado" layoutX="328.0" layoutY="152.0" prefHeight="29.0" prefWidth="165.0" promptText="Ingrese el E-mail" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtPaisEmpleado" layoutX="307.0" layoutY="108.0" prefHeight="29.0" prefWidth="125.0" promptText="Ingrese el pais." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtDepartamentoEmpleado" layoutX="366.0" layoutY="62.0" prefHeight="29.0" prefWidth="140.0" promptText="Ingrese el departamento" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtCiudadEmpleado" layoutX="330.0" layoutY="22.0" prefHeight="29.0" prefWidth="165.0" promptText="Ingrese la direccion" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
+                                    <TextField fx:id="txtAniosExperiencia" layoutX="321.0" layoutY="233.0" prefHeight="29.0" prefWidth="165.0" promptText="Ingrese los años de xp." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <Label layoutX="269.0" layoutY="239.0" text="Años xp">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: FFFF; -fx-background-radius: 100 100 10 10; -fx-text-fill: A56463;" text="Gestión de objetos">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="824.0" style="-fx-background-color: #5a4141;">
+                     <children>
+                        <AnchorPane layoutY="-4.0" prefHeight="482.0" prefWidth="230.0" style="-fx-background-color: E2CFC1;">
+                           <children>
+                              <VBox layoutY="56.0" prefHeight="290.0" prefWidth="233.0">
+                                 <children>
+                                    <TableView fx:id="tblListProduct" prefHeight="287.0" prefWidth="233.0" style="-fx-background-color: E2CFC1;">
+                                       <columns>
+                                          <TableColumn fx:id="columnNombreObjeto" prefWidth="112.0">
+                                             <graphic>
+                                                <Pane prefHeight="0.0" prefWidth="108.0" style="-fx-background-color: #5a4141; -fx-background-radius: 5 0 0 5;">
+                                                   <children>
+                                                      <Label layoutX="31.0" layoutY="4.0" text="Nombre" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </graphic>
+                                          </TableColumn>
+                                          <TableColumn fx:id="columnCodigoObjeto" prefWidth="119.0" text="C2">
+                                             <graphic>
+                                                <Pane prefHeight="24.0" prefWidth="115.0" style="-fx-background-color: #5a4141; -fx-background-radius: 0 5 5 0;">
+                                                   <children>
+                                                      <Label layoutX="30.0" layoutY="4.0" prefHeight="17.0" prefWidth="56.0" text="Código" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </graphic>
+                                          </TableColumn>
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <Pane layoutX="4.0" layoutY="18.0" prefHeight="38.0" prefWidth="225.0" style="-fx-background-color: #5a4141; -fx-background-radius: 10 10 0 0;">
+                                 <children>
+                                    <Label layoutX="61.0" layoutY="9.0" text="Listado Objetos" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../pngwing.com%20(4).png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Pane layoutX="272.0" layoutY="37.0" prefHeight="400.0" prefWidth="525.0" style="-fx-background-color: #5a4141; -fx-background-radius: 20 20 20 20;">
+                           <children>
+                              <Pane layoutX="-14.0" prefHeight="390.0" prefWidth="525.0" style="-fx-background-color: ffffff; -fx-background-radius: 10 10 10 10;">
+                                 <children>
+                                    <TextField fx:id="txtNombreObjeto" layoutX="71.0" layoutY="24.0" prefHeight="25.0" prefWidth="188.0" promptText="Ingrese el nombre." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
+                                    <TextField fx:id="txtCodigoObjeto" layoutX="71.0" layoutY="64.0" prefHeight="25.0" prefWidth="188.0" promptText="Ingrese el codigo" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtPesoObjeto" layoutX="71.0" layoutY="110.0" prefHeight="25.0" prefWidth="188.0" promptText="Ingrese el peso" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtEstadoObjeto" layoutX="71.0" layoutY="154.0" prefHeight="29.0" prefWidth="188.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtValorUnitarioObjeto" layoutX="72.0" layoutY="194.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <Label layoutX="14.0" layoutY="30.0" text="Nombre">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="68.0" text="Codigo">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="113.0" text="Peso">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="13.0" layoutY="158.0" text="Estado">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="13.0" layoutY="200.0" text="Valor">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox layoutX="305.0" layoutY="343.0" spacing="8.0">
+                                       <children>
+                                          <Button fx:id="btnActuliazarObjeto" layoutX="305.0" layoutY="343.0" mnemonicParsing="false" onAction="#actualizarObjeto" style="-fx-background-color: #5a4141;" text="Actualizar" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="btnRegistrarObjeto" layoutX="385.0" layoutY="343.0" mnemonicParsing="false" onAction="#registrarObjeto" style="-fx-background-color: #5a4141;" text="Registrar" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="btnNuevoObjeto" layoutX="459.0" layoutY="343.0" mnemonicParsing="false" onAction="#nuevoObjeto" style="-fx-background-color: #5a4141;" text="Nuevo" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <ComboBox fx:id="choiceBoxObjeto" layoutX="14.0" layoutY="274.0" prefHeight="23.0" prefWidth="80.0" style="-fx-background-color: ffffff; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 5 5 5 5;" />
+                                    <TextField fx:id="txtBuscarObjeto" layoutX="14.0" layoutY="311.0" prefHeight="25.0" prefWidth="258.0" />
+                                    <Button fx:id="btnBuscarObjeto" layoutX="214.0" layoutY="311.0" mnemonicParsing="false" onAction="#buscarObejto" style="-fx-background-color: transparent;" text="Buscar" textFill="#808080">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <Label layoutX="275.0" layoutY="113.0" text="Valor total">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="275.0" layoutY="28.0" text="Descripcion">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtValorTotalObjeto" layoutX="346.0" layoutY="107.0" prefHeight="29.0" prefWidth="165.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <TextField fx:id="txtDescripcionObjeto" layoutX="346.0" layoutY="22.0" prefHeight="29.0" prefWidth="165.0" promptText="Ingrese la direccion" style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
+                                    <TextField fx:id="txtColorObjeto" layoutX="316.0" layoutY="62.0" prefHeight="29.0" prefWidth="179.0" promptText="Ingrese el color." style="-fx-background-radius: 10 10 10 10; -fx-background-color: transparent; -fx-border-color: B88F88; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 30 30 30 30;" />
+                                    <Label layoutX="275.0" layoutY="68.0" text="Color">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

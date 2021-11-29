@@ -1,0 +1,5 @@
+package co.edu.uniquindio.gestionPrestamos.controller;
+
+public class InventoryController {
+
+}
