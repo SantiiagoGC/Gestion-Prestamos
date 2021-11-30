@@ -15,7 +15,7 @@ public class Company {
     private String nombre;
     private ArrayList<Empleado> empleado = new ArrayList<>();
     private ArrayList<Cliente> cliente = new ArrayList<>();
-    private ArrayList<Product> objeto = new ArrayList<>();
+    private ArrayList<Objeto> objeto = new ArrayList<>();
     private ArrayList<Loan> prestamo = new ArrayList<>();
     /*
      * Constructor
@@ -45,10 +45,10 @@ public class Company {
     public void setCliente(ArrayList<Cliente> cliente) {
         this.cliente = cliente;
     }
-    public ArrayList<Product> getObjeto() {
+    public ArrayList<Objeto> getObjeto() {
         return objeto;
     }
-    public void setObjeto(ArrayList<Product> objeto) {
+    public void setObjeto(ArrayList<Objeto> objeto) {
         this.objeto = objeto;
     }
     public ArrayList<Loan> getPrestamo() {
@@ -69,7 +69,7 @@ public class Company {
 		customer = new Cliente("1874", "Anna", "756888", "3215478524", "Cll 167", "Armenia", "Quindio", "Colombia", "Anna@gmail.com",  "Estudiante", "Femenino");
 		getCliente().add(customer);
 		
-		Product product = new Product("258749", "100 años de soleda", "Negro", "2.5 kilogramos", "20000", "20000", ConditionProduct.DISPONIBLE, "Libro", "Libro negro escrito por Gabriel");
+		Objeto product = new Objeto("258749", "100 años de soleda", "Negro", "2.5 kilogramos", "20000", "Disponible",  "Libro", "Libro negro escrito por Gabriel",20,10);
 		getObjeto().add(product);
 		
 		Empleado employee = new Empleado("1684", "Luis", "42424", "3254589875", "Crr 21", "Armenia", "Quindio", "Colombia", "Luis@gmail.com",  TypeEmployee.PRESTADOR,"5 años");
@@ -91,7 +91,7 @@ public class Company {
 	}
 	//Verifica el códig del cliente
 	public boolean verifyCodeProduct(String productCode) {
-		Product objetoAux = null;
+		Objeto objetoAux = null;
 		for(int  i = 0; i < objeto.size(); i++) {
 			objetoAux = objeto.get(i);
 			if (objetoAux.getCodigo().equals(productCode)) {
@@ -169,25 +169,20 @@ public class Company {
 	 * @param totalValue
 	 * @return
 	 */
-	public Product registerProduct(String nameProduct, String productCode, String productWeight,
-			String conditionProduct, String productValue, String productDescription, String productColor,
-			String totalValue) {
-
-		Product product = new Product(productCode, nameProduct, productColor, productWeight, productValue, totalValue, null, "", productDescription);
-		product.setNombre(nameProduct);
-		product.setCodigo(productCode);
-		product.setPeso(productWeight);
-		int conditionProduct2 = Integer.parseInt(conditionProduct);
-		if (conditionProduct2 == ConditionProduct.DISPONIBLE.getProductCondition()) {
-			product.setEstadoObjeto(ConditionProduct.DISPONIBLE);
-		}
-		if(conditionProduct2 == ConditionProduct.NO_DISPONIBLE.getProductCondition()) {
-			product.setEstadoObjeto(ConditionProduct.NO_DISPONIBLE);
-		}
-		product.setValorUnitario(productValue);
-		product.setDescripcion(productDescription);
-		product.setColor(productColor);
-		product.setValorTotal(totalValue);
+	public Objeto registerProduct(String codigo, String nombre, String color, String peso, String precioAlquiler,
+			String estadoObjeto, String tipo, String descripcion, int unidadesDisponibles,
+			int unidadesPrestadas) {
+		Objeto product = new Objeto(codigo, nombre, color, peso, precioAlquiler, null, tipo, descripcion, unidadesDisponibles, unidadesPrestadas);
+		product.setNombre(nombre);
+		product.setCodigo(codigo);
+		product.setPeso(peso);
+		product.setEstadoObjeto(estadoObjeto);
+		product.setTipo(tipo);
+		product.setPrecioAlquiler(precioAlquiler);
+		product.setDescripcion(descripcion);
+		product.setColor(color);
+		product.setUnidadesDisponibles(unidadesDisponibles);
+		product.setUnidadesPrestadas(unidadesPrestadas);
 		return product;
 	}
 	/**
@@ -204,7 +199,7 @@ public class Company {
 	 * @param employeeType
 	 * @return
 	 */
-	public Empleado registerEmployee(String nameEmployee, String telefonoEmpleado, String employeeIdentification,
+	public Empleado registrarEmpleado(String nameEmployee, String telefonoEmpleado, String employeeIdentification,
 			String employeeAddress, String cellPhoneEmployee, String employeeCity, String employeeDepartment,
 			String employeeCountry, String emailEmployee, String employeeType, String aniosXp) {
 
@@ -240,7 +235,7 @@ public class Company {
 	}
 	//Registra el prestamo
 	public Loan registerLoan(String loanCode, String loanCondition, String loanValue, String loanDate,
-			String expirationDate, Cliente foundCustomer, Empleado foundEmployee, Product foundProduct) {
+			String expirationDate, Cliente foundCustomer, Empleado foundEmployee, Objeto foundProduct) {
 
 		Cliente clienteAux = null;
 		Loan loan = new Loan(loanCode, loanValue, loanDate, expirationDate, null, foundCustomer, foundEmployee, foundProduct);
@@ -283,25 +278,22 @@ public class Company {
 		}
 
 	}
-	public void updateProduct(String nameProduct, String productCode, String productWeight, String conditionProduct,
-			String productValue, String productDescription, String productColor, String totalValue) throws ProductExistException {
+	public void updateProduct(String codigo, String nombre, String color, String peso, String precioAlquiler,
+			String estadoObjeto, String tipo, String descripcion, int unidadesDisponibles,
+			int unidadesPrestadas) throws ProductExistException {
 
-		Product product = obtenerProduct(productCode);
+		Objeto product = obtenerProduct(codigo);
 		if(product != null){
-			product.setNombre(nameProduct);
-			product.setCodigo(productCode);
-			product.setPeso(productWeight);
-			int conditionProduct2 = Integer.parseInt(conditionProduct);
-			if (conditionProduct2 == ConditionProduct.DISPONIBLE.getProductCondition()) {
-				product.setEstadoObjeto(ConditionProduct.DISPONIBLE);
-			}
-			if(conditionProduct2 == ConditionProduct.NO_DISPONIBLE.getProductCondition()) {
-				product.setEstadoObjeto(ConditionProduct.NO_DISPONIBLE);
-			}
-			product.setValorUnitario(productValue);
-			product.setDescripcion(productDescription);
-			product.setColor(productColor);
-			product.setValorTotal(totalValue);
+			product.setNombre(nombre);
+			product.setCodigo(codigo);
+			product.setPeso(peso);
+			product.setEstadoObjeto(estadoObjeto);
+			product.setTipo(tipo);
+			product.setPrecioAlquiler(precioAlquiler);
+			product.setDescripcion(descripcion);
+			product.setColor(color);
+			product.setUnidadesDisponibles(unidadesDisponibles);
+			product.setUnidadesPrestadas(unidadesPrestadas);
 		} else{
 			throw new ProductExistException("No existe el producto.");
 		}
@@ -348,9 +340,9 @@ public class Company {
 		}
 		return null;
 	}
-	public Product obtenerProduct(String productCode) {
+	public Objeto obtenerProduct(String productCode) {
 
-		for (Product product : objeto) {
+		for (Objeto product : objeto) {
 			if(product.getCodigo().equals(productCode)){
 				return product;
 			}

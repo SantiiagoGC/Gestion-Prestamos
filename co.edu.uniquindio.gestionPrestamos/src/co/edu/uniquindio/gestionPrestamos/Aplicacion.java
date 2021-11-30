@@ -11,7 +11,7 @@ import co.edu.uniquindio.gestionPrestamos.model.Company;
 import co.edu.uniquindio.gestionPrestamos.model.Cliente;
 import co.edu.uniquindio.gestionPrestamos.model.Empleado;
 import co.edu.uniquindio.gestionPrestamos.model.Loan;
-import co.edu.uniquindio.gestionPrestamos.model.Product;
+import co.edu.uniquindio.gestionPrestamos.model.Objeto;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,12 +19,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Aplicacion extends Application{
-	private Company company = new Company("Loan management.");
+	private Company company = new Company("Administracion prestamos.");
 	private Stage primaryStage;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Loan management.");
+		this.primaryStage.setTitle("Administracion prestamos.");
 		//aqui llamamos para mostrar lo que hemos cargado dentro el metodo
 		showLoginWindow();
 	}
@@ -65,7 +65,7 @@ public class Aplicacion extends Application{
 		return company.getCliente();
 	}
 
-	public ArrayList<Product> obtenerProductos() {
+	public ArrayList<Objeto> obtenerProductos() {
 		return company.getObjeto();
 	}
 
@@ -122,13 +122,15 @@ public class Aplicacion extends Application{
 	 * @param productDescription
 	 * @param productColor
 	 * @param totalValue
+	 * @param unidadesPres 
+	 * @param unidadesDis 
 	 * @return
 	 */
-	public Product registerProduct(String nameProduct, String productCode, String productWeight,
-			String conditionProduct, String productValue, String productDescription, String productColor,
-			String totalValue) {
-		return company.registerProduct(nameProduct,productCode,productWeight,conditionProduct,productValue,
-				productDescription,productColor,totalValue);
+	public Objeto registerProduct(String codigo, String nombre, String color, String peso, String precioAlquiler,
+			String estadoObjeto,  String tipo, String descripcion, int unidadesDisponibles,
+			int unidadesPrestadas) {
+		return company.registerProduct(codigo,nombre,color,peso,precioAlquiler,
+				estadoObjeto, tipo, descripcion, unidadesDisponibles, unidadesPrestadas);
 	}
 	/**
 	 * Registra al empleado
@@ -144,16 +146,16 @@ public class Aplicacion extends Application{
 	 * @param employeeType
 	 * @return
 	 */
-	public Empleado registerEmployee(String nameEmployee, String lastNameEmployee, String employeeIdentification,
+	public Empleado registrarEmpleado1(String nameEmployee, String lastNameEmployee, String employeeIdentification,
 			String employeeAddress, String cellPhoneEmployee, String employeeCity, String employeeDepartment,
 			String employeeCountry, String emailEmployee, String employeeType, String aniosXp) {
 
-		return company.registerEmployee(nameEmployee,lastNameEmployee,employeeIdentification,employeeAddress,
+		return company.registrarEmpleado(nameEmployee,lastNameEmployee,employeeIdentification,employeeAddress,
 				cellPhoneEmployee,employeeCity,employeeDepartment,employeeCountry,emailEmployee,employeeType, aniosXp);
 	}
 	//Registra el prestamo
 	public Loan registerLoan(String loanCode, String loanCondition, String loanValue, String loanDate,
-			String expirationDate, Cliente foundCustomer, Empleado foundEmployee, Product foundProduct) {
+			String expirationDate, Cliente foundCustomer, Empleado foundEmployee, Objeto foundProduct) {
 
 		return company.registerLoan(loanCode,loanCondition,loanValue,loanDate,expirationDate,
 				foundCustomer,foundEmployee,foundProduct);
@@ -168,11 +170,12 @@ public class Aplicacion extends Application{
 				emailCustomer,profesioCustomer);
 	}
 
-	public void updateProduct(String nameProduct, String productCode, String productWeight, String conditionProduct,
-			String productValue, String productDescription, String productColor, String totalValue) throws ProductExistException {
+	public void updateProduct(String nameProduct, String productCode, String productWeight,
+			String conditionProduct, String productValue, String productDescription, String productColor,
+			String totalValue, int unidadesDis, int unidadesPres) throws ProductExistException {
 
 		company.updateProduct(nameProduct,productCode,productWeight,conditionProduct,productValue,
-				productDescription,productColor,totalValue);
+				productDescription,productColor,totalValue, unidadesDis, unidadesPres);
 
 	}
 
@@ -195,7 +198,7 @@ public class Aplicacion extends Application{
 		return company.obtenerEmployee(employee);
 	}
 
-	public Product searchProduct(String product) {
+	public Objeto searchProduct(String product) {
 		return company.obtenerProduct(product);
 	}
 

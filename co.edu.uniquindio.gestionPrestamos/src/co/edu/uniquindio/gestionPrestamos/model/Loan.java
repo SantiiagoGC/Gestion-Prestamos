@@ -21,10 +21,10 @@ public class Loan {
     //private ArrayList<LoanDetail> detallePrestamo = new ArrayList<>();
     private Cliente customer;
     private Empleado employee;
-    private Product product;
+    private Objeto product;
 	//Constructor
     public Loan(String codigo, String valor, String fechaPrestamo, String fechaEntrega, ConditionLoan estadoPrestamo,
-			Cliente customer, Empleado employee, Product product) {
+			Cliente customer, Empleado employee, Objeto product) {
 		super();
 		this.codigo = codigo;
 		this.valor = valor;
@@ -81,10 +81,10 @@ public class Loan {
 	public void setEmployee(Empleado employee) {
 		this.employee = employee;
 	}
-	public Product getProduct() {
+	public Objeto getProduct() {
 		return product;
 	}
-	public void setProduct(Product product) {
+	public void setProduct(Objeto product) {
 		this.product = product;
 	}
 

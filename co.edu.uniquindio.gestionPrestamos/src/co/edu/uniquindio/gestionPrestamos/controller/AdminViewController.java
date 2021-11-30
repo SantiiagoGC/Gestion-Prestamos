@@ -11,7 +11,7 @@ import co.edu.uniquindio.gestionPrestamos.exception.ProductExistException;
 import co.edu.uniquindio.gestionPrestamos.model.Cliente;
 import co.edu.uniquindio.gestionPrestamos.model.Empleado;
 import co.edu.uniquindio.gestionPrestamos.model.Loan;
-import co.edu.uniquindio.gestionPrestamos.model.Product;
+import co.edu.uniquindio.gestionPrestamos.model.Objeto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,7 +43,7 @@ public class AdminViewController {
     private TextField txtObjetos;
 
     @FXML
-    private TextField txtValorUnitarioObjeto;
+    private TextField txtValorObjeto;
 
     @FXML
     private TextField txtBuscarObjeto;
@@ -110,9 +110,6 @@ public class AdminViewController {
 
     @FXML
     private TextField txtBuscarCliente;
-
-    @FXML
-    private TextField txtValorTotalObjeto;
 
     @FXML
     private Button btnActuliazarCliente;
@@ -206,6 +203,15 @@ public class AdminViewController {
 
     @FXML
     private TextField txtColorObjeto;
+    
+    @FXML
+    private TextField txtTipoObjeto;
+    
+    @FXML
+    private TextField txtUnidadesDis;
+
+    @FXML
+    private TextField txtUnidadesPres;
 
     @FXML
     private Button btnBuscarObjeto;
@@ -226,7 +232,7 @@ public class AdminViewController {
 	private TableView<Empleado> tblListEmployee;
 
 	@FXML
-	private TableView<Product> tblListProduct;
+	private TableView<Objeto> tblListProduct;
 
 	@FXML
 	private TableView<Loan> tblListLoan;
@@ -238,10 +244,10 @@ public class AdminViewController {
     private TableColumn<Cliente, String> columnDocumentoCliente;
 
 	@FXML
-	private TableColumn<Product, String> columnNombreObjeto;
+	private TableColumn<Objeto, String> columnNombreObjeto;
 
 	@FXML
-	private TableColumn<Product, String> columnCodigoObjeto;
+	private TableColumn<Objeto, String> columnCodigoObjeto;
 
 	@FXML
 	private TableColumn<Empleado, String> columnNombreEmpleado;
@@ -259,12 +265,12 @@ public class AdminViewController {
 	private Aplicacion aplicacion;
 	//Observables
 	ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
-	ObservableList<Product> listProducts = FXCollections.observableArrayList();
+	ObservableList<Objeto> listProducts = FXCollections.observableArrayList();
 	ObservableList<Empleado> listEmployee = FXCollections.observableArrayList();
 	ObservableList<Loan> listLoan = FXCollections.observableArrayList();
 	//Variables de seleccion
 	private Cliente clienteSeleccionado;
-	private Product selectedProduct;
+	private Objeto selectedProduct;
 	private Empleado selectedEmployee;
 	private Loan selectedLoan;
 
@@ -336,11 +342,11 @@ public class AdminViewController {
 	}
 	@FXML
 	void registrarObjeto(ActionEvent event) {
-		registrarProducto();
+		registrarAObjeto();
 	}
 	@FXML
 	void registrarEmpleado(ActionEvent event) {
-		registrarEmployee();
+		registrarAEmpleado();
 	}
 	@FXML
 	void registrarPrestamo(ActionEvent event) {
@@ -352,11 +358,11 @@ public class AdminViewController {
 	}
 	@FXML
 	void actualizarObjeto(ActionEvent event) throws ProductExistException {
-		updateProduct();
+		actualizarObjeto();
 	}
 	@FXML
 	void actualizarEmpleado(ActionEvent event) throws EmployeeExistException {
-		updateEmployee();
+		actualizarEmpleado();
 	}
 	@FXML
 	void actualizarPrestamo(ActionEvent event) {
@@ -410,7 +416,7 @@ public class AdminViewController {
 		tblListLoan.setItems(obtenerPrestamos());
 	}
 
-	private ObservableList<Product> obtenerProductos() {
+	private ObservableList<Objeto> obtenerProductos() {
 		listProducts.addAll(aplicacion.obtenerProductos());
 		return listProducts;
 	}
@@ -447,16 +453,18 @@ public class AdminViewController {
 		}
 	}
 
-	private void showProductInformation(Product product) {
+	private void showProductInformation(Objeto product) {
 		if (product != null) {
 			txtNombreObjeto.setText(product.getNombre());
 			txtCodigoObjeto.setText(product.getCodigo());
 			txtPesoObjeto.setText(product.getPeso());
+			txtValorObjeto.setText(product.getPrecioAlquiler());
 			txtEstadoObjeto.setText(product.getEstadoObjeto().toString());
-			txtValorUnitarioObjeto.setText(product.getValorUnitario());
+			txtTipoObjeto.setText(product.getTipo());
 			txtDescripcionObjeto.setText(product.getDescripcion());
 			txtColorObjeto.setText(product.getColor());
-			txtValorTotalObjeto.setText(product.getValorTotal());
+			txtUnidadesDis.setText(String.valueOf(product.getUnidadesDisponibles()));
+			txtUnidadesPres.setText(String.valueOf(product.getUnidadesPrestadas()));
 		}
 
 	}
@@ -514,11 +522,13 @@ public class AdminViewController {
 		txtNombreObjeto.setText("");
 		txtCodigoObjeto.setText("");
 		txtPesoObjeto.setText("");
+		txtValorObjeto.setText("");
 		txtEstadoObjeto.setText("");
-		txtValorUnitarioObjeto.setText("");
+		txtTipoObjeto.setText("");
 		txtDescripcionObjeto.setText("");
 		txtColorObjeto.setText("");
-		txtValorTotalObjeto.setText("");
+		txtUnidadesDis.setText("");
+		txtUnidadesPres.setText("");
 	}
 	//Limpia la ventana de objeto
 	private void nuevoEmpleado() {
@@ -580,22 +590,26 @@ public class AdminViewController {
     	}
 	}
 	//Registra la información del objeto
-	private void registrarProducto() {
+	private void registrarAObjeto() {
 		String nameProduct = txtNombreObjeto.getText();
     	String productCode = txtCodigoObjeto.getText();
     	String productWeight = txtPesoObjeto.getText();
     	String conditionProduct = txtEstadoObjeto.getText();
-    	String productValue = txtValorUnitarioObjeto.getText();
+    	String productValue = txtValorObjeto.getText();
     	String productDescription = txtDescripcionObjeto.getText();
     	String productColor = txtColorObjeto.getText();
-    	String totalValue = txtValorTotalObjeto.getText();
-
+    	String objetoTipo = txtTipoObjeto.getText();
+    	String unidadesDis = txtUnidadesDis.getText();
+    	String unidadesPres = txtUnidadesPres.getText();
+    	    	
     	if(validDataProduct(nameProduct,productCode,productWeight,conditionProduct,productValue,
-    			productDescription,productColor,totalValue)){
-
-    		Product objeto = null;
-    		objeto = aplicacion.registerProduct(nameProduct,productCode,productWeight,conditionProduct,productValue,
-    			productDescription,productColor,totalValue);
+    			productDescription,productColor,objetoTipo, unidadesDis, unidadesPres)){
+    		
+        	int unidadesDisponibles = Integer.parseInt(unidadesDis);
+        	int unidadesPrestadas = Integer.parseInt(unidadesPres);
+    		Objeto objeto = null;
+    		objeto = aplicacion.registerProduct(productCode,nameProduct,productColor,productWeight,productValue,
+    				conditionProduct,objetoTipo,productDescription, unidadesDisponibles, unidadesPrestadas);
 
     		if(objeto != null){
     			listProducts.add(objeto);
@@ -607,7 +621,7 @@ public class AdminViewController {
 
 	}
 	//Registra al empleado
-	private void registrarEmployee() {
+	private void registrarAEmpleado() {
 		String nameEmployee = txtNombreEmpleado.getText();
     	String lastNameEmployee = txtTelefonoEmpleado.getText();
     	String employeeIdentification = txtDocumentoEmpleado.getText();
@@ -624,7 +638,7 @@ public class AdminViewController {
     			employeeAddress,cellPhoneEmployee,employeeCity,employeeDepartment,employeeCountry,emailEmployee,employeeType)){
 
     		Empleado employee = null;
-    		employee  = aplicacion.registerEmployee(nameEmployee,lastNameEmployee,employeeIdentification,
+    		employee  = aplicacion.registrarEmpleado1(nameEmployee,lastNameEmployee,employeeIdentification,
         			employeeAddress,cellPhoneEmployee,employeeCity,employeeDepartment,employeeCountry,emailEmployee,employeeType, empleadoExperiencia);
 
     		if(employee != null){
@@ -651,7 +665,7 @@ public class AdminViewController {
 				customer,employee,product)){
 			Cliente foundCustomer = aplicacion.searchCustomer(customer);
 			Empleado foundEmployee = aplicacion.searchEmployee(employee);
-			Product foundProduct = aplicacion.searchProduct(product);
+			Objeto foundProduct = aplicacion.searchProduct(product);
 
 			Loan loan = null;
 			loan = aplicacion.registerLoan(loanCode,loanCondition,loanValue,loanDate,expirationDate,
@@ -697,21 +711,27 @@ public class AdminViewController {
 
 	}
 	//Actuliza el producto
-	private void updateProduct() throws ProductExistException {
+	private void actualizarObjeto() throws ProductExistException {
 		String nameProduct = txtNombreObjeto.getText();
     	String productCode = txtCodigoObjeto.getText();
     	String productWeight = txtPesoObjeto.getText();
     	String conditionProduct = txtEstadoObjeto.getText();
-    	String productValue = txtValorUnitarioObjeto.getText();
+    	String productValue = txtValorObjeto.getText();
     	String productDescription = txtDescripcionObjeto.getText();
     	String productColor = txtColorObjeto.getText();
-    	String totalValue = txtValorTotalObjeto.getText();
+    	String objetoTipo = txtTipoObjeto.getText();
+    	String unidadesDis = txtUnidadesDis.getText();
+    	String unidadesPres = txtUnidadesPres.getText();
+    	
     	if(selectedProduct != null){
     		if(validDataProduct2(nameProduct,productCode,productWeight,conditionProduct,productValue,
-    			productDescription,productColor,totalValue)){
-
+    			productDescription,productColor,objetoTipo, unidadesDis, unidadesPres)){
+    			
+            	int unidadesDisponibles = Integer.parseInt(unidadesDis);
+            	int unidadesPrestadas = Integer.parseInt(unidadesPres);
+            	
     			aplicacion.updateProduct(nameProduct,productCode,productWeight,conditionProduct,productValue,
-    			productDescription,productColor,totalValue);
+    	    	productDescription,productColor,objetoTipo, unidadesDisponibles, unidadesPrestadas);
     			showMessage("Notificación.", "Actualizacion Completada", "Se ha actualizado con exito.", AlertType.INFORMATION);
     			tblListProduct.refresh();
     		}
@@ -721,7 +741,7 @@ public class AdminViewController {
 
 	}
 	//Actualizar al empleado
-	private void updateEmployee() throws EmployeeExistException {
+	private void actualizarEmpleado() throws EmployeeExistException {
 		String nameEmployee = txtNombreEmpleado.getText();
     	String lastNameEmployee = txtTelefonoEmpleado.getText();
     	String employeeIdentification = txtDocumentoEmpleado.getText();
@@ -875,7 +895,8 @@ public class AdminViewController {
 	 */
 	private boolean validDataProduct(String nameProduct, String productCode, String productWeight,
 			String conditionProduct, String productValue, String productDescription, String productColor,
-			String totalValue) {
+			String objetoTipo,String unidadesDis, String unidadesPres) {
+		
 		String mensaje = "";
 
 		if(nameProduct == null || nameProduct.equals("") || nameProduct.matches("[0-9]+")){
@@ -908,10 +929,18 @@ public class AdminViewController {
 	    if(productDescription == null || productDescription.equals("")){
 	    	mensaje += "¡INGRESE LA CONDICIÓN DEL PRODUCTO!";
 	    }
-	    if(totalValue == null || totalValue.equals("") || totalValue.matches("[a-zA-z]")){
+		if(productColor == null || productColor.equals("") || productColor.matches("[0-9]+")){
+			mensaje  += "COLOR NO VALIDO.\n";
+		}
+	    if(objetoTipo == null || objetoTipo.equals("") || objetoTipo.matches("[0-9]+")){
 	    	mensaje += "¡VALOR TOTAL NO VALIDO!";
 	    }
-
+	    if(unidadesDis == null || unidadesDis.equals("") || unidadesDis.matches("[a-zA-Z]+")){
+	    	mensaje += "¡UNIDADES DISPONIBLES NO VALIDAS!";
+	    }
+	    if(unidadesPres == null || unidadesPres.equals("") || unidadesPres.matches("[a-zA-Z]+")){
+	    	mensaje += "¡UNIDADES PRESTADAS NO VALIDAS!";
+	    }
 	    if(mensaje.equals("")){
 	        return true;
 	    } else{
@@ -923,7 +952,7 @@ public class AdminViewController {
 	//Vaiida los datos para la actualización
 	private boolean validDataProduct2(String nameProduct, String productCode, String productWeight,
 			String conditionProduct, String productValue, String productDescription, String productColor,
-			String totalValue) {
+			String objetoTipo,String unidadesDis, String unidadesPres) {
 		String mensaje = "";
 
 		if(nameProduct == null || nameProduct.equals("") || nameProduct.matches("[0-9]+")){
@@ -933,7 +962,7 @@ public class AdminViewController {
 	        mensaje += "CÓDIGO NO VALIDO.\n";
 	    } else{
 	    	if (selectedProduct != null ) {
-				if (!productCode.equals(selectedProduct.getCodigo())){
+				if (productCode.equals(selectedProduct.getCodigo())){
 					if (aplicacion.verifyCodeProduct(productCode)) {
 						mensaje += "¡ESE CÓDIGO YA EXISTE!";
 					}
@@ -956,8 +985,17 @@ public class AdminViewController {
 	    if(productDescription == null || productDescription.equals("")){
 	    	mensaje += "¡INGRESE LA CONDICIÓN DEL PRODUCTO!";
 	    }
-	    if(totalValue == null || totalValue.equals("") || totalValue.matches("[a-zA-z]")){
+		if(productColor == null || productColor.equals("") || productColor.matches("[0-9]+")){
+			mensaje  += "COLOR NO VALIDO.\n";
+		}
+	    if(objetoTipo == null || objetoTipo.equals("") || objetoTipo.matches("[0-9]+")){
 	    	mensaje += "¡VALOR TOTAL NO VALIDO!";
+	    }
+	    if(unidadesDis == null || unidadesDis.equals("") || unidadesDis.matches("[a-zA-Z]+")){
+	    	mensaje += "¡UNIDADES DISPONIBLES NO VALIDAS!";
+	    }
+	    if(unidadesPres == null || unidadesPres.equals("") || unidadesPres.matches("[a-zA-Z]+")){
+	    	mensaje += "¡UNIDADES PRESTADAS NO VALIDAS!";
 	    }
 
 	    if(mensaje.equals("")){

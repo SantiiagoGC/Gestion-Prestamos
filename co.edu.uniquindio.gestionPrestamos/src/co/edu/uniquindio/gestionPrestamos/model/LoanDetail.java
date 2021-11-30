@@ -11,15 +11,15 @@ public class LoanDetail {
 
     private int borrowedUnits;
     private double subTotal;
-    private ArrayList<Product> loanedProduct1 = new ArrayList<>();
-    private Product loanedProduct;
+    private ArrayList<Objeto> loanedProduct1 = new ArrayList<>();
+    private Objeto loanedProduct;
     /*
      * Constructor
      * @param borrowedUnits
      * @param subTotal
      * @param loanedProduct
      */
-    public LoanDetail(int borrowedUnits, double subTotal, ArrayList<Product> loanedProduct1) {
+    public LoanDetail(int borrowedUnits, double subTotal, ArrayList<Objeto> loanedProduct1) {
         super();
         this.borrowedUnits = borrowedUnits;
         this.subTotal = subTotal;
@@ -48,16 +48,16 @@ public class LoanDetail {
     public void setSubTotal(double subTotal) {
         this.subTotal = subTotal;
     }
-    public ArrayList<Product> getLoanedProduct1() {
+    public ArrayList<Objeto> getLoanedProduct1() {
         return loanedProduct1;
     }
-    public void setLoanedProduct1(ArrayList<Product> loanedProduct1) {
+    public void setLoanedProduct1(ArrayList<Objeto> loanedProduct1) {
         this.loanedProduct1 = loanedProduct1;
     }
-    public Product getLoanedProduct() {
+    public Objeto getLoanedProduct() {
 		return loanedProduct;
 	}
-	public void setLoanedProduct(Product loanedProduct) {
+	public void setLoanedProduct(Objeto loanedProduct) {
 		this.loanedProduct = loanedProduct;
 	}
 	@Override
