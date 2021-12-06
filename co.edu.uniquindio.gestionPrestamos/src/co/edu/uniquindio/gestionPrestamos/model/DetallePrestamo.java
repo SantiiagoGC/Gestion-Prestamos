@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Mauricio
  *
  */
-public class LoanDetail {
+public class DetallePrestamo {
 
     private int borrowedUnits;
     private double subTotal;
@@ -19,7 +19,7 @@ public class LoanDetail {
      * @param subTotal
      * @param loanedProduct
      */
-    public LoanDetail(int borrowedUnits, double subTotal, ArrayList<Objeto> loanedProduct1) {
+    public DetallePrestamo(int borrowedUnits, double subTotal, ArrayList<Objeto> loanedProduct1) {
         super();
         this.borrowedUnits = borrowedUnits;
         this.subTotal = subTotal;
@@ -30,7 +30,7 @@ public class LoanDetail {
      * @param borrowedUnits
      * @param subTotal
      */
-    public LoanDetail(int borrowedUnits, double subTotal) {
+    public DetallePrestamo(int borrowedUnits, double subTotal) {
         super();
         this.borrowedUnits = borrowedUnits;
         this.subTotal = subTotal;

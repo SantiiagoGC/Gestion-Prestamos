@@ -1,16 +1,18 @@
 package co.edu.uniquindio.gestionPrestamos;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import co.edu.uniquindio.gestionPrestamos.controller.LoginController;
 import co.edu.uniquindio.gestionPrestamos.exception.CustomerExistException;
 import co.edu.uniquindio.gestionPrestamos.exception.EmployeeExistException;
+import co.edu.uniquindio.gestionPrestamos.exception.LoanExistException;
 import co.edu.uniquindio.gestionPrestamos.exception.ProductExistException;
-import co.edu.uniquindio.gestionPrestamos.model.Company;
+import co.edu.uniquindio.gestionPrestamos.model.Empresa;
 import co.edu.uniquindio.gestionPrestamos.model.Cliente;
 import co.edu.uniquindio.gestionPrestamos.model.Empleado;
-import co.edu.uniquindio.gestionPrestamos.model.Loan;
+import co.edu.uniquindio.gestionPrestamos.model.Prestamo;
 import co.edu.uniquindio.gestionPrestamos.model.Objeto;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Aplicacion extends Application{
-	private Company company = new Company("Administracion prestamos.");
+	private Empresa empresa = new Empresa("Administracion prestamos.", "0805");
 	private Stage primaryStage;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -54,44 +56,45 @@ public class Aplicacion extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
-	public Company getCompany() {
-		return company;
+	public Empresa getCompany() {
+		return empresa;
 	}
-	public void setCompany(Company company) {
-		this.company = company;
+	public void setCompany(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	public ArrayList<Cliente> obtenerClientes() {
-		return company.getCliente();
+		return empresa.getCliente();
 	}
 
 	public ArrayList<Objeto> obtenerProductos() {
-		return company.getObjeto();
+		return empresa.getObjeto();
 	}
 
 	public ArrayList<Empleado> obtenerEmpleados() {
-		return company.getEmpleado();
+		return empresa.getEmpleado();
 	}
 
-	public ArrayList<Loan> obtenerPrestamos() {
-		return company.getPrestamo();
+	public ArrayList<Prestamo> obtenerPrestamos() {
+		return empresa.getPrestamo();
 	}
 	//Verifica la identificación del cliente
 	public boolean verifyIdentificationClient(String documentoCustomer) {
-		return company.verfyIdentificationCustomer(documentoCustomer);
+		return empresa.verfyIdentificationCustomer(documentoCustomer);
 	}
 	//Verifica el código del cliente
 	public boolean verifyCodeProduct(String productCode) {
-		return company.verifyCodeProduct(productCode);
+		return empresa.verifyCodeProduct(productCode);
 	}
 	//Verfica el documento del empleado
 	public boolean verifyIdentificationEmployee(String employeeIdentification) {
-		return company.verifyCodeEmployee(employeeIdentification);
+		return empresa.verifyCodeEmployee(employeeIdentification);
 	}
 	//Verifica el código del prestamo
 	public boolean verifyCodeLoan(String loanCode) {
-		return company.verifyCodeLoan(loanCode);
+		return empresa.verifyCodeLoan(loanCode);
 	}
+	
 	/**
 	 * Registra al cliente
 	 * @param nameCustomer
@@ -106,10 +109,10 @@ public class Aplicacion extends Application{
 	 * @param profesioCustomer
 	 * @return
 	 */
-	public Cliente registerClient(String nameCustomer, String lastNameCustomer, String customerIdentification,
+	public Cliente registrarACliente(String nameCustomer, String lastNameCustomer, String customerIdentification,
 			String customerAddress, String cellPhoneClient, String clientCity, String customerDepartment,
 			String clientCountry, String emailCustomer, String profesioCustomer, String genero) {
-		return company.registerClient(nameCustomer, lastNameCustomer, customerIdentification, customerAddress,
+		return empresa.registerCliente(nameCustomer, lastNameCustomer, customerIdentification, customerAddress,
 				cellPhoneClient, clientCity, customerDepartment, clientCountry, emailCustomer, profesioCustomer, genero);
 	}
 	/**
@@ -126,10 +129,10 @@ public class Aplicacion extends Application{
 	 * @param unidadesDis 
 	 * @return
 	 */
-	public Objeto registerProduct(String codigo, String nombre, String color, String peso, String precioAlquiler,
+	public Objeto registrarAObjeto(String codigo, String nombre, String color, String peso, String precioAlquiler,
 			String estadoObjeto,  String tipo, String descripcion, int unidadesDisponibles,
 			int unidadesPrestadas) {
-		return company.registerProduct(codigo,nombre,color,peso,precioAlquiler,
+		return empresa.registerObjeto(codigo,nombre,color,peso,precioAlquiler,
 				estadoObjeto, tipo, descripcion, unidadesDisponibles, unidadesPrestadas);
 	}
 	/**
@@ -146,61 +149,79 @@ public class Aplicacion extends Application{
 	 * @param employeeType
 	 * @return
 	 */
-	public Empleado registrarEmpleado1(String nameEmployee, String lastNameEmployee, String employeeIdentification,
-			String employeeAddress, String cellPhoneEmployee, String employeeCity, String employeeDepartment,
-			String employeeCountry, String emailEmployee, String employeeType, String aniosXp) {
+	public Empleado registrarAEmpleado(String documento, String nombre, String telefono, String celular, String direccion,
+            String ciudadResidencia, String departamento, String pais, String mail,
+            String tipoEmpleado, String aniosExperiencia) {
 
-		return company.registrarEmpleado(nameEmployee,lastNameEmployee,employeeIdentification,employeeAddress,
-				cellPhoneEmployee,employeeCity,employeeDepartment,employeeCountry,emailEmployee,employeeType, aniosXp);
+		return empresa.registerEmpleado(documento,nombre,telefono,celular,
+				direccion,ciudadResidencia,departamento,pais,mail,tipoEmpleado, aniosExperiencia);
 	}
 	//Registra el prestamo
-	public Loan registerLoan(String loanCode, String loanCondition, String loanValue, String loanDate,
-			String expirationDate, Cliente foundCustomer, Empleado foundEmployee, Objeto foundProduct) {
+	public Prestamo registrarAPrestamo(String loanCode, String loanCondition, String loanValue, String loanDate,
+			String expirationDate, Cliente foundCustomer, Empleado foundEmployee, Objeto foundProduct, int diasSolicitados, int diasTranscurridos) {
 
-		return company.registerLoan(loanCode,loanCondition,loanValue,loanDate,expirationDate,
-				foundCustomer,foundEmployee,foundProduct);
+		return empresa.registerPrestamo(loanCode,loanCondition,loanValue,loanDate,expirationDate,
+				foundCustomer,foundEmployee,foundProduct, diasSolicitados, diasTranscurridos);
 	}
 
-	public void updateCustomer(String nameCustomer, String lastNameCustomer, String customerIdentification,
-			String customerAddress, String cellPhoneClient, String clientCity, String customerDepartment,
-			String clientCountry, String emailCustomer, String profesioCustomer, String generoCliente) throws CustomerExistException {
+	public void actualizarAcliente(String documentoAntiguo, String documento, String nombre, String telefono, String celular, String direccion,
+			String ciudadResidencia, String departamento, String pais, String mail,
+			String profesion, String genero) throws CustomerExistException {
 
-		company.udpdateCustomer(nameCustomer,lastNameCustomer,customerIdentification,customerAddress,
-				cellPhoneClient,clientCity,customerDepartment,clientCountry,
-				emailCustomer,profesioCustomer);
+		 empresa.udpdateCustomer(documentoAntiguo, documento,nombre,telefono,celular, direccion,
+				 ciudadResidencia,departamento,pais,mail,
+				 profesion,genero);
 	}
 
-	public void updateProduct(String nameProduct, String productCode, String productWeight,
-			String conditionProduct, String productValue, String productDescription, String productColor,
-			String totalValue, int unidadesDis, int unidadesPres) throws ProductExistException {
+	public void updateProduct(String codigoAnterior, String codigo, String nombre, String color, String peso, String precioAlquiler,
+			String estadoObjeto,  String tipo, String descripcion, int unidadesDisponibles,
+			int unidadesPrestadas) throws ProductExistException {
 
-		company.updateProduct(nameProduct,productCode,productWeight,conditionProduct,productValue,
-				productDescription,productColor,totalValue, unidadesDis, unidadesPres);
-
-	}
-
-	public void updateEmployee(String nameEmployee, String lastNameEmployee, String employeeIdentification,
-			String employeeAddress, String cellPhoneEmployee, String employeeCity, String employeeDepartment,
-			String employeeCountry, String emailEmployee, String employeeType) throws EmployeeExistException {
-
-		company.updateEmployee(nameEmployee,lastNameEmployee,employeeIdentification,employeeAddress,
-				cellPhoneEmployee,employeeCity,employeeDepartment,employeeCountry,
-				emailEmployee,employeeType);
-
+		empresa.actualizarObjeto(codigoAnterior, codigo,nombre,color,peso,precioAlquiler,
+				estadoObjeto,tipo,descripcion, unidadesDisponibles, unidadesPrestadas);
 
 	}
 
-	public Cliente searchCustomer(String customer) {
-		return company.obtenerCusotmer(customer);
+	public void updateEmployee(String identificacionAnterior, String documento, String nombre, String telefono, String celular, String direccion,
+            String ciudadResidencia, String departamento, String pais, String mail,
+            String tipoEmpleado, String aniosExperiencia) throws EmployeeExistException {
+
+		empresa.updateEmployee(identificacionAnterior,documento,nombre,telefono,
+				celular,direccion,ciudadResidencia,departamento,
+				pais,mail, tipoEmpleado, aniosExperiencia);
+	}
+	
+	public void actualizarPrestamo(String codigoAnterior, String codigo, String valor, String fechaPrestamo, String fechaEntrega, String estadoPrestamo,
+			Cliente cliente, Empleado empleado, Objeto objeto, int diasTranscurridos, int diasSolicitados) throws LoanExistException{
+		empresa.actualizarPrestamo(codigoAnterior, codigo, valor, fechaPrestamo, fechaEntrega, estadoPrestamo, cliente, empleado, objeto, diasTranscurridos, diasSolicitados);
+	}
+	
+	public int eliminarCliente(String documentoCliente) {
+		return empresa.eliminarCliente(documentoCliente);
+	}
+	
+	public int eliminarEmpleado(String documentoEmpleado) {
+		return empresa.eliminarEmpleado(documentoEmpleado);
+	}
+	
+	public int eliminarObjeto(String codigoObjeto) {
+		return empresa.eliminarObjeto(codigoObjeto);
+	}
+	
+	public int eliminarPrestamo(String codigoPrestamo) {
+		return empresa.eliminarPrestamo(codigoPrestamo);
 	}
 
-	public Empleado searchEmployee(String employee) {
-		return company.obtenerEmployee(employee);
+	public Cliente buscarCliente(String cliente) {
+		return empresa.obtenerCliente(cliente);
 	}
 
-	public Objeto searchProduct(String product) {
-		return company.obtenerProduct(product);
+	public Empleado buscarEmpleado(String empleado) {
+		return empresa.obtenerEmpleado(empleado);
 	}
 
+	public Objeto buscarObjeto(String objeto) {
+		return empresa.obtenerObjeto(objeto);
+	}
 
 }

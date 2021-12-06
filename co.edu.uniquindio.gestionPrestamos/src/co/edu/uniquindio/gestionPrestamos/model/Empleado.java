@@ -7,7 +7,7 @@ package co.edu.uniquindio.gestionPrestamos.model;
  **/
 public class Empleado extends Person{
 
-    private TypeEmployee tipoEmpleado;
+    private String tipoEmpleado;
     private String aniosExperiencia;
     /*
      * Cosntructor
@@ -25,16 +25,16 @@ public class Empleado extends Person{
      */
     public Empleado(String documento, String nombre, String telefono, String celular, String direccion,
             String ciudadResidencia, String departamento, String pais, String mail,
-            TypeEmployee tipoEmpleado, String aniosExperiencia) {
+            String tipoEmpleado, String aniosExperiencia) {
         super(documento, nombre, telefono, celular, direccion, ciudadResidencia, departamento, pais, mail);
         this.tipoEmpleado = tipoEmpleado;
         this.aniosExperiencia = aniosExperiencia;
     }
     //Setters y Getters-------------------------------------------------------------
-    public TypeEmployee getTipoEmpleado() {
+    public String getTipoEmpleado() {
         return tipoEmpleado;
     }
-    public void setTipoEmpleado(TypeEmployee tipoEmpleado) {
+    public void setTipoEmpleado(String tipoEmpleado) {
         this.tipoEmpleado = tipoEmpleado;
     }
     
@@ -44,16 +44,10 @@ public class Empleado extends Person{
 	public void setAniosExperiencia(String aniosExperiencia) {
 		this.aniosExperiencia = aniosExperiencia;
 	}
+	
 	@Override
-    public String toString() {
-        return "Empleado [tipoEmpleado=" + tipoEmpleado + ", getDocumento()=" + getDocumento() + ", getNombre()="
-                + getNombre() + ", getTelefono()=" + getTelefono() + ", getCelular()=" + getCelular()
-                + ", getDireccion()=" + getDireccion() + ", getCiudadResidencia()=" + getCiudadResidencia()
-                + ", getDepartamento()=" + getDepartamento() + ", getPais()=" + getPais() + ", getMail()=" + getMail()
-                + ",getAniosExperiencia()=" + getAniosExperiencia() + "]";
-    }
-
-
-
+	public String toString() {
+		return "Empleado [tipoEmpleado=" + tipoEmpleado + ", aniosExperiencia=" + aniosExperiencia + "]";
+	}
 
 }
