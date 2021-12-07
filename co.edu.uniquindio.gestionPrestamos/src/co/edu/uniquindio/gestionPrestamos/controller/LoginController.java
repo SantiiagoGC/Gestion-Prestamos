@@ -16,6 +16,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginController {
+	
+	private Stage primaryStage;
 
     @FXML
     private TextField txtUser;

@@ -14,53 +14,71 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="500.0" prefWidth="565.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.gestionPrestamos.controller.LoanController">
+<BorderPane prefHeight="554.0" prefWidth="565.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.gestionPrestamos.controller.LoanController">
    <left>
-      <AnchorPane prefHeight="500.0" prefWidth="302.0" style="-fx-background-color: green;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="500.0" prefWidth="302.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="282.0" fitWidth="276.0" layoutX="26.0" layoutY="-42.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="282.0" fitWidth="276.0" layoutX="39.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../pngwing.com%20(4).png" />
+                  <Image url="@../../../../../../../bandera.jpg" />
                </image>
             </ImageView>
-            <TextField fx:id="txtFechaPrestamoPrestar" layoutX="113.0" layoutY="280.0" promptText="Fechat del prestamo." style="-fx-background-color: ffffff; -fx-border-color: white; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
-            <TextField fx:id="txtcodigoPrestamoPrestar" layoutX="113.0" layoutY="164.0" promptText="Codigo del prestamo." style="-fx-background-color: ffffff; -fx-border-color: white; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
-            <TextField fx:id="txtEstadoPrestamoPrestar" layoutX="113.0" layoutY="205.0" promptText="Estado del prestamo." style="-fx-background-color: ffffff; -fx-border-color: white; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
-            <TextField fx:id="txtValorPrestamoPrestar" layoutX="113.0" layoutY="243.0" promptText="Valor del prestamo." style="-fx-background-color: ffffff; -fx-border-color: white; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
-            <Label layoutX="57.0" layoutY="168.0" text="Codigo" textFill="WHITE">
+            <TextField fx:id="txtFechaPrestamoPrestar" layoutX="113.0" layoutY="280.0" promptText="Fecha del prestamo." style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <TextField fx:id="txtcodigoPrestamoPrestar" layoutX="113.0" layoutY="171.0" promptText="Codigo del prestamo." style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <TextField fx:id="txtValorPrestamoPrestar" layoutX="113.0" layoutY="243.0" promptText="Valor del prestamo." style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <Label layoutX="58.0" layoutY="177.0" text="Codigo">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="56.0" layoutY="209.0" text="Estado" textFill="WHITE">
+            <Label layoutX="67.0" layoutY="247.0" text="Valor">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="67.0" layoutY="247.0" text="Valor" textFill="WHITE">
+            <Label layoutX="62.0" layoutY="284.0" text="Fecha">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="62.0" layoutY="284.0" text="Fecha" textFill="WHITE">
+            <Label layoutX="14.0" layoutY="324.0" text="Fecha de entrega">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="324.0" text="Fecha de entrega" textFill="WHITE">
+            <TextField fx:id="txtFechaEntregaPrestamoPrestar" layoutX="113.0" layoutY="318.0" promptText="Fecha del entrega del prestamo." style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <TextField fx:id="txtclientePrestamoPrestar" layoutX="113.0" layoutY="357.0" promptText="Cliente que pidio el prestamo." style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <Label layoutX="62.0" layoutY="363.0" text="Cliente">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="txtFechaEntregaPrestamoPrestar" layoutX="113.0" layoutY="318.0" promptText="Fecha del entrega del prestamo." style="-fx-background-color: ffffff; -fx-border-color: beige; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
-            <TextField fx:id="txtclientePrestamoPrestar" layoutX="113.0" layoutY="357.0" promptText="Cliente que pidio el prestamo." style="-fx-background-color: ffffff; -fx-border-color: white; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
-            <Label layoutX="62.0" layoutY="363.0" text="Cliente" textFill="WHITE">
+            <TextField fx:id="txtEmpleadoPrestamoPrestar" layoutX="113.0" layoutY="392.0" promptText="Empleado que hizo el prestamo." style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <Label layoutX="51.0" layoutY="398.0" text="Empleado">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="txtEmpleadoPrestamoPrestar" layoutX="113.0" layoutY="392.0" promptText="Empleado que hizo el prestamo." style="-fx-background-color: ffffff; -fx-border-color: white; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
-            <Label layoutX="51.0" layoutY="398.0" text="Empleado" textFill="WHITE">
+            <TextField fx:id="txtObjetoPrestado" layoutX="113.0" layoutY="429.0" promptText="Objeto a prestar." style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <Label layoutX="63.0" layoutY="435.0" text="Objeto">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtDiasSolici" layoutX="113.0" layoutY="466.0" promptText="Dias solicitados." style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <TextField fx:id="txtDiasTranscu" layoutX="113.0" layoutY="504.0" promptText="Dias transcurridos." style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" />
+            <Label layoutX="19.0" layoutY="472.0" text="Dias solicitados">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="5.0" layoutY="510.0" text="Dias transcurridos">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxEstado" layoutX="115.0" layoutY="207.0" prefWidth="150.0" promptText="Seleccione el estado" style="-fx-background-color: white; -fx-border-color: green; -fx-border-width: 2px 2px 2px 2px; -fx-border-radius: 5 5 5 5;" visibleRowCount="2" />
+            <Label layoutX="18.0" layoutY="213.0" text="Estado prestamo">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -69,7 +87,7 @@
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="506.0" prefWidth="249.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="554.0" prefWidth="254.0" BorderPane.alignment="CENTER">
          <children>
             <TableView fx:id="tblListPrestar" layoutX="14.0" layoutY="51.0" prefHeight="401.0" prefWidth="220.0" style="-fx-background-color: beige;">
               <columns>
@@ -93,16 +111,9 @@
                   </TableColumn>
               </columns>
             </TableView>
-            <TextField fx:id="txtBuscarPrestar" layoutX="64.0" layoutY="19.0" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
-            <Button fx:id="btnBuscarPrestar" layoutX="179.0" layoutY="19.0" mnemonicParsing="false" onAction="#buscarPrestar" prefHeight="29.0" prefWidth="54.0" style="-fx-background-color: green;" text="Buscar" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <ComboBox fx:id="comboBoxPrestar" layoutX="14.0" layoutY="22.0" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-radius: 30 30 30 30; -fx-border-width: 2px 2px 2px 2px;" />
-            <HBox layoutX="17.0" layoutY="461.0" prefHeight="25.0" prefWidth="216.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="461.0">
+            <HBox layoutX="17.0" layoutY="461.0" prefHeight="29.0" prefWidth="221.0" spacing="10.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="461.0">
                <children>
-                  <Button fx:id="btnActualizarPrestar" mnemonicParsing="false" onAction="#actualizarPrestar" style="-fx-background-color: green;" text="Actualizar" textFill="WHITE">
+                  <Button fx:id="btnNuevoPrestar" mnemonicParsing="false" onAction="#nuevoPrestar" style="-fx-background-color: green;" text="Nuevo" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -112,13 +123,18 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnNuevoPrestar" mnemonicParsing="false" onAction="#nuevoPrestar" style="-fx-background-color: green;" text="Nuevo" textFill="WHITE">
+                  <Button fx:id="btnActualizarPrestar" mnemonicParsing="false" onAction="#actualizarPrestar" style="-fx-background-color: green;" text="Actualizar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
+            <Button fx:id="btnEliminarPrestar" layoutX="83.0" layoutY="498.0" mnemonicParsing="false" onAction="#eliminarPrestar" prefHeight="25.0" prefWidth="67.0" style="-fx-background-color: green;" text="Eliminar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </right>

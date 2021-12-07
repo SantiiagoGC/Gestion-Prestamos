@@ -1,11 +1,11 @@
 package co.edu.uniquindio.gestionPrestamos.controller;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
 import java.util.ResourceBundle;
-
 import co.edu.uniquindio.gestionPrestamos.Aplicacion;
 import co.edu.uniquindio.gestionPrestamos.exception.CustomerExistException;
 import co.edu.uniquindio.gestionPrestamos.exception.EmployeeExistException;
@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,8 +31,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Representa el controlador de la vista de administrador
+ * @author santi, juan, nodier.
+ *
+ */
 public class AdminViewController {
 
+	//-------------------------VARIABLES FXML-------------------------------------//
+	
 	@FXML
 	private ResourceBundle resources;
 
@@ -55,6 +63,15 @@ public class AdminViewController {
 	
     @FXML
     private Button btnEliminarAPrestamo;
+    
+    @FXML
+    private ComboBox<String> comboBoxEstadoPres;
+    
+    @FXML
+    private DatePicker dpFechaPrestamo;
+
+    @FXML
+    private DatePicker dpFechaEntrega;
 
 	@FXML
 	private TextField txtValorObjeto;
@@ -94,9 +111,6 @@ public class AdminViewController {
 
 	@FXML
 	private TextField txtEmailCliente;
-
-	@FXML
-	private TextField txtEstadoPrestamo;
 
 	@FXML
 	private Button btnRegistrarCliente;
@@ -288,29 +302,33 @@ public class AdminViewController {
 	private TableColumn<Prestamo, String> columnCodigoPrestamo;
 
 	private Aplicacion aplicacion;
-	// Observables
+	
+	//------------------------------------------------------------------------//
+	
+	//Listas Observables
 	ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
 	ObservableList<Objeto> listaProductos = FXCollections.observableArrayList();
-	ObservableList<Empleado> listEmployee = FXCollections.observableArrayList();
-	ObservableList<Prestamo> listLoan = FXCollections.observableArrayList();
+	ObservableList<Empleado> listaEmpleados = FXCollections.observableArrayList();
+	ObservableList<Prestamo> listaPrestamos = FXCollections.observableArrayList();
 	
 	// Variables de seleccion
 	private Cliente clienteSeleccionado;
-	private Objeto selectedProduct;
-	private Empleado selectedEmployee;
-	private Prestamo selectedLoan;
+	private Objeto objetoSeleccionado;
+	private Empleado empleadoSeleccionado;
+	private Prestamo prestamoSeleccionado;
 
+	//APLICACION
 	public void setAplicacion(Aplicacion aplicacion) {
 		this.aplicacion = aplicacion;
-		loadCustomerList();
-		loadProductList();
-		loadEmployeeList();
-		loadLoanList();
+		cargarListaClientes();
+		cargarListaObjetos();
+		cargarListaEmpleados();
+		cargarListaPrestamos();
 	}
 
 	@FXML
 	void initialize() {
-		// Datos de la tabla Cliente
+		//Datos de la tabla Cliente
 		this.columnNombreCliente.setCellValueFactory(new PropertyValueFactory<>("nombre"));
 		this.columnDocumentoCliente.setCellValueFactory(new PropertyValueFactory<>("documento"));
 
@@ -319,36 +337,48 @@ public class AdminViewController {
 			mostrarInformacionCliente(clienteSeleccionado);
 		});
 
+		//Datos de la tabla Objeto
 		this.columnNombreObjeto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
 		this.columnCodigoObjeto.setCellValueFactory(new PropertyValueFactory<>("codigo"));
 
 		tblListProduct.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-			selectedProduct = newSelection;
-			mostrarInformacionObjeto(selectedProduct);
+			objetoSeleccionado = newSelection;
+			mostrarInformacionObjeto(objetoSeleccionado);
 		});
 
+		//Datos de la tabla Empleado
 		this.columnNombreEmpleado.setCellValueFactory(new PropertyValueFactory<>("nombre"));
 		this.columnDocumentoEmpleado.setCellValueFactory(new PropertyValueFactory<>("documento"));
 
 		tblListEmployee.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-			selectedEmployee = newSelection;
-			mostrarInformacionEmpleado(selectedEmployee);
+			empleadoSeleccionado = newSelection;
+			mostrarInformacionEmpleado(empleadoSeleccionado);
 		});
 
+		//Datos de la tabla Prestamo
 		this.columnValorPrestamo.setCellValueFactory(new PropertyValueFactory<>("valor"));
 		this.columnCodigoPrestamo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
 
 		tblListLoan.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-			selectedLoan = newSelection;
-			mostrarInformacionPrestamo(selectedLoan);
+			prestamoSeleccionado = newSelection;
+			mostrarInformacionPrestamo(prestamoSeleccionado);
 		});
 		
+		//Creando los items del comboBox de los tipos de empleados
 		ArrayList<String> listaTipoEmpleado = new ArrayList<>();
 		Collections.addAll(listaTipoEmpleado, new String[] {"Jefe de inventario","Empleado"});
 		
 		choiceBoxEmpleado.getItems().addAll(listaTipoEmpleado);
+		
+		//Creando los items del comboBox de los tipos estados de los prestamos
+		ArrayList<String> listaEstadoPrestamo = new ArrayList<>();
+		Collections.addAll(listaEstadoPrestamo, new String[] {"Falta por entregar","Entregado"});
+		
+		comboBoxEstadoPres.getItems().addAll(listaEstadoPrestamo);
 		}
 
+	//----------------------------METODOS JAVAFX----------------------------------//
+	
 	@FXML
 	void nuevoCliente(ActionEvent event) {
 		nuevoCliente();
@@ -449,7 +479,9 @@ public class AdminViewController {
 		eliminarPrestamo();
 	}
 
-	// Nos muestra un tipo de alerta
+	//-----------------------------------------------------------------------------//
+	
+	//Nos muestra un tipo de alerta
 	private void showMessage(String titulo, String header, String contenido, AlertType tipoAlerta) {
 
 		Alert alert = new Alert(tipoAlerta);
@@ -459,48 +491,61 @@ public class AdminViewController {
 		alert.showAndWait();
 
 	}
-
-	private void loadCustomerList() {
+	
+	//Carga la lista de los clientes
+	private void cargarListaClientes() {
 		tblListCostumer.getItems().clear();
 		tblListCostumer.setItems(obtenerClientes());
 
 	}
 
-	private void loadProductList() {
+	//Carga la lista de los objetos
+	private void cargarListaObjetos() {
 		tblListProduct.getItems().clear();
 		tblListProduct.setItems(obtenerProductos());
 	}
 
-	private void loadEmployeeList() {
+	//Carga la lista de los empleados
+	private void cargarListaEmpleados() {
 		tblListEmployee.getItems().clear();
 		tblListEmployee.setItems(obtenerEmpleados());
 	}
 
-	private void loadLoanList() {
+	//Carga la lista de los prestamos
+	private void cargarListaPrestamos() {
 		tblListLoan.getItems().clear();
 		tblListLoan.setItems(obtenerPrestamos());
 	}
 
+	//Se le añade a la ObservableList de Objeto los objetos de los ArrayList
 	private ObservableList<Objeto> obtenerProductos() {
 		listaProductos.addAll(aplicacion.obtenerProductos());
 		return listaProductos;
 	}
 
+	//Se le añade a la ObservableList de Empleado los empleados de los ArrayList
 	private ObservableList<Empleado> obtenerEmpleados() {
-		listEmployee.addAll(aplicacion.obtenerEmpleados());
-		return listEmployee;
+		listaEmpleados.addAll(aplicacion.obtenerEmpleados());
+		return listaEmpleados;
 	}
-
+	
+	//Se le añade a la ObservableList de Prestamo los prestamos de los ArrayList
 	private ObservableList<Prestamo> obtenerPrestamos() {
-		listLoan.addAll(aplicacion.obtenerPrestamos());
-		return listLoan;
+		listaPrestamos.addAll(aplicacion.obtenerPrestamos());
+		return listaPrestamos;
 	}
 
+	//Se le añade a la ObservableList de Cliente los clientes de los ArrayList
 	private ObservableList<Cliente> obtenerClientes() {
 		listaClientes.addAll(aplicacion.obtenerClientes());
 		return listaClientes;
 	}
-
+	
+	/**
+	 * Metodo para que al seleccionar un cliente este se rellene el formulario 
+	 * con sus respectivos datos
+	 * @param cliente objeto de tipo Cliente
+	 */
 	private void mostrarInformacionCliente(Cliente cliente) {
 		if (cliente != null) {
 			txtNombreCliente.setText(cliente.getNombre());
@@ -523,7 +568,6 @@ public class AdminViewController {
 			}else {
 				rdBoton2.setSelected(true);
 			}
-			
 			//rdBoton1.setText(cliente.getGenero());
 			//System.out.println(rdBoton1.getText());
 		}
@@ -573,10 +617,13 @@ public class AdminViewController {
 
 		if (prestamo != null) {
 			txtCódigoPrestamo.setText(prestamo.getCodigo());
-			txtEstadoPrestamo.setText(prestamo.getEstadoPrestamo());
+			comboBoxEstadoPres.getSelectionModel().select(prestamo.getEstadoPrestamo());
+			//txtEstadoPrestamo.setText(prestamo.getEstadoPrestamo());
 			txtValorPrestamo.setText(prestamo.getValor());
-			txtFechaPrestamo.setText(prestamo.getFechaPrestamo());
-			txtFechaEntrega.setText(prestamo.getFechaEntrega());
+			//txtFechaPrestamo.setText(prestamo.getFechaPrestamo());
+			dpFechaPrestamo.setValue(LocalDate.parse(prestamo.getFechaPrestamo()));
+			//txtFechaEntrega.setText(prestamo.getFechaEntrega());
+			dpFechaEntrega.setValue(LocalDate.parse(prestamo.getFechaEntrega()));
 			txtCliente.setText(prestamo.getCliente().getNombre());
 			txtEmpleado.setText(prestamo.getEmpleado().getNombre());
 			txtObjetos.setText(prestamo.getObjeto().getNombre());
@@ -650,10 +697,12 @@ public class AdminViewController {
 	// Limpia la ventana del prestamo
 	private void nuevoPrestamo() {
 		txtCódigoPrestamo.setText("");
-		txtEstadoPrestamo.setText("");
+		comboBoxEstadoPres.getSelectionModel().select(null);
 		txtValorPrestamo.setText("");
-		txtFechaPrestamo.setText("");
-		txtFechaEntrega.setText("");
+		//txtFechaPrestamo.setText("");
+		dpFechaPrestamo.setValue(null);
+		//txtFechaEntrega.setText("");
+		dpFechaEntrega.setValue(null);
 		txtCliente.setText("");
 		txtEmpleado.setText("");
 		txtObjetos.setText("");
@@ -764,7 +813,7 @@ public class AdminViewController {
 					emailEmpleado, tipoEmpleado, aniosXp);
 
 			if (employee != null) {
-				listEmployee.add(employee);
+				listaEmpleados.add(employee);
 				showMessage("Notificación.", "Registro completado.", "Empleado registrado con exito.",
 						AlertType.INFORMATION);
 			} else {
@@ -781,10 +830,13 @@ public class AdminViewController {
 	 */
 	private void registrarPrestamo() {
 		String prestamoCodigo = txtCódigoPrestamo.getText();
-		String prestamoEstado = txtEstadoPrestamo.getText();
+		String prestamoEstado = comboBoxEstadoPres.getSelectionModel().getSelectedItem();
+		//String prestamoEstado = txtEstadoPrestamo.getText();
 		String valorPrestamo = txtValorPrestamo.getText();
-		String fechaPrestamo = txtFechaPrestamo.getText();
-		String fechaEntrega = txtFechaEntrega.getText();
+		//String fechaPrestamo = txtFechaPrestamo.getText();
+		String fechaPrestamo = dpFechaPrestamo.getValue().toString();
+		//String fechaEntrega = txtFechaEntrega.getText();
+		String fechaEntrega = dpFechaEntrega.getValue().toString();
 		String cliente = txtCliente.getText();
 		String empleado = txtEmpleado.getText();
 		String producto = txtObjetos.getText();
@@ -811,7 +863,7 @@ public class AdminViewController {
 				objetoEncontrado.setUnidadesPrestadas(objetoEncontrado.getUnidadesPrestadas() + 1);
 
 				if (loan != null) {
-					listLoan.add(loan);
+					listaPrestamos.add(loan);
 					showMessage("Notificación.", "Registro completado.", "Prestamo registrado con exito.",
 							AlertType.INFORMATION);
 				} else {
@@ -889,14 +941,14 @@ public class AdminViewController {
 		String unidadesDis = txtUnidadesDis.getText();
 		String unidadesPres = txtUnidadesPres.getText();
 
-		if (selectedProduct != null) {
+		if (objetoSeleccionado != null) {
 			if (validarDatosObjeto2(nameProduct, productCode, productWeight, conditionProduct, productValue,
 					productDescription, productColor, objetoTipo, unidadesDis, unidadesPres)) {
 
 				int unidadesDisponibles = Integer.parseInt(unidadesDis);
 				int unidadesPrestadas = Integer.parseInt(unidadesPres);
 
-				aplicacion.updateProduct(selectedProduct.getCodigo(), productCode, nameProduct, productColor,
+				aplicacion.actualizarAProducto(objetoSeleccionado.getCodigo(), productCode, nameProduct, productColor,
 						productWeight, productValue, conditionProduct, objetoTipo, productDescription,
 						unidadesDisponibles, unidadesPrestadas);
 
@@ -926,12 +978,12 @@ public class AdminViewController {
 		String aniosXp = txtAniosExperiencia.getText();
 		String tipoEmpleado = choiceBoxEmpleado.getSelectionModel().getSelectedItem();
 
-		if (selectedEmployee != null) {
+		if (empleadoSeleccionado != null) {
 			if (validarDatosEmpleado2(identificacionEmpleado, nombreEmpleado, telefonoEmpleado, celularEmpleado,
 					direccionEmpleado, ciudadEmpleado, departamentoEmpleado, paisEmpleado, emailEmpleado, tipoEmpleado,
 					aniosXp)) {
 
-				aplicacion.updateEmployee(selectedEmployee.getDocumento(), identificacionEmpleado, nombreEmpleado,
+				aplicacion.actualizarAEmpleado(empleadoSeleccionado.getDocumento(), identificacionEmpleado, nombreEmpleado,
 						telefonoEmpleado, celularEmpleado, direccionEmpleado, ciudadEmpleado, departamentoEmpleado,
 						paisEmpleado, emailEmpleado, tipoEmpleado, aniosXp);
 				showMessage("Notificación.", "Actualizacion Completada", "Se ha actualizado con exito.",
@@ -947,34 +999,40 @@ public class AdminViewController {
 
 	private void actualizarPrestamo() throws LoanExistException {
 		String prestamoCodigo = txtCódigoPrestamo.getText();
-		String prestamoEstado = txtEstadoPrestamo.getText();
+		String prestamoEstado = comboBoxEstadoPres.getSelectionModel().getSelectedItem();
 		String valorPrestamo = txtValorPrestamo.getText();
-		String fechaPrestamo = txtFechaPrestamo.getText();
-		String fechaEntrega = txtFechaEntrega.getText();
+		String fechaPrestamo = dpFechaPrestamo.getValue().toString();
+		String fechaEntrega = dpFechaEntrega.getValue().toString();
 		String cliente = txtCliente.getText();
 		String empleado = txtEmpleado.getText();
 		String producto = txtObjetos.getText();
 		String diasSolicitados = txtDiasSolicitados.getText();
 		String diasTranscurridos = txtDiasTranscurridos.getText();
 		
-		if (selectedLoan != null) {
+		if (prestamoSeleccionado != null) {
 			if (validarDatosPrestamo2(prestamoCodigo, prestamoEstado, valorPrestamo, fechaPrestamo, fechaEntrega, cliente,
 				empleado, producto, diasSolicitados, diasTranscurridos)) {
+				
+					int diasTrans = Integer.parseInt(diasTranscurridos);
+					int diasSoli = Integer.parseInt(diasSolicitados);
 			
-			int diasTrans = Integer.parseInt(diasTranscurridos);
-			int diasSoli = Integer.parseInt(diasSolicitados);
-			
-			Cliente clienteEncontrado = aplicacion.buscarCliente(cliente);
-			Empleado empleadoEncontrado = aplicacion.buscarEmpleado(empleado);
-			Objeto objetoEncontrado = aplicacion.buscarObjeto(producto);
+					Cliente clienteEncontrado = aplicacion.buscarCliente(cliente);
+					Empleado empleadoEncontrado = aplicacion.buscarEmpleado(empleado);
+					Objeto objetoEncontrado = aplicacion.buscarObjeto(producto);
+					
+					if(objetoEncontrado.getUnidadesDisponibles() > 0) {
 
-			aplicacion.actualizarPrestamo(selectedLoan.getCodigo(), prestamoCodigo, valorPrestamo, fechaPrestamo, fechaEntrega,
+					aplicacion.actualizarPrestamo(prestamoSeleccionado.getCodigo(), prestamoCodigo, valorPrestamo, fechaPrestamo, fechaEntrega,
 					prestamoEstado, clienteEncontrado, empleadoEncontrado, objetoEncontrado, diasTrans, diasSoli);
 
-			showMessage("Notificación.", "Actualizacion Completada", "Se ha actualizado con exito.",
+					showMessage("Notificación.", "Actualizacion Completada", "Se ha actualizado con exito.",
+							AlertType.INFORMATION);
+					tblListLoan.refresh();
+		}else {
+			showMessage("Notificación.", "Actualizacion incompletada", "No hay unidades disponibles.",
 					AlertType.INFORMATION);
-			tblListLoan.refresh();
 		}
+			}
 	} else {
 		showMessage("Notificación.", "Actualizacion incompleta", "No se ha podido actualizar la información.",
 				AlertType.INFORMATION);
@@ -987,59 +1045,86 @@ public class AdminViewController {
 	private void eliminarCliente() {
 		if(clienteSeleccionado != null) {
 			int i = 0;
-			i = aplicacion.eliminarCliente(clienteSeleccionado.getDocumento());
+			boolean clienteTienePrestamos = aplicacion.obtenerClientePrestamo(clienteSeleccionado);
+			i = aplicacion.eliminarACliente(clienteSeleccionado.getDocumento());
+			if(clienteTienePrestamos == false) {
 			if(i>=0) {
 				listaClientes.remove(i);
 				showMessage("Notificación.", "Eliminacion Completada", "Se ha eliminado con exito.",
 						AlertType.INFORMATION);
 			}
 		}else {
+			showMessage("Notificación.", "Eliminacion incompleta", "El cliente tiene prestamos activos.",
+					AlertType.WARNING);
+		}
+			}
+		else {
 			showMessage("Notificación.", "Eliminacion incompleta", "Seleccione un cliente.",
 					AlertType.WARNING);
 		}
 	}
 	
 	private void eliminarEmpleado() {
-		if(selectedEmployee != null) {
+		if(empleadoSeleccionado != null) {
 			int i = 0;
-			i = aplicacion.eliminarEmpleado(selectedEmployee.getDocumento());
+			boolean empleadoTienePrestamos = aplicacion.obtenerEmpleadoPrestamo(empleadoSeleccionado);
+			i = aplicacion.eliminarAEmpleado(empleadoSeleccionado.getDocumento());
+			if(empleadoTienePrestamos == false) {
 			if(i >= 0) {
-				listEmployee.remove(i);
+				listaEmpleados.remove(i);
 				showMessage("Notificación.", "Eliminacion Completada", "Se ha eliminado con exito.",
 						AlertType.INFORMATION);
 			}
 		}else {
-			showMessage("Notificación.", "Eliminacion incompleta", "Seleccione un cliente.",
+			showMessage("Notificación.", "Eliminacion incompleta", "El empleado ha realizado prestamos.",
+					AlertType.WARNING);
+		}
+			}else {
+			showMessage("Notificación.", "Eliminacion incompleta", "Seleccione un empleado.",
 					AlertType.WARNING);
 		}
 	}
 	
 	private void eliminarObjeto() {
-		if(selectedProduct != null) {
+		if(objetoSeleccionado != null) {
 			int i = 0;
-			i = aplicacion.eliminarObjeto(selectedProduct.getCodigo());
+			boolean objetoTienePrestamos = aplicacion.obtenerObjetoPrestamo(objetoSeleccionado);
+			i = aplicacion.eliminarAObjeto(objetoSeleccionado.getCodigo());
+			if(objetoTienePrestamos == false) {
 			if(i >= 0) {
 				listaProductos.remove(i);
 				showMessage("Notificación.", "Eliminacion Completada", "Se ha eliminado con exito.",
 						AlertType.INFORMATION);
 			}
 		}else {
-			showMessage("Notificación.", "Eliminacion incompleta", "Seleccione un cliente.",
+			showMessage("Notificación.", "Eliminacion incompleta", "El objeto esta en algun prestamo.",
+					AlertType.WARNING);
+		}
+			}else {
+			showMessage("Notificación.", "Eliminacion incompleta", "Seleccione un objeto.",
 					AlertType.WARNING);
 		}
 	}
 	
 	private void eliminarPrestamo() {
-		if(selectedLoan != null) {
+		if(prestamoSeleccionado != null) {
+			if(prestamoSeleccionado.getEstadoPrestamo().equalsIgnoreCase("Entregado")) {
 			int i = 0;
-			i = aplicacion.eliminarPrestamo(selectedLoan.getCodigo());
+			i = aplicacion.eliminarAPrestamo(prestamoSeleccionado.getCodigo());
 			if(i >= 0) {
-				listLoan.remove(i);
+				prestamoSeleccionado.getObjeto().setUnidadesDisponibles(prestamoSeleccionado.getObjeto().getUnidadesDisponibles() +1);
+				prestamoSeleccionado.getObjeto().setUnidadesPrestadas(prestamoSeleccionado.getObjeto().getUnidadesPrestadas() -1);
+				listaPrestamos.remove(i);
+				
 				showMessage("Notificación.", "Eliminacion Completada", "Se ha eliminado con exito.",
 						AlertType.INFORMATION);
 			}
 		}else {
-			showMessage("Notificación.", "Eliminacion incompleta", "Seleccione un cliente.",
+			showMessage("Notificación.", "Eliminacion incompleta", "Este prestamo se encuentra activo.",
+					AlertType.INFORMATION);
+		}
+			}else {
+			showMessage("Notificación.", "Eliminacion incompleta", "Seleccione un prestamo.",
 					AlertType.WARNING);
 		}
 	}
@@ -1079,12 +1164,12 @@ public class AdminViewController {
 		} else {
 			if (clienteSeleccionado != null) {
 				if (!documentoCustomer.equals(clienteSeleccionado.getDocumento())) {
-					if (aplicacion.verifyIdentificationClient(documentoCustomer)) {
+					if (aplicacion.verifyIdentificacionCliente(documentoCustomer)) {
 						mensaje += "¡ESE DOCUMENTO YA EXISTE!";
 					}
 				}
 			} else {
-				if (aplicacion.verifyIdentificationClient(documentoCustomer)) {
+				if (aplicacion.verifyIdentificacionCliente(documentoCustomer)) {
 					mensaje += "¡ESA DOCUMENTO YA EXISTE!";
 				}
 			}
@@ -1138,12 +1223,12 @@ public class AdminViewController {
 		} else {
 			if (clienteSeleccionado != null) {
 				if (!customerIdentification.equals(clienteSeleccionado.getDocumento())) {
-					if (aplicacion.verifyIdentificationClient(customerIdentification)) {
+					if (aplicacion.verifyIdentificacionCliente(customerIdentification)) {
 						mensaje += "¡ESE DOCUMENTO YA EXISTE!";
 					}
 				}
 			} else {
-				if (aplicacion.verifyIdentificationClient(customerIdentification)) {
+				if (aplicacion.verifyIdentificacionCliente(customerIdentification)) {
 					mensaje += "¡ESA DOCUMENTO YA EXISTE!";
 				}
 			}
@@ -1201,14 +1286,14 @@ public class AdminViewController {
 		if (productCode == null || productCode.equals("") || productCode.matches("[a-zA-Z]+")) {
 			mensaje += "CÓDIGO NO VALIDO.\n";
 		} else {
-			if (selectedProduct != null) {
-				if (productCode.equals(selectedProduct.getCodigo())) {
-					if (aplicacion.verifyCodeProduct(productCode)) {
+			if (objetoSeleccionado != null) {
+				if (productCode.equals(objetoSeleccionado.getCodigo())) {
+					if (aplicacion.verifyCodigoProducto(productCode)) {
 						mensaje += "¡ESE CÓDIGO YA EXISTE!";
 					}
 				}
 			} else {
-				if (aplicacion.verifyCodeProduct(productCode)) {
+				if (aplicacion.verifyCodigoProducto(productCode)) {
 					mensaje += "¡ESA CÓDIGO YA EXISTE!";
 				}
 			}
@@ -1258,9 +1343,9 @@ public class AdminViewController {
 		if (productCode == null || productCode.equals("") || productCode.matches("[a-zA-Z]+")) {
 			mensaje += "CÓDIGO NO VALIDO.\n";
 		} else {
-			if (selectedProduct != null) {
-				if (!productCode.equals(selectedProduct.getCodigo())) {
-					if (aplicacion.verifyCodeProduct(productCode)) {
+			if (objetoSeleccionado != null) {
+				if (!productCode.equals(objetoSeleccionado.getCodigo())) {
+					if (aplicacion.verifyCodigoProducto(productCode)) {
 						mensaje += "¡ESE CÓDIGO YA EXISTE!";
 					}
 				}
@@ -1319,14 +1404,14 @@ public class AdminViewController {
 		if (documento == null || documento.equals("") || documento.matches("[a-zA-Z]+")) {
 			mensaje += "CEDULA NO VALIDA.\n";
 		} else {
-			if (selectedEmployee != null) {
-				if (!documento.equals(selectedEmployee.getDocumento())) {
-					if (aplicacion.verifyIdentificationEmployee(documento)) {
+			if (empleadoSeleccionado != null) {
+				if (!documento.equals(empleadoSeleccionado.getDocumento())) {
+					if (aplicacion.verifyIdentificacionEmpleado(documento)) {
 						mensaje += "¡ESE DOCUMENTO YA EXISTE!";
 					}
 				}
 			} else {
-				if (aplicacion.verifyIdentificationEmployee(documento)) {
+				if (aplicacion.verifyIdentificacionEmpleado(documento)) {
 					mensaje += "¡ESA DOCUMENTO YA EXISTE!";
 				}
 			}
@@ -1384,9 +1469,9 @@ public class AdminViewController {
 		if (documento == null || documento.equals("") || documento.matches("[a-zA-Z]+")) {
 			mensaje += "CEDULA NO VALIDA.\n";
 		} else {
-			if (selectedEmployee != null) {
-				if (!documento.equals(selectedEmployee.getDocumento())) {
-					if (aplicacion.verifyIdentificationEmployee(documento)) {
+			if (empleadoSeleccionado != null) {
+				if (!documento.equals(empleadoSeleccionado.getDocumento())) {
+					if (aplicacion.verifyIdentificacionEmpleado(documento)) {
 						mensaje += "¡ESE DOCUMENTO YA EXISTE!";
 					}
 				}
@@ -1430,14 +1515,14 @@ public class AdminViewController {
 		if (loanCode == null || loanCode.equals("") || loanCode.matches("[a-zA-Z]")) {
 			mensaje += "¡CÓDIGO NO VALIDO!";
 		} else {
-			if (selectedLoan != null) {
-				if (!loanCode.equals(selectedLoan.getCodigo())) {
-					if (aplicacion.verifyCodeLoan(loanCode)) {
+			if (prestamoSeleccionado != null) {
+				if (!loanCode.equals(prestamoSeleccionado.getCodigo())) {
+					if (aplicacion.verifyCodigoPrestamo(loanCode)) {
 						mensaje += "¡ESTE CÓDIGO YA ESTÁ REGISTRADO!";
 					}
 				}
 			} else {
-				if (aplicacion.verifyCodeLoan(loanCode)) {
+				if (aplicacion.verifyCodigoPrestamo(loanCode)) {
 					mensaje += "¡ESTE CÓDIGO YA ESTÁ REGISTRADO!";
 				}
 			}
@@ -1450,21 +1535,21 @@ public class AdminViewController {
 		if (loanValue == null || loanValue.equals("") || loanValue.matches("[a-zA-Z]")) {
 			mensaje += "¡VALOR INVALIDO!";
 		}
-		if (loanDate == null || loanDate.equals("") || loanDate.matches("[a-zA-Z]+")) {
+		if (loanDate == null || loanDate.equals("") ) {
 			mensaje += "¡FECHA INVALIDA!";
 		}
-		if (expirationDate == null || expirationDate.equals("") || expirationDate.matches("[a-zA-Z]")) {
+		if (expirationDate == null || expirationDate.equals("") ) {
 			mensaje += "¡FECHA DE ENTREGA INVALIDA!";
 		}
-		if (!aplicacion.verifyIdentificationClient(customer) || customer == null || customer.equals("")
+		if (!aplicacion.verifyIdentificacionCliente(customer) || customer == null || customer.equals("")
 				|| customer.matches(("[a-zA-Z]"))) {
 			mensaje += "¡CLIENTE INVALIDO!";
 		}
-		if (!aplicacion.verifyIdentificationEmployee(employee) || employee == null || employee.equals("")
+		if (!aplicacion.verifyIdentificacionEmpleado(employee) || employee == null || employee.equals("")
 				|| employee.matches(("[a-zA-Z]"))) {
 			mensaje += "¡EMPLEADO INVALIDO!";
 		}
-		if (!aplicacion.verifyCodeProduct(product) || product == null || product.equals("")) {
+		if (!aplicacion.verifyCodigoProducto(product) || product == null || product.equals("")) {
 			mensaje += "¡PRODUCTO INVALIDO!";
 		}
 		if (diasSolicitados == null || diasSolicitados.equals("") || diasSolicitados.matches("[a-zA-Z]+")) {
@@ -1493,9 +1578,9 @@ public class AdminViewController {
 		if (loanCode == null || loanCode.equals("") || loanCode.matches("[a-zA-Z]")) {
 			mensaje += "¡CÓDIGO NO VALIDO!";
 		} else {
-			if (selectedLoan != null) {
-				if (!loanCode.equals(selectedLoan.getCodigo())) {
-					if (aplicacion.verifyCodeLoan(loanCode)) {
+			if (prestamoSeleccionado != null) {
+				if (!loanCode.equals(prestamoSeleccionado.getCodigo())) {
+					if (aplicacion.verifyCodigoPrestamo(loanCode)) {
 						mensaje += "¡ESTE CÓDIGO YA ESTÁ REGISTRADO!";
 					}
 				}
@@ -1515,15 +1600,15 @@ public class AdminViewController {
 		if (expirationDate == null || expirationDate.equals("") || expirationDate.matches("[a-zA-Z]")) {
 			mensaje += "¡FECHA DE ENTREGA INVALIDA!";
 		}
-		if (!aplicacion.verifyIdentificationClient(customer) || customer == null || customer.equals("")
+		if (!aplicacion.verifyIdentificacionCliente(customer) || customer == null || customer.equals("")
 				|| customer.matches(("[a-zA-Z]"))) {
 			mensaje += "¡CLIENTE INVALIDO!";
 		}
-		if (!aplicacion.verifyIdentificationEmployee(employee) || employee == null || employee.equals("")
+		if (!aplicacion.verifyIdentificacionEmpleado(employee) || employee == null || employee.equals("")
 				|| employee.matches(("[a-zA-Z]"))) {
 			mensaje += "¡EMPLEADO INVALIDO!";
 		}
-		if (!aplicacion.verifyCodeProduct(product) || product == null || product.equals("")) {
+		if (!aplicacion.verifyCodigoProducto(product) || product == null || product.equals("")) {
 			mensaje += "¡PRODUCTO INVALIDO!";
 		}
 		if (diasSolicitados == null || diasSolicitados.equals("") || diasSolicitados.matches("[a-zA-Z]+")) {
