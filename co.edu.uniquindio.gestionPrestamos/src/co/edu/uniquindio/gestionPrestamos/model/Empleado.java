@@ -72,7 +72,12 @@ public class Empleado extends Persona{
 	
 	@Override
 	public String toString() {
-		return "Empleado [tipoEmpleado=" + tipoEmpleado + ", aniosExperiencia=" + aniosExperiencia + "]";
+		return "Nombre: " + getNombre() + "\nDocumento: " + getDocumento() + "\nCelular: " +
+				getCelular() + "\nTelefono: " + getTelefono() +
+				"\nDireccion: " + getDireccion() + "\nCiudad: " + getCiudadResidencia() +
+				"\nDepartamento: " + getDepartamento() +"\nPais: " + getPais() + "\nEmail: " +
+				getMail() + "\nTipo de empleado: " + tipoEmpleado +"\nAños de experiencia " +aniosExperiencia+ "." ;
+		
 	}
 
 }

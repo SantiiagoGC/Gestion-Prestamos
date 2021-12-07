@@ -441,17 +441,18 @@ public class AdminViewController {
 
 	@FXML
 	void buscarCliente(ActionEvent event) {
-
+		buscarCliente();
 	}
 
 	@FXML
 	void buscarObejto(ActionEvent event) {
+		buscarObejto();
 
 	}
 
 	@FXML
 	void buscarEmpleado(ActionEvent event) {
-
+		buscarEmpleado();
 	}
 
 	@FXML
@@ -713,6 +714,54 @@ public class AdminViewController {
 		tblListLoan.getSelectionModel().clearSelection();
 	}
 
+	/**
+	 * Consultar cliente 
+	 */
+	private void buscarCliente(){
+		String documento = txtBuscarCliente.getText();
+		Cliente clienteEncontrado = null;
+		clienteEncontrado = aplicacion.consultarAcliente(documento);
+		
+		if(clienteEncontrado != null) {
+		showMessage("ENCONTRADO.", "Cliente encontrado.", "Es: "+clienteEncontrado.toString(),
+				AlertType.INFORMATION);
+		}else {
+			showMessage("NO ENCONTRADO.", "Cliente no encontrado.", "Por favor verifique los datos",
+					AlertType.WARNING);
+		}
+		
+	}
+	
+	private void buscarEmpleado(){
+		String documento = txtBuscarEmpleado.getText();
+		Empleado empleadoEncontrado = null;
+		empleadoEncontrado = aplicacion.consultarAempleado(documento);
+		
+		if(empleadoEncontrado != null) {
+		showMessage("ENCONTRADO.", "Empleado encontrado.", "Es: "+empleadoEncontrado.toString(),
+				AlertType.INFORMATION);
+		}else {
+			showMessage("NO ENCONTRADO.", "Empleado no encontrado.", "Por favor verifique los datos",
+					AlertType.WARNING);
+		}
+		
+	}
+	
+	private void buscarObejto() {
+		String datos = txtBuscarObjeto.getText();
+		//Objeto objetoEncontrado = null;
+		String valoresEncontrados="";
+		valoresEncontrados = aplicacion.consultarAobjeto(datos);
+		
+		if(valoresEncontrados != null && valoresEncontrados != "") {
+		showMessage("ENCONTRADO.", "Objeto encontrado.", "Es: "+valoresEncontrados+" ",
+				AlertType.INFORMATION);
+		}else {
+			showMessage("NO ENCONTRADO.", "Objeto no encontrado.", "Por favor verifique los datos",
+					AlertType.WARNING);
+		}
+	}
+	
 	/**
 	 * Registra la información del cliente
 	 */

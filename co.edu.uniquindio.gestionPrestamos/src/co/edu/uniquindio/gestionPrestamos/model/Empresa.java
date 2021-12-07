@@ -159,6 +159,11 @@ public class Empresa {
 		Objeto objeto2 = new Objeto("1234", "Martillo", "Negro", "1.5 kg", "25000", "Dispinible", "Herramienta",
 				"Martillo punta de acero", 19, 1);
 		getObjeto().add(objeto2);
+		
+		/**
+		Objeto objeto3 = new Objeto("12343", "Martillo", "Negro", "1.5 kg", "25000", "Dispinible", "Herramienta",
+				"Martillo punta de acero", 19, 1);
+		getObjeto().add(objeto3);*/
 
 		Empleado empleado1 = new Empleado("1684", "Luis", "42424", "3254589875", "Crr 21", "Armenia", "Quindio",
 				"Colombia", "Luis@gmail.com", "Empleado", "5 años");
@@ -797,4 +802,49 @@ public class Empresa {
 		}
 		return false;
 	}
+	
+	/**
+	 * Metodo para consultar un cliente
+	 * @param documento
+	 * @return
+	 */
+	public Cliente consultarCliente(String documento) {
+		for (int i = 0; i < listaClientes.size(); i++) {
+			if (listaClientes.get(i).getDocumento().equals(documento)) {
+				return listaClientes.get(i);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Metodo para consultar un empleado
+	 * @param documento
+	 * @return
+	 */
+	public Empleado consultarEmpleado(String documento) {
+		for (int i = 0; i < listaEmpleados.size(); i++) {
+			if (listaEmpleados.get(i).getDocumento().equals(documento)) {
+				return listaEmpleados.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public String consultarObjeto(String datos) {
+		
+		String datos1 ="";
+	
+		for (int i = 0; i < listaObjetos.size(); i++) {
+			if (listaObjetos.get(i).getCodigo().equals(datos) ||
+					listaObjetos.get(i).getNombre().equals(datos)) {
+				
+				datos1="Nombre: " + listaObjetos.get(i).getNombre() + "\nCodigo: "
+				+ listaObjetos.get(i).getCodigo() + ".";
+				return datos1;
+			}
+		}
+		return null;
+	}
+	
 }

@@ -68,16 +68,27 @@ public class Cliente extends Persona {
 		this.genero = genero;
 	}
 
-	@Override
-	public String toString() {
+	//@Override
+	/**public String toString() {
 		return "Cliente [profesion=" + profesion + ", getDocumento()=" + getDocumento() + ", getNombre()=" + getNombre()
 				+ ", getTelefono()=" + getTelefono() + ", getCelular()=" + getCelular() + ", getDireccion()="
 				+ getDireccion() + ", getCiudadResidencia()=" + getCiudadResidencia() + ", getDepartamento()="
 				+ getDepartamento() + ", getPais()=" + getPais() + ", getMail()=" + getMail() + "]";
+	}*/
+	
+	@Override
+	public String toString() {
+		return "Nombre: " + getNombre() + "\nDocumento: " + getDocumento() + "\nProfesion: " +
+	profesion + "\nCelular: " + getCelular() + "\nTelefono: " + getTelefono() +
+	"\nDireccion: " + getDireccion() + "\nCiudad: " + getCiudadResidencia() + "\nDepartamento: " + getDepartamento() +
+	"\nPais: " + getPais() + "\nEmail: " + getMail() + "\nGenero: " + genero +"." ;
+		
 	}
 
 	public String toStringNombre() {
 		return "" + getNombre();
 	}
+	
+	
 
 }

@@ -417,5 +417,17 @@ public class Aplicacion extends Application{
 	public boolean obtenerObjetoPrestamo(Objeto objeto) {
 		return empresa.buscarPrestamoConObjeto(objeto);
 	}
+	
+	public Cliente consultarAcliente(String documento) {
+		return empresa.consultarCliente(documento);
+	}
+	
+	public Empleado consultarAempleado(String documentoEmpleado) {
+		return empresa.consultarEmpleado(documentoEmpleado);
+	}
+	
+	public String consultarAobjeto(String datos) {
+		return empresa.consultarObjeto(datos);
+	}
 
 }
