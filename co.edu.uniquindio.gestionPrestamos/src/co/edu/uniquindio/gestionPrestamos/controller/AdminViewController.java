@@ -276,6 +276,9 @@ public class AdminViewController {
 
 	@FXML
 	private TableView<Prestamo> tblListLoan;
+	
+    @FXML
+    private TableColumn<Objeto, String> columnNombrePrestamo1;
 
 	@FXML
 	private TableColumn<Cliente, String> columnNombreCliente;
@@ -356,9 +359,11 @@ public class AdminViewController {
 		});
 
 		//Datos de la tabla Prestamo
+		this.columnNombrePrestamo1.setCellValueFactory(new PropertyValueFactory<>("nombreObjeto"));
 		this.columnValorPrestamo.setCellValueFactory(new PropertyValueFactory<>("valor"));
 		this.columnCodigoPrestamo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
 
+		
 		tblListLoan.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			prestamoSeleccionado = newSelection;
 			mostrarInformacionPrestamo(prestamoSeleccionado);
@@ -457,7 +462,7 @@ public class AdminViewController {
 
 	@FXML
 	void buscarPrestamo(ActionEvent event) {
-
+		buscarPrestamo();
 	}
 	
 	@FXML
@@ -574,6 +579,11 @@ public class AdminViewController {
 		}
 	}
 
+	/**
+	 * Metodo para que al seleccionar un objeto se rellene el formulario 
+	 * con sus respectivos datos
+	 * @param producto
+	 */
 	private void mostrarInformacionObjeto(Objeto producto) {
 		if (producto != null) {
 			txtNombreObjeto.setText(producto.getNombre());
@@ -593,6 +603,11 @@ public class AdminViewController {
 
 	}
 
+	/**
+	 * Metodo para que al seleccionar un empleado se rellene el formulario 
+	 * con sus respectivos datos
+	 * @param empleado
+	 */
 	private void mostrarInformacionEmpleado(Empleado empleado) {
 		if (empleado != null) {
 			txtNombreEmpleado.setText(empleado.getNombre());
@@ -614,6 +629,11 @@ public class AdminViewController {
 
 	}
 
+	/**
+	 * Metodo para que al seleccionar un prestamo se rellene el formulario 
+	 * con sus respectivos datos
+	 * @param prestamo
+	 */
 	private void mostrarInformacionPrestamo(Prestamo prestamo) {
 
 		if (prestamo != null) {
@@ -625,9 +645,9 @@ public class AdminViewController {
 			dpFechaPrestamo.setValue(LocalDate.parse(prestamo.getFechaPrestamo()));
 			//txtFechaEntrega.setText(prestamo.getFechaEntrega());
 			dpFechaEntrega.setValue(LocalDate.parse(prestamo.getFechaEntrega()));
-			txtCliente.setText(prestamo.getCliente().getNombre());
-			txtEmpleado.setText(prestamo.getEmpleado().getNombre());
-			txtObjetos.setText(prestamo.getObjeto().getNombre());
+			txtCliente.setText(prestamo.getCliente().getNombre()+ " " + "CC: " + prestamo.getCliente().getDocumento());
+			txtEmpleado.setText(prestamo.getEmpleado().getNombre()+ " " + "CC: " + prestamo.getEmpleado().getDocumento());
+			txtObjetos.setText(prestamo.getObjeto().getNombre()+ " " + "Codigo: " + prestamo.getObjeto().getCodigo());
 			txtDiasSolicitados.setText(String.valueOf(prestamo.getDiasSolicitados()));
 			txtDiasTranscurridos.setText(String.valueOf(prestamo.getDiasTranscurridos()));
 			btnRegistrarPrestamo.setDisable(true);
@@ -709,6 +729,7 @@ public class AdminViewController {
 		txtObjetos.setText("");
 		txtDiasSolicitados.setText("");
 		txtDiasTranscurridos.setText("");
+		txtBuscarPrestamo.setText("");
 		btnRegistrarPrestamo.setDisable(false);
 		btnActuliazarPrestamo.setDisable(true);
 		tblListLoan.getSelectionModel().clearSelection();
@@ -732,6 +753,9 @@ public class AdminViewController {
 		
 	}
 	
+	/**
+	 * Consultar empleado
+	 */
 	private void buscarEmpleado(){
 		String documento = txtBuscarEmpleado.getText();
 		Empleado empleadoEncontrado = null;
@@ -747,6 +771,9 @@ public class AdminViewController {
 		
 	}
 	
+	/**
+	 * Consultar objeto
+	 */
 	private void buscarObejto() {
 		String datos = txtBuscarObjeto.getText();
 		//Objeto objetoEncontrado = null;
@@ -760,6 +787,24 @@ public class AdminViewController {
 			showMessage("NO ENCONTRADO.", "Objeto no encontrado.", "Por favor verifique los datos",
 					AlertType.WARNING);
 		}
+	}
+	
+	/**
+	 * Consultar prestamo
+	 */
+	private void buscarPrestamo() {
+		String codigo = txtBuscarPrestamo.getText();
+		Prestamo prestamoEncontrado = null;
+		prestamoEncontrado = aplicacion.consultarAprestamo(codigo);
+		
+		if(prestamoEncontrado != null) {
+			showMessage("ENCONTRADO.", "Prestamo encontrado.", "Es: "+prestamoEncontrado.toString()+" ",
+					AlertType.INFORMATION);
+		}else {
+			showMessage("NO ENCONTRADO.", "Prestamo no encontrado.", "Por favor verifique los datos",
+					AlertType.WARNING);
+		}
+		
 	}
 	
 	/**
@@ -931,10 +976,8 @@ public class AdminViewController {
 
 	/**
 	 * Metodo para actualizar los datos de clientes
-	 * 
 	 * @throws CustomerExistException en caso de que el cliente no exista esta
-	 *                                exception saltara.
-	 * 
+	 * exception saltara.
 	 */
 	private void actualizarCliente() throws CustomerExistException {
 		String nombreCliente = txtNombreCliente.getText();
@@ -973,10 +1016,8 @@ public class AdminViewController {
 
 	/**
 	 * Metodo para actualizar los datos de los objetos o productos
-	 * 
 	 * @throws ProductExistException en caso de que el objeto no exista esta
-	 *                               excepcion saltara.
-	 * 
+	 * excepcion saltara.
 	 */
 	private void actualizarObjeto() throws ProductExistException {
 		String nameProduct = txtNombreObjeto.getText();
@@ -1046,6 +1087,7 @@ public class AdminViewController {
 
 	}
 
+	//Actualizar un prestamo
 	private void actualizarPrestamo() throws LoanExistException {
 		String prestamoCodigo = txtCódigoPrestamo.getText();
 		String prestamoEstado = comboBoxEstadoPres.getSelectionModel().getSelectedItem();
@@ -1113,6 +1155,9 @@ public class AdminViewController {
 		}
 	}
 	
+	/**
+	 * Metodo para eliminar un empleado
+	 */
 	private void eliminarEmpleado() {
 		if(empleadoSeleccionado != null) {
 			int i = 0;
@@ -1134,6 +1179,9 @@ public class AdminViewController {
 		}
 	}
 	
+	/**
+	 * Metodo para eliminar un objeto
+	 */
 	private void eliminarObjeto() {
 		if(objetoSeleccionado != null) {
 			int i = 0;
@@ -1155,6 +1203,9 @@ public class AdminViewController {
 		}
 	}
 	
+	/**
+	 * Metodo para eliminar un prestamo
+	 */
 	private void eliminarPrestamo() {
 		if(prestamoSeleccionado != null) {
 			if(prestamoSeleccionado.getEstadoPrestamo().equalsIgnoreCase("Entregado")) {
@@ -1251,7 +1302,7 @@ public class AdminViewController {
 		}
 	}
 
-	// Valida los para la actulización del cliente
+	// Valida los datos para la actulización del cliente
 	private boolean validarDatosCliente2(String nameCustomer, String telefonoCliente, String customerIdentification,
 			String customerAddress, String cellPhoneClient, String clientCity, String customerDepartment,
 			String clientCountry, String emailCustomer, String profesioCustomer) {
@@ -1311,17 +1362,19 @@ public class AdminViewController {
 	}
 
 	/**
-	 * Valida los datos del producto
-	 * 
-	 * @param nameProduct
-	 * @param productCode
-	 * @param productWeight
-	 * @param conditionProduct
-	 * @param productValue
-	 * @param productDescription
-	 * @param productColor
-	 * @param totalValue
-	 * @return
+	 * Metodo para validar los datos de un objeto o producto
+	 * @param nameProduct nombre del objeto
+	 * @param productCode codigo del objeto
+	 * @param productWeight peso del objeto
+	 * @param conditionProduct estado del objeto
+	 * @param productValue valor del objeto
+	 * @param productDescription descripcion del objeto
+	 * @param productColor color del objeto
+	 * @param objetoTipo tipo del objeto
+	 * @param unidadesDis unidades disponibles del objeto
+	 * @param unidadesPres unidades prestadas del objeto
+	 * @return true en caso de datos correctos, false en caso de datos incorrectos 
+	 * mas la ubicacion del error.
 	 */
 	private boolean validarDatosObjeto(String nameProduct, String productCode, String productWeight,
 			String conditionProduct, String productValue, String productDescription, String productColor,
@@ -1380,7 +1433,7 @@ public class AdminViewController {
 		}
 	}
 
-	// Vaiida los datos para la actualización
+	// Vaiida los datos para la actualización de un objeto
 	private boolean validarDatosObjeto2(String nameProduct, String productCode, String productWeight,
 			String conditionProduct, String productValue, String productDescription, String productColor,
 			String objetoTipo, String unidadesDis, String unidadesPres) {
@@ -1434,7 +1487,22 @@ public class AdminViewController {
 		}
 	}
 
-	// Valida la informacion
+	/**
+	 * Metodo para validar los datos de un empleado
+	 * @param documento del empleado
+	 * @param nombre del empleado
+	 * @param telefono del empleado
+	 * @param celular del empleado
+	 * @param direccion del empleado
+	 * @param ciudadResidencia del empleado
+	 * @param departamento del empleado
+	 * @param pais del empleado
+	 * @param mail del empleado
+	 * @param tipoEmpleado del empleado
+	 * @param aniosExperiencia del empleado
+	 * @return true en caso de datos correctos, false en caso de datos incorrectos 
+	 * mas la ubicacion del error.
+	 */
 	private boolean validarDatosEmpleado(String documento, String nombre, String telefono, String celular,
 			String direccion, String ciudadResidencia, String departamento, String pais, String mail,
 			String tipoEmpleado, String aniosExperiencia) {
@@ -1496,7 +1564,7 @@ public class AdminViewController {
 		}
 	}
 
-	// Validación de datos para acutlizar al empleado
+	// Validación de datos para actualizar al empleado
 	private boolean validarDatosEmpleado2(String documento, String nombre, String telefono, String celular,
 			String direccion, String ciudadResidencia, String departamento, String pais, String mail,
 			String tipoEmpleado, String aniosExperiencia) {
@@ -1554,6 +1622,21 @@ public class AdminViewController {
 		}
 	}
 
+	/**
+	 * Metodo para velidar los datos del prestamo
+	 * @param loanCode codigo del prestamo
+	 * @param loanCondition estado del prestamo
+	 * @param loanValue valor del prestamo
+	 * @param loanDate fecha del prestamo
+	 * @param expirationDate fecha de entrega del prestamo 
+	 * @param customer cliente que realizo el prestamo
+	 * @param employee empleado que realizo el prestamo
+	 * @param product producto que fue prestado
+	 * @param diasSolicitados dias solicitados 
+	 * @param diasTranscurridos dias transcurridos
+	 * @return true en caso de datos correctos, false en caso de datos incorrectos 
+	 * mas la ubicacion del error.
+	 */
 	private boolean validarDatosPrestamo(String loanCode, String loanCondition, String loanValue, String loanDate,
 			String expirationDate, String customer, String employee, String product, String diasSolicitados,
 			String diasTranscurridos) {
@@ -1617,6 +1700,7 @@ public class AdminViewController {
 		}
 	}
 
+	//Valida los datos para la actualizacion de un prestamo
 	private boolean validarDatosPrestamo2(String loanCode, String loanCondition, String loanValue, String loanDate,
 			String expirationDate, String customer, String employee, String product, String diasSolicitados,
 			String diasTranscurridos) {

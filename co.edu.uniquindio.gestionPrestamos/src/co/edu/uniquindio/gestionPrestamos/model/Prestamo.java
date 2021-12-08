@@ -16,6 +16,7 @@ public class Prestamo {
     private String fechaPrestamo;
     private String fechaEntrega;
     private Cliente cliente;
+    private String nombreObjeto;
     private Empleado empleado;
     private Objeto objeto;
     private int diasTranscurridos;
@@ -48,8 +49,16 @@ public class Prestamo {
 		this.diasTranscurridos = diasTranscurridos;
 		this.diasSolicitados = diasSolicitados;
 	}
+    
+    
 	
-    /**
+    public String getNombreObjeto() {
+    	nombreObjeto = objeto.getNombre();
+		return nombreObjeto;
+	}
+
+
+	/**
      * Metodo get del codigo del Prestamo
      * @return un String con el codigo
      */
@@ -208,5 +217,18 @@ public class Prestamo {
 	public void setDiasSolicitados(int diasSolicitados) {
 		this.diasSolicitados = diasSolicitados;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Codigo: " + codigo + "\nEstado del prestamo: " + estadoPrestamo + "\nValor: " + valor
+				+ "\nFecha del prestamo: " + fechaPrestamo + "\nfecha de entrega: " + fechaEntrega + "\ncliente: " +
+				cliente.getNombre() + " CC: " + cliente.getDocumento()
+				+ "\nNombre del objeto: " + nombreObjeto + " Codigo: " + objeto.getCodigo() + "\nEmpleado: " + empleado.getNombre() + " CC: " + empleado.getDocumento() 
+				+ "\nDias transcurridos: " + diasTranscurridos + "\nDias solicitados: " + diasSolicitados + ".";
+	}
+	
+	
 
 }

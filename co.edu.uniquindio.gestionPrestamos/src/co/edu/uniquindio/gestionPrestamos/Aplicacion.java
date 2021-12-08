@@ -418,16 +418,40 @@ public class Aplicacion extends Application{
 		return empresa.buscarPrestamoConObjeto(objeto);
 	}
 	
+	/**
+	 * Metodo para consultar un cliente enlazado a empresa
+	 * @param documento el cliente
+	 * @return objeto de tipo Cliente
+	 */
 	public Cliente consultarAcliente(String documento) {
 		return empresa.consultarCliente(documento);
 	}
 	
+	/**
+	 * Metodo para consultar un empleado enlazado a empresa
+	 * @param documentoEmpleado documento del empelado
+	 * @return objeto de tipo empleado
+	 */
 	public Empleado consultarAempleado(String documentoEmpleado) {
 		return empresa.consultarEmpleado(documentoEmpleado);
 	}
 	
+	/**
+	 * Metodo para consultar un objeto enlazado a empresa
+	 * @param datos del objeto, ya sea nombre o codigo
+	 * @return String con los objetos encontrado
+	 */
 	public String consultarAobjeto(String datos) {
 		return empresa.consultarObjeto(datos);
+	}
+	
+	/**
+	 * Metodo para consultar un prestamo enlazado a empresa
+	 * @param codigoPrestamo codigo del prestamo
+	 * @return objeto de tipo Prestamo
+	 */
+	public Prestamo consultarAprestamo(String codigoPrestamo) {
+		return empresa.consultarPrestamo(codigoPrestamo);
 	}
 
 }

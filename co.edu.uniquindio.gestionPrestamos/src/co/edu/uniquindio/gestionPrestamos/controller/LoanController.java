@@ -1,6 +1,7 @@
 package co.edu.uniquindio.gestionPrestamos.controller;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -67,24 +69,30 @@ public class LoanController {
     
     @FXML
     private ComboBox<String> comboBoxEstado;
+    
+    @FXML
+    private DatePicker dpFechaPrestamoPrestar;
 
     @FXML
-    private TextField txtBuscarPrestar;
-
+    private DatePicker dpFechaEntregaPrestar;
+    
     @FXML
-    private TextField txtFechaEntregaPrestamoPrestar;
-
+    private Button btnBuscarPrestamosPrestar;
+    
     @FXML
-    private TextField txtFechaPrestamoPrestar;
+    private TextField txtBuscarPrestamoPrestar;
 
     @FXML
     private TextField txtValorPrestamoPrestar;
 
     @FXML
-    private Button btnBuscarPrestar;
+    private Button btnBuscarPrestamoPrestar;
 
     @FXML
     private TableView<Prestamo> tblListPrestar;
+    
+    @FXML
+    private TableColumn<Prestamo, String> columnNombreObjeto2;
 
     @FXML
     private TextField txtEstadoPrestamoPrestar;
@@ -106,6 +114,7 @@ public class LoanController {
 
 		this.columnValorPrestar.setCellValueFactory(new PropertyValueFactory<>("valor"));
 		this.columnCodigoPrestar.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+		this.columnNombreObjeto2.setCellValueFactory(new PropertyValueFactory<>("nombreObjeto"));
 
 		tblListPrestar.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			selectedLoan = newSelection;
@@ -119,8 +128,8 @@ public class LoanController {
 	} 
 	
 	@FXML
-    void buscarPrestar(ActionEvent event) {
-
+    void buscarPrestamoPrestar(ActionEvent event) {
+		buscarPrestamoPrestar();
     }
 
     @FXML
@@ -145,13 +154,17 @@ public class LoanController {
     	//txtEstadoPrestamoPrestar.setText("");
 		comboBoxEstado.getSelectionModel().select(null);
     	txtValorPrestamoPrestar.setText("");
-		txtFechaPrestamoPrestar.setText("");
-		txtFechaEntregaPrestamoPrestar.setText("");
+		dpFechaPrestamoPrestar.setValue(null);
+		//txtFechaPrestamoPrestar.setText("");
+		dpFechaEntregaPrestar.setValue(null);
+		//txtFechaEntregaPrestamoPrestar.setText("");
 		txtclientePrestamoPrestar.setText("");
 		txtEmpleadoPrestamoPrestar.setText("");
 		txtObjetoPrestado.setText("");
 		txtDiasSolici.setText("");
 		txtDiasTranscu.setText("");
+		txtBuscarPrestamoPrestar.setText("");
+		//txtBuscarPrestar.setText("");
 		btnRegistarPrestar.setDisable(false);
 		btnActualizarPrestar.setDisable(true);
 		tblListPrestar.getSelectionModel().clearSelection();
@@ -178,20 +191,22 @@ public class LoanController {
 		return listaPrestamos;
 	}
 	
-	private void showLoanInformation(Prestamo loan) {
+	private void showLoanInformation(Prestamo prestamo) {
 
-		if (loan != null) {
-			txtcodigoPrestamoPrestar.setText(loan.getCodigo());
+		if (prestamo != null) {
+			txtcodigoPrestamoPrestar.setText(prestamo.getCodigo());
 			//txtEstadoPrestamoPrestar.setText(loan.getEstadoPrestamo().toString());
-			comboBoxEstado.getSelectionModel().select(loan.getEstadoPrestamo());
-			txtValorPrestamoPrestar.setText(loan.getValor());
-			txtFechaPrestamoPrestar.setText(loan.getFechaPrestamo());
-			txtFechaEntregaPrestamoPrestar.setText(loan.getFechaEntrega());
-			txtclientePrestamoPrestar.setText(loan.getCliente().getNombre());
-			txtEmpleadoPrestamoPrestar.setText(loan.getEmpleado().getNombre());
-			txtObjetoPrestado.setText(loan.getObjeto().getNombre());
-			txtDiasSolici.setText(String.valueOf(loan.getDiasSolicitados()));
-			txtDiasTranscu.setText(String.valueOf(loan.getDiasTranscurridos()));
+			comboBoxEstado.getSelectionModel().select(prestamo.getEstadoPrestamo());
+			txtValorPrestamoPrestar.setText(prestamo.getValor());
+			dpFechaPrestamoPrestar.setValue(LocalDate.parse(prestamo.getFechaPrestamo()));
+			//txtFechaPrestamoPrestar.setText(prestamo.getFechaPrestamo());
+			dpFechaEntregaPrestar.setValue(LocalDate.parse(prestamo.getFechaPrestamo()));
+			//txtFechaEntregaPrestamoPrestar.setText(prestamo.getFechaEntrega());
+			txtclientePrestamoPrestar.setText(prestamo.getCliente().getNombre()+ " " + "CC: " + prestamo.getCliente().getDocumento());
+			txtEmpleadoPrestamoPrestar.setText(prestamo.getEmpleado().getNombre()+ " " + "CC: " + prestamo.getEmpleado().getDocumento());
+			txtObjetoPrestado.setText(prestamo.getObjeto().getNombre()+ " " + "Codigo: " + prestamo.getObjeto().getCodigo());
+			txtDiasSolici.setText(String.valueOf(prestamo.getDiasSolicitados()));
+			txtDiasTranscu.setText(String.valueOf(prestamo.getDiasTranscurridos()));
 			btnRegistarPrestar.setDisable(true);
 			btnActualizarPrestar.setDisable(false);
 
@@ -203,8 +218,10 @@ public class LoanController {
 	 	String prestamoCodigo = txtcodigoPrestamoPrestar.getText();
 			//String prestamoEstado = txtEstadoPrestamoPrestar.getText();
 			String valorPrestamo = txtValorPrestamoPrestar.getText();
-			String fechaPrestamo = txtFechaPrestamoPrestar.getText();
-			String fechaEntrega = txtFechaEntregaPrestamoPrestar.getText();
+			String fechaPrestamo = dpFechaPrestamoPrestar.getValue().toString();
+			//String fechaPrestamo = txtFechaPrestamoPrestar.getText();
+			String fechaEntrega = dpFechaEntregaPrestar.getValue().toString();
+			//String fechaEntrega = txtFechaEntregaPrestamoPrestar.getText();
 			String cliente = txtclientePrestamoPrestar.getText();
 			String empleado = txtEmpleadoPrestamoPrestar.getText();
 			String producto = txtObjetoPrestado.getText();
@@ -253,8 +270,8 @@ public class LoanController {
 		String prestamoEstado = comboBoxEstado.getSelectionModel().getSelectedItem();
 		//	String prestamoEstado = txtEstadoPrestamoPrestar.getText();
 			String valorPrestamo = txtValorPrestamoPrestar.getText();
-			String fechaPrestamo = txtFechaPrestamoPrestar.getText();
-			String fechaEntrega = txtFechaEntregaPrestamoPrestar.getText();
+			String fechaPrestamo = dpFechaPrestamoPrestar.getValue().toString();
+			String fechaEntrega = dpFechaEntregaPrestar.getValue().toString();
 			String cliente = txtclientePrestamoPrestar.getText();
 			String empleado = txtEmpleadoPrestamoPrestar.getText();
 			String producto = txtObjetoPrestado.getText();
@@ -284,6 +301,22 @@ public class LoanController {
 				AlertType.INFORMATION);
 	}
 		}
+	
+	
+	private void buscarPrestamoPrestar() {
+		String codigo = txtBuscarPrestamoPrestar.getText();
+		Prestamo prestamoEncontrado = null;
+		prestamoEncontrado = aplicacion.consultarAprestamo(codigo);
+		
+		if(prestamoEncontrado != null) {
+			showMessage("ENCONTRADO.", "Prestamo encontrado.", "Es: "+prestamoEncontrado.toString()+" ",
+					AlertType.INFORMATION);
+		}else {
+			showMessage("NO ENCONTRADO.", "Prestamo no encontrado.", "Por favor verifique los datos",
+					AlertType.WARNING);
+		}
+		
+	}
 	
 	
 	private void eliminarPrestar() {

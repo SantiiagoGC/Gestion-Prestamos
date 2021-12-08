@@ -831,6 +831,11 @@ public class Empresa {
 		return null;
 	}
 	
+	/**
+	 * Metodo para consultar un objeto
+	 * @param datos del objeto
+	 * @return
+	 */
 	public String consultarObjeto(String datos) {
 		
 		String datos1 ="";
@@ -842,6 +847,20 @@ public class Empresa {
 				datos1="Nombre: " + listaObjetos.get(i).getNombre() + "\nCodigo: "
 				+ listaObjetos.get(i).getCodigo() + ".";
 				return datos1;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Metodo para consultar un prestamo
+	 * @param codigoPrestamo 
+	 * @return
+	 */
+	public Prestamo consultarPrestamo(String codigoPrestamo) {
+		for (int i = 0; i < listaPrestamos.size(); i++) {
+			if(listaPrestamos.get(i).getCodigo().equals(codigoPrestamo)) {
+				return listaPrestamos.get(i);
 			}
 		}
 		return null;
